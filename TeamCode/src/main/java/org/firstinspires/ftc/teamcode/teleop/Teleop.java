@@ -12,13 +12,13 @@ import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
 import org.firstinspires.ftc.teamcode.hardware.DriveTrain;
 
 @Config
-@TeleOp(name = "YeshivaLeague2025Teleop", group = "Teleop")
+@TeleOp(name = "YeshivaLeague2026TestTeleop", group = "Teleop")
 public class Teleop extends NextFTCOpMode {
 
     public Command driverControlled;
 
     public Teleop() {
-        super(DriveTrain.INSTANCE);
+       // super(DriveTrain.INSTANCE);
     }
 
     private GamepadEx gp1;
