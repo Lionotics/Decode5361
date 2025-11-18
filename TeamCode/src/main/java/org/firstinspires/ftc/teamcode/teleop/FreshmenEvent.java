@@ -23,7 +23,7 @@ public class FreshmenEvent extends NextFTCOpMode {
     @Override
     public void onStartButtonPressed() {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
-        driverControlled = DriveTrain.INSTANCE.Drive(gamepadManager.getGamepad1(), false);
+        driverControlled = DriveTrain.INSTANCE.Drive(gamepadManager.getGamepad1(), true);
         driverControlled.invoke();
         GamepadEx gp1 = gamepadManager.getGamepad1();
         GamepadEx gp2 = gamepadManager.getGamepad2();
