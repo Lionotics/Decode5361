@@ -34,14 +34,21 @@ public class TestArm extends NextFTCOpMode {
         gp1.getDpadUp().setReleasedCommand(()-> Arm.INSTANCE.setPowerToMotor(0));
         gp1.getDpadDown().setReleasedCommand(()-> Arm.INSTANCE.setPowerToMotor(0));
 
+        gp1.getA().setPressedCommand( () -> Arm.INSTANCE.setServoPosition(1));
+        gp1.getB().setPressedCommand( () -> Arm.INSTANCE.setServoPosition(0));
+
+        gp1.getX().setPressedCommand( () -> Arm.INSTANCE.setServoPositionNotOverriding(1));
+        gp1.getY().setPressedCommand( () -> Arm.INSTANCE.setServoPositionNotOverriding(0));
+
+
 
     }
 
     @Override
     public void onUpdate() {
-        telemetry.addData("gp1Down ", gp1.getDpadDown().getState());
-        telemetry.addData("gp1Up ", gp1.getDpadUp().getState());
-        telemetry.addData("See if init ran ",  Arm.INSTANCE.initRan);
+        telemetry.addData("Servo Position ",  Arm.INSTANCE.getServoPosition());
+        telemetry.addData("Servo Target Position ",  Arm.INSTANCE.motorPositionTarget);
+
 
         telemetry.update();
     }
