@@ -12,7 +12,7 @@ dependencies {
     implementation 'com.rowanmcalpin.nextftc:ftc:0.6.1'
     implementation 'com.rowanmcalpin.nextftc:pedro:0.6.1'
     implementation 'com.pedropathing:pedro:1.0.8'
-    implementation 'com.acmerobotics.dashboard:dashboard:0.4.16'
+    implementation 'com.acmerobotics.dashboard:dashboard:0.5.1'
 
     implementation 'org.firstinspires.ftc:Inspection:10.2.0'
     implementation 'org.firstinspires.ftc:Blocks:10.2.0'
@@ -26,5 +26,5 @@ dependencies {
 
     //noinspection GradleDependency
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.acmerobotics.dashboard:dashboard:0.4.16'
+    implementation 'com.acmerobotics.dashboard:dashboard:0.5.1'
 }

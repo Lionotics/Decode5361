@@ -17,21 +17,21 @@ public class FreshmenEvent extends NextFTCOpMode {
     public Command driverControlled;
 
     public FreshmenEvent() {
-        super(DriveTrain.INSTANCE);
+        super(DriveTrain.INSTANCE, MotorForOpenHouse.INSTANCE);
     }
 
     @Override
     public void onStartButtonPressed() {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
-        driverControlled = DriveTrain.INSTANCE.Drive(gamepadManager.getGamepad1(), true);
+        driverControlled = DriveTrain.INSTANCE.Drive(gamepadManager.getGamepad1(), false);
         driverControlled.invoke();
         GamepadEx gp1 = gamepadManager.getGamepad1();
         GamepadEx gp2 = gamepadManager.getGamepad2();
 
-        gp1.getDpadUp().setPressedCommand(() -> MotorForOpenHouse.INSTANCE.setPowerToMotorOpenhouse(1));
-        gp1.getDpadDown().setPressedCommand(() -> MotorForOpenHouse.INSTANCE.setPowerToMotorOpenhouse(-1));
-        gp1.getDpadUp().setReleasedCommand(()-> MotorForOpenHouse.INSTANCE.setPowerToMotorOpenhouse(0));
-        gp1.getDpadDown().setReleasedCommand(()-> MotorForOpenHouse.INSTANCE.setPowerToMotorOpenhouse(0));
+        gp1.getA().setPressedCommand(() -> MotorForOpenHouse.INSTANCE.setPowerToMotorOpenhouse(1));
+        gp1.getB().setPressedCommand(() -> MotorForOpenHouse.INSTANCE.setPowerToMotorOpenhouse(-1));
+        gp1.getA().setReleasedCommand(()-> MotorForOpenHouse.INSTANCE.setPowerToMotorOpenhouse(0));
+        gp1.getB().setReleasedCommand(()-> MotorForOpenHouse.INSTANCE.setPowerToMotorOpenhouse(0));
 
     }
 

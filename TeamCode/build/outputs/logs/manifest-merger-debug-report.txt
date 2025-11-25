@@ -9,7 +9,7 @@ MERGED from [com.rowanmcalpin.nextftc:pedro:0.6.1] /home/jacob/.gradle/caches/8.
 MERGED from [com.rowanmcalpin.nextftc:ftc:0.6.1] /home/jacob/.gradle/caches/8.13/transforms/a3f8368cdaef5300b1560c12800de64e/transformed/ftc-0.6.1/AndroidManifest.xml:2:1-7:12
 MERGED from [com.rowanmcalpin.nextftc:core:0.6.1] /home/jacob/.gradle/caches/8.13/transforms/a37f95c2b1d43f7855ee0107eca229e0/transformed/core-0.6.1/AndroidManifest.xml:2:1-7:12
 MERGED from [com.pedropathing:pedro:1.0.8] /home/jacob/.gradle/caches/8.13/transforms/9d37065436b3a672309a52cd1ae68a95/transformed/pedro-1.0.8/AndroidManifest.xml:2:1-7:12
-MERGED from [com.acmerobotics.dashboard:dashboard:0.4.16] /home/jacob/.gradle/caches/8.13/transforms/c760ed1e1cc618b66f65b62a7c952d4e/transformed/dashboard-0.4.16/AndroidManifest.xml:2:1-9:12
+MERGED from [com.acmerobotics.dashboard:dashboard:0.5.1] /home/jacob/.gradle/caches/8.13/transforms/1f553c29017399f7dd103bc9e832182e/transformed/dashboard-0.5.1/AndroidManifest.xml:2:1-7:12
 MERGED from [org.firstinspires.ftc:OnBotJava:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/6e9c46d29f8763d6eb33fd4135ce2e14/transformed/OnBotJava-10.2.0/AndroidManifest.xml:34:1-41:12
 MERGED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:2:1-24:12
 MERGED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:3:1-178:12
@@ -104,8 +104,8 @@ MERGED from [com.rowanmcalpin.nextftc:core:0.6.1] /home/jacob/.gradle/caches/8.1
 MERGED from [com.rowanmcalpin.nextftc:core:0.6.1] /home/jacob/.gradle/caches/8.13/transforms/a37f95c2b1d43f7855ee0107eca229e0/transformed/core-0.6.1/AndroidManifest.xml:5:5-44
 MERGED from [com.pedropathing:pedro:1.0.8] /home/jacob/.gradle/caches/8.13/transforms/9d37065436b3a672309a52cd1ae68a95/transformed/pedro-1.0.8/AndroidManifest.xml:5:5-44
 MERGED from [com.pedropathing:pedro:1.0.8] /home/jacob/.gradle/caches/8.13/transforms/9d37065436b3a672309a52cd1ae68a95/transformed/pedro-1.0.8/AndroidManifest.xml:5:5-44
-MERGED from [com.acmerobotics.dashboard:dashboard:0.4.16] /home/jacob/.gradle/caches/8.13/transforms/c760ed1e1cc618b66f65b62a7c952d4e/transformed/dashboard-0.4.16/AndroidManifest.xml:5:5-7:41
-MERGED from [com.acmerobotics.dashboard:dashboard:0.4.16] /home/jacob/.gradle/caches/8.13/transforms/c760ed1e1cc618b66f65b62a7c952d4e/transformed/dashboard-0.4.16/AndroidManifest.xml:5:5-7:41
+MERGED from [com.acmerobotics.dashboard:dashboard:0.5.1] /home/jacob/.gradle/caches/8.13/transforms/1f553c29017399f7dd103bc9e832182e/transformed/dashboard-0.5.1/AndroidManifest.xml:5:5-44
+MERGED from [com.acmerobotics.dashboard:dashboard:0.5.1] /home/jacob/.gradle/caches/8.13/transforms/1f553c29017399f7dd103bc9e832182e/transformed/dashboard-0.5.1/AndroidManifest.xml:5:5-44
 MERGED from [org.firstinspires.ftc:OnBotJava:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/6e9c46d29f8763d6eb33fd4135ce2e14/transformed/OnBotJava-10.2.0/AndroidManifest.xml:39:5-44
 MERGED from [org.firstinspires.ftc:OnBotJava:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/6e9c46d29f8763d6eb33fd4135ce2e14/transformed/OnBotJava-10.2.0/AndroidManifest.xml:39:5-44
 MERGED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:7:5-44

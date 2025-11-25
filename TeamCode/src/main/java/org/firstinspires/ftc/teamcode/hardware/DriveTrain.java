@@ -30,10 +30,15 @@ public class DriveTrain extends Subsystem {
     private IMU imu;
 
     public void initialize() {
-        frontLeft = new MotorEx("frontLeft");
-        frontRight = new MotorEx("frontRight");
-        backLeft = new MotorEx("backLeft");
-        backRight = new MotorEx("backRight");
+      //  frontLeft = new MotorEx("frontLeft");
+       // frontRight = new MotorEx("frontRight");
+       // backLeft = new MotorEx("backLeft");
+       // backRight = new MotorEx("backRight");
+
+        frontLeft = new MotorEx("backLeft");
+        frontRight = new MotorEx("backRight");
+        backLeft = new MotorEx("frontLeft");
+        backRight = new MotorEx("frontRight");
 
 
         frontLeft.reverse();
@@ -52,7 +57,7 @@ public class DriveTrain extends Subsystem {
         imu.resetYaw();
     }
 
-    public Command Drive(GamepadEx gamepad, boolean fieldOriented) {
-        return new MecanumDriverControlled(motors, gamepad, fieldOriented, imu);
+    public Command Drive(GamepadEx gamepad, boolean robotOreinted) {
+        return new MecanumDriverControlled(motors, gamepad, robotOreinted, imu);
     }
 }
