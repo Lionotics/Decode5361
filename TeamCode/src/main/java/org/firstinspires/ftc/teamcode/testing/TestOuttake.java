@@ -4,8 +4,6 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.rowanmcalpin.nextftc.core.command.Command;
-import com.rowanmcalpin.nextftc.core.control.controllers.PIDFController;
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
 import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadEx;
 
@@ -35,7 +33,7 @@ public class TestOuttake extends NextFTCOpMode {
 
 
 
-        gp1.getB().setPressedCommand(() -> Outtake.INSTANCE.setVelocityOfMotor());
+        gp1.getB().setPressedCommand(() -> Outtake.INSTANCE.startMotor());
         gp1.getA().setPressedCommand(() -> Outtake.INSTANCE.stopMotor());
 
 
@@ -43,7 +41,7 @@ public class TestOuttake extends NextFTCOpMode {
 
     @Override
     public void onUpdate() {
-        telemetry.addData("Motor Outtake Current Velocity: ",  Outtake.INSTANCE.getMotorCurrentVelocity());
+        telemetry.addData("Motor Outtake Current Velocity: ",  Outtake.INSTANCE.getMotorCurrentLeftVelocity());
         telemetry.update();
     }
 

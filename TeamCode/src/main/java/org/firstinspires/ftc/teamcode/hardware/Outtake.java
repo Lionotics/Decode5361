@@ -1,17 +1,15 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.rowanmcalpin.nextftc.core.Subsystem;
 import com.rowanmcalpin.nextftc.core.command.Command;
+import com.rowanmcalpin.nextftc.core.command.groups.ParallelGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
 import com.rowanmcalpin.nextftc.core.control.controllers.PIDFController;
-import com.rowanmcalpin.nextftc.ftc.OpModeData;
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx;
 
 
+import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorGroup;
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.RunToVelocity;
 
 @Config
@@ -24,7 +22,7 @@ public class Outtake extends Subsystem {
     public  static  double kD = 0.00;
 
 
-    public  static double motorVelocity = 700;
+    public  static double motorVelocity = 60;
 
 
     private final PIDFController outtakeVelocityController = new PIDFController(
@@ -38,43 +36,59 @@ public class Outtake extends Subsystem {
 
     public static Outtake INSTANCE = new Outtake();
 
-    private MotorEx motorOuttake;
+    private MotorEx motorOuttakeRight;
+    private MotorEx motorOuttakeLeft;
+
+    private  MotorGroup flywheelGroup;
+
+
 
 
     public void initialize() {
-        motorOuttake = new MotorEx("Outtake");
+        motorOuttakeRight = new MotorEx("flyWheelRight");
+        motorOuttakeLeft = new MotorEx("flyWheelLeft");
+
+        motorOuttakeLeft.reverse();
+        motorOuttakeRight.reverse();
+
+         flywheelGroup = new MotorGroup(motorOuttakeLeft, motorOuttakeRight);
     }
 
-    public InstantCommand setPowerToMotorOuttake(double i) {
+    public InstantCommand setPowerToMotorS(double i) {
         return new InstantCommand(()-> {
-            motorOuttake.setPower(i*motorPower);
+            //motorOuttakeRight.setPower(i*motorPower);
+            flywheelGroup.setPower(i*motorPower);
+
+
         });
     }
 
-    public Command setVelocityOfMotor() {
-        double targetTemp  = -motorVelocity; // ignore direction
+    public Command startMotor() {
+        double targetTemp  = motorVelocity; // ignore direction
 
-        return new RunToVelocity(
-                motorOuttake,
-                targetTemp,      // target velocity (ticks/sec)
+
+         return new RunToVelocity(
+                flywheelGroup,
+                targetTemp,
                 outtakeVelocityController,
-                this                            // the Outtake subsystem
+                this
         );
 
     }
 
     public Command stopMotor() {
-
-        return new RunToVelocity(
-                motorOuttake,
-                0,      // target velocity (ticks/sec)
-                outtakeVelocityController,
-                this                            // the Outtake subsystem
-        );
-
+        return new InstantCommand(() -> {
+            flywheelGroup.setPower(0);
+        });
     }
 
-    public  double getMotorCurrentVelocity() {
-        return  -1 * motorOuttake.getVelocity();
+    public  double getMotorCurrentLeftVelocity() {
+        return motorOuttakeLeft.getVelocity();
     }
+
+    public  double getMotorCurrentRightVelocity() {
+        return motorOuttakeRight.getVelocity();
+    }
+
+
 }

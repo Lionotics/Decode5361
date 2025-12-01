@@ -10,28 +10,53 @@ import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadEx;
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
 
 import org.firstinspires.ftc.teamcode.hardware.DriveTrain;
+import org.firstinspires.ftc.teamcode.hardware.Feet;
+import org.firstinspires.ftc.teamcode.hardware.Intake;
+import org.firstinspires.ftc.teamcode.hardware.Outtake;
+import org.firstinspires.ftc.teamcode.hardware.OuttakeRotator;
 
 @Config
-@TeleOp(name = "YeshivaLeague2026TestTeleop", group = "Teleop")
+@TeleOp(name = "5361Teleop", group = "Teleop")
 public class Teleop extends NextFTCOpMode {
 
     public Command driverControlled;
 
     public Teleop() {
-       // super(DriveTrain.INSTANCE);
+        super(DriveTrain.INSTANCE,Intake.INSTANCE,Feet.INSTANCE,OuttakeRotator.INSTANCE,Outtake.INSTANCE);
+
     }
 
-    private GamepadEx gp1;
 
     @Override
     public void onStartButtonPressed() {
-        gp1 = gamepadManager.getGamepad1();
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+        driverControlled = DriveTrain.INSTANCE.Drive(gamepadManager.getGamepad1(), false);
+        driverControlled.invoke();
+        GamepadEx gp1 = gamepadManager.getGamepad1();
+        GamepadEx gp2 = gamepadManager.getGamepad2();
+
+        gp1.getRightBumper().setPressedCommand(() -> Intake.INSTANCE.eat());
+        gp1.getLeftBumper().setPressedCommand(() -> Intake.INSTANCE.spit());
+
+        gp1.getA().setPressedCommand(() -> Outtake.INSTANCE.startMotor());
+        //gp1.getA().setPressedCommand(() -> Outtake.INSTANCE.setPowerToMotorS(1));
+
+        gp1.getB().setPressedCommand(() -> Outtake.INSTANCE.stopMotor());
+
+        gp1.getX().setPressedCommand(() -> Feet.INSTANCE.kickBall());
+        gp1.getY().setPressedCommand(() -> Intake.INSTANCE.loadBall(0.5));
+
+        gp1.getDpadUp().setHeldCommand(() -> OuttakeRotator.INSTANCE.rotateUp());
+        gp1.getDpadDown().setHeldCommand(() -> OuttakeRotator.INSTANCE.rotateDown());
 
     }
 
     @Override
     public void onUpdate() {
 
+        telemetry.addData("Motor Outtake Left Current Velocity: ",  Outtake.INSTANCE.getMotorCurrentLeftVelocity());
+        telemetry.addData("Motor Outtake Right Current Velocity: ",  Outtake.INSTANCE.getMotorCurrentRightVelocity());
+
+        telemetry.update();
     }
 }

@@ -9,7 +9,7 @@ import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
 import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadEx;
 
 import org.firstinspires.ftc.teamcode.hardware.DriveTrain;
-import org.firstinspires.ftc.teamcode.hardware.MotorForOpenHouse;
+import org.firstinspires.ftc.teamcode.hardware.Intake;
 
 @Config
 @TeleOp(name = "2025FreshmenEvent", group = "Teleop")
@@ -17,7 +17,7 @@ public class FreshmenEvent extends NextFTCOpMode {
     public Command driverControlled;
 
     public FreshmenEvent() {
-        super(DriveTrain.INSTANCE, MotorForOpenHouse.INSTANCE);
+        super(DriveTrain.INSTANCE, Intake.INSTANCE);
     }
 
     @Override
@@ -28,10 +28,10 @@ public class FreshmenEvent extends NextFTCOpMode {
         GamepadEx gp1 = gamepadManager.getGamepad1();
         GamepadEx gp2 = gamepadManager.getGamepad2();
 
-        gp1.getA().setPressedCommand(() -> MotorForOpenHouse.INSTANCE.setPowerToMotorOpenhouse(1));
-        gp1.getB().setPressedCommand(() -> MotorForOpenHouse.INSTANCE.setPowerToMotorOpenhouse(-1));
-        gp1.getA().setReleasedCommand(()-> MotorForOpenHouse.INSTANCE.setPowerToMotorOpenhouse(0));
-        gp1.getB().setReleasedCommand(()-> MotorForOpenHouse.INSTANCE.setPowerToMotorOpenhouse(0));
+        gp1.getA().setPressedCommand(() -> Intake.INSTANCE.setPowerToIntake(1));
+        gp1.getB().setPressedCommand(() -> Intake.INSTANCE.setPowerToIntake(-1));
+        gp1.getA().setReleasedCommand(()-> Intake.INSTANCE.setPowerToIntake(0));
+        gp1.getB().setReleasedCommand(()-> Intake.INSTANCE.setPowerToIntake(0));
 
     }
 
