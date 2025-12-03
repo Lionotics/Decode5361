@@ -13,7 +13,6 @@ import org.firstinspires.ftc.teamcode.hardware.DriveTrain;
 import org.firstinspires.ftc.teamcode.hardware.Feet;
 import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.Outtake;
-import org.firstinspires.ftc.teamcode.hardware.OuttakeRotator;
 
 @Config
 @TeleOp(name = "5361Teleop", group = "Teleop")
@@ -38,10 +37,9 @@ public class Teleop extends NextFTCOpMode {
         gp1.getRightBumper().setPressedCommand(() -> Intake.INSTANCE.eat());
         gp1.getLeftBumper().setPressedCommand(() -> Intake.INSTANCE.spit());
 
-        gp1.getA().setPressedCommand(() -> Outtake.INSTANCE.startMotor());
+        gp1.getA().setPressedCommand(() -> Outtake.INSTANCE.handleMotor());
         //gp1.getA().setPressedCommand(() -> Outtake.INSTANCE.setPowerToMotorS(1));
-
-        gp1.getB().setPressedCommand(() -> Outtake.INSTANCE.stopMotor());
+        //gp1.getB().setPressedCommand(() -> Outtake.INSTANCE.stopMotor());
 
         gp1.getX().setPressedCommand(() -> Feet.INSTANCE.kickBall());
         gp1.getY().setPressedCommand(() -> Intake.INSTANCE.loadBall(0.5));

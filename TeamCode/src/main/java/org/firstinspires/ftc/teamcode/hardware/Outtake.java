@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.hardware;
 import com.acmerobotics.dashboard.config.Config;
 import com.rowanmcalpin.nextftc.core.Subsystem;
 import com.rowanmcalpin.nextftc.core.command.Command;
-import com.rowanmcalpin.nextftc.core.command.groups.ParallelGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
 import com.rowanmcalpin.nextftc.core.control.controllers.PIDFController;
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx;
@@ -21,8 +20,9 @@ public class Outtake extends Subsystem {
     public  static  double kI = 0.00;
     public  static  double kD = 0.00;
 
-
     public  static double motorVelocity = 60;
+
+    private boolean motorRunning = false;
 
 
     private final PIDFController outtakeVelocityController = new PIDFController(
@@ -63,16 +63,22 @@ public class Outtake extends Subsystem {
         });
     }
 
-    public Command startMotor() {
+    public Command handleMotor() {
         double targetTemp  = motorVelocity; // ignore direction
+        if (!motorRunning) {
+            motorRunning = true;
 
+            return new RunToVelocity(
+                    flywheelGroup,
+                    targetTemp,
+                    outtakeVelocityController,
+                    this
+            );
+        } else{
 
-         return new RunToVelocity(
-                flywheelGroup,
-                targetTemp,
-                outtakeVelocityController,
-                this
-        );
+            motorRunning = false;
+            return  stopMotor();
+        }
 
     }
 

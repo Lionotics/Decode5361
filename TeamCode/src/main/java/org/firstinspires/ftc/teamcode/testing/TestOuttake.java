@@ -33,7 +33,7 @@ public class TestOuttake extends NextFTCOpMode {
 
 
 
-        gp1.getB().setPressedCommand(() -> Outtake.INSTANCE.startMotor());
+        gp1.getB().setPressedCommand(() -> Outtake.INSTANCE.handleMotor());
         gp1.getA().setPressedCommand(() -> Outtake.INSTANCE.stopMotor());
 
 
