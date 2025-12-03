@@ -22,7 +22,7 @@ public class Teleop extends NextFTCOpMode {
     public Command driverControlled;
 
     public Teleop() {
-        super(DriveTrain.INSTANCE,Intake.INSTANCE,Feet.INSTANCE,OuttakeRotator.INSTANCE,Outtake.INSTANCE);
+        super(DriveTrain.INSTANCE,Intake.INSTANCE,Feet.INSTANCE,Outtake.INSTANCE);
 
     }
 
@@ -46,8 +46,6 @@ public class Teleop extends NextFTCOpMode {
         gp1.getX().setPressedCommand(() -> Feet.INSTANCE.kickBall());
         gp1.getY().setPressedCommand(() -> Intake.INSTANCE.loadBall(0.5));
 
-        gp1.getDpadUp().setHeldCommand(() -> OuttakeRotator.INSTANCE.rotateUp());
-        gp1.getDpadDown().setHeldCommand(() -> OuttakeRotator.INSTANCE.rotateDown());
 
     }
 
