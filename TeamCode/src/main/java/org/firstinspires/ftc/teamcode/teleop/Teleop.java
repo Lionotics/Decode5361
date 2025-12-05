@@ -37,8 +37,7 @@ public class Teleop extends NextFTCOpMode {
         GamepadEx gp1 = gamepadManager.getGamepad1();
         GamepadEx gp2 = gamepadManager.getGamepad2();
 
-        gp1.getRightBumper().setPressedCommand(() -> Intake.INSTANCE.eat());
-        gp1.getLeftBumper().setPressedCommand(() -> Intake.INSTANCE.spit());
+
 
 
         /*gp1.getRightTrigger().setPressedCommand(new Function1<Float, Command>() {
@@ -59,11 +58,16 @@ public class Teleop extends NextFTCOpMode {
             }
         }); */
 
-        gp1.getA().setPressedCommand(() -> Outtake.INSTANCE.handleMotor( Outtake.motorVelocityClose ));
-        gp1.getB().setPressedCommand(() -> Outtake.INSTANCE.handleMotor( Outtake.motorVelocityFar ));
+        gp1.getA().setPressedCommand(() -> Feet.INSTANCE.kickBall());
+
+        gp1.getB().setPressedCommand(() -> Intake.INSTANCE.eat());
 
 
-        gp1.getY().setPressedCommand(() -> Feet.INSTANCE.kickBall());
+        gp1.getRightBumper().setPressedCommand(() -> Outtake.INSTANCE.handleMotor( Outtake.motorVelocityClose ));
+        gp1.getLeftBumper().setPressedCommand(() -> Outtake.INSTANCE.handleMotor( Outtake.motorVelocityFar ));
+
+
+        gp1.getY().setPressedCommand(() -> Intake.INSTANCE.spit());
 
 
 

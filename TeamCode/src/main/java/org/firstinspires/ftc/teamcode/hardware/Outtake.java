@@ -43,7 +43,7 @@ public class Outtake extends Subsystem {
 
     private  MotorGroup flywheelGroup;
 
-    public double targetVelocityToActualVelocty(double targetVelocity) {
+    public double targetVelocityToActualVelocity(double targetVelocity) {
         return  0.0418 * targetVelocity + 5;
     }
 
@@ -69,7 +69,7 @@ public class Outtake extends Subsystem {
     }
 
     public Command handleMotor(double targetTempRaw ) {
-        double targetTemp = targetVelocityToActualVelocty(targetTempRaw);
+        double targetTemp = targetVelocityToActualVelocity(targetTempRaw);
 
         if (!motorRunning) {
             motorRunning = true;
