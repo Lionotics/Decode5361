@@ -20,7 +20,9 @@ public class Outtake extends Subsystem {
     public  static  double kI = 0.00;
     public  static  double kD = 0.00;
 
-    public  static double motorVelocity = 60;
+    public  static double motorVelocityClose = 1290;
+    public  static double motorVelocityFar = 1650;
+
 
     private boolean motorRunning = false;
 
@@ -41,7 +43,9 @@ public class Outtake extends Subsystem {
 
     private  MotorGroup flywheelGroup;
 
-
+    public double targetVelocityToActualVelocty(double targetVelocity) {
+        return  0.0418 * targetVelocity + 5;
+    }
 
 
     public void initialize() {
@@ -52,6 +56,7 @@ public class Outtake extends Subsystem {
         motorOuttakeRight.reverse();
 
          flywheelGroup = new MotorGroup(motorOuttakeLeft, motorOuttakeRight);
+        motorRunning = false;
     }
 
     public InstantCommand setPowerToMotorS(double i) {
@@ -63,8 +68,9 @@ public class Outtake extends Subsystem {
         });
     }
 
-    public Command handleMotor() {
-        double targetTemp  = motorVelocity; // ignore direction
+    public Command handleMotor(double targetTempRaw ) {
+        double targetTemp = targetVelocityToActualVelocty(targetTempRaw);
+
         if (!motorRunning) {
             motorRunning = true;
 

@@ -14,16 +14,17 @@ public class Feet extends Subsystem {
     public Servo kicker;
     public Servo protector;
 
-    public  static double kickerPosition1 = 0.1;
+    public  static double kickerPosition1 = 0.08;
     public  static double protectorPosition1 = 0.7;
-    public  static double kickerPosition2 = 0.2;
+    public  static double kickerPosition2 = 0.25;
     public  static double protectorPosition2 = 0.4;
 
     public static double kickDelaySeconds = 0.13;
-    public static double preReturnDelaySeconds = 0.4;
+    public static double preReturnDelaySeconds = 0.2;
     public static double postReturnDelaySeconds = 0.4;
 
     public static  double loadDelaySecond = 0.5;
+
 
 
     private  Feet() {}
