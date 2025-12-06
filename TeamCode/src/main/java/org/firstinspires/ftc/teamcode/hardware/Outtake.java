@@ -16,9 +16,9 @@ public class Outtake extends Subsystem {
 
     public  static double motorPower = 0.5;
 
-    public  static  double kP = 0.01;
+    public  static  double kP = 0.06;
     public  static  double kI = 0.00;
-    public  static  double kD = 0.00;
+    public  static  double kD = 0.002;
 
     public  static double motorVelocityClose = 1290;
     public  static double motorVelocityFar = 1650;
@@ -44,7 +44,8 @@ public class Outtake extends Subsystem {
     private  MotorGroup flywheelGroup;
 
     public double targetVelocityToActualVelocity(double targetVelocity) {
-        return  0.0418 * targetVelocity + 5;
+        return  -targetVelocity;
+        //return  0.0418 * targetVelocity + 5;
     }
 
 

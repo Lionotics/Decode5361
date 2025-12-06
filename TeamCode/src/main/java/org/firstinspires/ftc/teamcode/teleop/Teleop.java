@@ -5,17 +5,14 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.rowanmcalpin.nextftc.core.command.Command;
-import com.rowanmcalpin.nextftc.core.command.utility.NullCommand;
 import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadEx;
 
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
 
 import org.firstinspires.ftc.teamcode.hardware.DriveTrain;
-import org.firstinspires.ftc.teamcode.hardware.Feet;
+import org.firstinspires.ftc.teamcode.hardware.Transfer;
 import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.Outtake;
-
-import kotlin.jvm.functions.Function1;
 
 @Config
 @TeleOp(name = "5361Teleop", group = "Teleop")
@@ -24,7 +21,7 @@ public class Teleop extends NextFTCOpMode {
     public Command driverControlled;
 
     public Teleop() {
-        super(DriveTrain.INSTANCE,Intake.INSTANCE,Feet.INSTANCE,Outtake.INSTANCE);
+        super(DriveTrain.INSTANCE,Intake.INSTANCE, Transfer.INSTANCE,Outtake.INSTANCE);
 
     }
 
@@ -58,7 +55,7 @@ public class Teleop extends NextFTCOpMode {
             }
         }); */
 
-        gp1.getA().setPressedCommand(() -> Feet.INSTANCE.kickBall());
+        gp1.getA().setPressedCommand(() -> Transfer.INSTANCE.kickBall());
 
         gp1.getB().setPressedCommand(() -> Intake.INSTANCE.eat());
 
@@ -68,6 +65,7 @@ public class Teleop extends NextFTCOpMode {
 
 
         gp1.getY().setPressedCommand(() -> Intake.INSTANCE.spit());
+
 
 
 

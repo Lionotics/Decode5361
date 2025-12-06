@@ -11,7 +11,6 @@ dependencies {
     implementation 'com.rowanmcalpin.nextftc:core:0.6.1'
     implementation 'com.rowanmcalpin.nextftc:ftc:0.6.1'
     implementation 'com.rowanmcalpin.nextftc:pedro:0.6.1'
-    implementation 'com.pedropathing:pedro:1.0.8'
     implementation 'com.acmerobotics.dashboard:dashboard:0.5.1'
 
     implementation 'org.firstinspires.ftc:Inspection:10.2.0'
@@ -22,7 +21,8 @@ dependencies {
     implementation 'org.firstinspires.ftc:Hardware:10.2.0'
     implementation 'org.firstinspires.ftc:FtcCommon:10.2.0'
     implementation 'org.firstinspires.ftc:Vision:10.2.0'
-    implementation 'com.pedropathing:pedro:1.0.7'
+    implementation 'com.pedropathing:ftc:2.0.4'
+
 
     //noinspection GradleDependency
     implementation 'androidx.appcompat:appcompat:1.2.0'
