@@ -32,7 +32,7 @@ public class Teleop extends NextFTCOpMode {
         driverControlled = DriveTrain.INSTANCE.Drive(gamepadManager.getGamepad1(), false);
         driverControlled.invoke();
         GamepadEx gp1 = gamepadManager.getGamepad1();
-        GamepadEx gp2 = gamepadManager.getGamepad2();
+       // GamepadEx gp2 = gamepadManager.getGamepad2();
 
 
 
@@ -60,15 +60,17 @@ public class Teleop extends NextFTCOpMode {
         gp1.getB().setPressedCommand(() -> Intake.INSTANCE.eat());
 
 
-        gp1.getRightBumper().setPressedCommand(() -> Outtake.INSTANCE.handleMotor( Outtake.motorVelocityClose ));
-        gp1.getLeftBumper().setPressedCommand(() -> Outtake.INSTANCE.handleMotor( Outtake.motorVelocityFar ));
-
+        gp1.getRightBumper().setPressedCommand(() -> Outtake.INSTANCE.handleMotor( Outtake.motorVelocityTarget ));
 
         gp1.getY().setPressedCommand(() -> Intake.INSTANCE.spit());
 
 
 
+        gp1.getDpadLeft().setPressedCommand( ()->Outtake.INSTANCE.MotorVelocityToLower() );
+        gp1.getDpadRight().setPressedCommand( ()->Outtake.INSTANCE.MotorVelocityToHigher() );
 
+        gp1.getDpadUp().setHeldCommand( ()-> Outtake.INSTANCE.raiseMotorVelocity() );
+        gp1.getDpadDown().setHeldCommand( ()-> Outtake.INSTANCE.lowerMotorVelocity() );
     }
 
     @Override
@@ -76,6 +78,8 @@ public class Teleop extends NextFTCOpMode {
 
         telemetry.addData("Motor Outtake Left Current Velocity: ",  Outtake.INSTANCE.getMotorCurrentLeftVelocity());
         telemetry.addData("Motor Outtake Right Current Velocity: ",  Outtake.INSTANCE.getMotorCurrentRightVelocity());
+        telemetry.addData("Motor Outtake Target Velocity: ",  Outtake.motorVelocityTarget);
+        telemetry.addData("Motor Velocity Is Higher (true if Higher, false if Lower): ",  Outtake.motorIsOnHigher);
 
         telemetry.update();
     }

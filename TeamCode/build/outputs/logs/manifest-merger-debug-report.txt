@@ -5,19 +5,19 @@ INJECTED from /home/jacob/Desktop/AndriodStudioProjects/Decode5361/TeamCode/src/
 INJECTED from /home/jacob/Desktop/AndriodStudioProjects/Decode5361/TeamCode/src/main/AndroidManifest.xml:8:1-11:12
 INJECTED from /home/jacob/Desktop/AndriodStudioProjects/Decode5361/TeamCode/src/main/AndroidManifest.xml:8:1-11:12
 MERGED from [:FtcRobotController] /home/jacob/Desktop/AndriodStudioProjects/Decode5361/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-78:12
+MERGED from [com.pedropathing:ftc:2.0.4] /home/jacob/.gradle/caches/8.13/transforms/f614825d36b2a0ef37cc5165179f353b/transformed/ftc-2.0.4/AndroidManifest.xml:2:1-7:12
 MERGED from [com.rowanmcalpin.nextftc:pedro:0.6.1] /home/jacob/.gradle/caches/8.13/transforms/4c4690366eba42ba060af55b80aff472/transformed/pedro-0.6.1/AndroidManifest.xml:2:1-7:12
 MERGED from [com.rowanmcalpin.nextftc:ftc:0.6.1] /home/jacob/.gradle/caches/8.13/transforms/a3f8368cdaef5300b1560c12800de64e/transformed/ftc-0.6.1/AndroidManifest.xml:2:1-7:12
 MERGED from [com.rowanmcalpin.nextftc:core:0.6.1] /home/jacob/.gradle/caches/8.13/transforms/a37f95c2b1d43f7855ee0107eca229e0/transformed/core-0.6.1/AndroidManifest.xml:2:1-7:12
-MERGED from [com.pedropathing:pedro:1.0.8] /home/jacob/.gradle/caches/8.13/transforms/9d37065436b3a672309a52cd1ae68a95/transformed/pedro-1.0.8/AndroidManifest.xml:2:1-7:12
 MERGED from [com.acmerobotics.dashboard:dashboard:0.5.1] /home/jacob/.gradle/caches/8.13/transforms/1f553c29017399f7dd103bc9e832182e/transformed/dashboard-0.5.1/AndroidManifest.xml:2:1-7:12
-MERGED from [org.firstinspires.ftc:OnBotJava:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/6e9c46d29f8763d6eb33fd4135ce2e14/transformed/OnBotJava-10.2.0/AndroidManifest.xml:34:1-41:12
-MERGED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:2:1-24:12
-MERGED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:3:1-178:12
-MERGED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:2:1-30:12
-MERGED from [org.firstinspires.ftc:RobotServer:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/496d9e03950196029dc762854cf810bb/transformed/RobotServer-10.2.0/AndroidManifest.xml:2:1-9:12
-MERGED from [org.firstinspires.ftc:Hardware:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1e1cc8319db873c2ab838465b7f0e728/transformed/Hardware-10.2.0/AndroidManifest.xml:2:1-9:12
-MERGED from [org.firstinspires.ftc:Vision:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/d3b778150e2a6b12067990e038d02659/transformed/Vision-10.2.0/AndroidManifest.xml:2:1-7:12
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:2:1-129:12
+MERGED from [org.firstinspires.ftc:OnBotJava:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/c3ff6b8dbf3be482dceaf62a202656ad/transformed/OnBotJava-11.0.0/AndroidManifest.xml:34:1-41:12
+MERGED from [org.firstinspires.ftc:Blocks:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/0c4435a800b46d922939e22c9b2ed244/transformed/Blocks-11.0.0/AndroidManifest.xml:2:1-24:12
+MERGED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:3:1-178:12
+MERGED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:2:1-30:12
+MERGED from [org.firstinspires.ftc:RobotServer:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/8ea70e7d0b402b67a076f9c29164c927/transformed/RobotServer-11.0.0/AndroidManifest.xml:2:1-9:12
+MERGED from [org.firstinspires.ftc:Hardware:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/497f4da412ce60c5f1978befb551f87b/transformed/Hardware-11.0.0/AndroidManifest.xml:2:1-9:12
+MERGED from [org.firstinspires.ftc:Vision:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/601f04e8656c6ff1986ed13a931a3794/transformed/Vision-11.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:2:1-129:12
 MERGED from [androidx.appcompat:appcompat:1.2.0] /home/jacob/.gradle/caches/8.13/transforms/9e6c9ea72ae78f2ffd4e9ea0a3d59803/transformed/appcompat-1.2.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.fragment:fragment:1.1.0] /home/jacob/.gradle/caches/8.13/transforms/e213dcf54a5df8f7e2d12a44271f2b1b/transformed/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /home/jacob/.gradle/caches/8.13/transforms/0b19f42bf6a67ae51188ea7a745a8d0d/transformed/appcompat-resources-1.2.0/AndroidManifest.xml:17:1-24:12
@@ -56,14 +56,14 @@ ADDED from /home/jacob/Desktop/AndriodStudioProjects/Decode5361/TeamCode/src/mai
 INJECTED from /home/jacob/Desktop/AndriodStudioProjects/Decode5361/TeamCode/src/main/AndroidManifest.xml:10:5-19
 MERGED from [:FtcRobotController] /home/jacob/Desktop/AndriodStudioProjects/Decode5361/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:12:5-76:19
 MERGED from [:FtcRobotController] /home/jacob/Desktop/AndriodStudioProjects/Decode5361/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:12:5-76:19
-MERGED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:16:5-22:19
-MERGED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:16:5-22:19
-MERGED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:21:5-176:19
-MERGED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:21:5-176:19
-MERGED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:17:5-28:19
-MERGED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:17:5-28:19
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:85:5-127:19
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:85:5-127:19
+MERGED from [org.firstinspires.ftc:Blocks:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/0c4435a800b46d922939e22c9b2ed244/transformed/Blocks-11.0.0/AndroidManifest.xml:16:5-22:19
+MERGED from [org.firstinspires.ftc:Blocks:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/0c4435a800b46d922939e22c9b2ed244/transformed/Blocks-11.0.0/AndroidManifest.xml:16:5-22:19
+MERGED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:21:5-176:19
+MERGED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:21:5-176:19
+MERGED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:17:5-28:19
+MERGED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:17:5-28:19
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:85:5-127:19
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:85:5-127:19
 MERGED from [androidx.core:core:1.3.0] /home/jacob/.gradle/caches/8.13/transforms/9392aed4cd7c66d1274687478259aa6d/transformed/core-1.3.0/AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.3.0] /home/jacob/.gradle/caches/8.13/transforms/9392aed4cd7c66d1274687478259aa6d/transformed/core-1.3.0/AndroidManifest.xml:24:5-89
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/jacob/.gradle/caches/8.13/transforms/98a5df3e44a60e569fdf98082adafe6a/transformed/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
@@ -87,7 +87,7 @@ MERGED from [com.jakewharton.threetenabp:threetenabp:1.3.1] /home/jacob/.gradle/
 	android:theme
 		ADDED from [:FtcRobotController] /home/jacob/Desktop/AndriodStudioProjects/Decode5361/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:17:9-45
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:85:18-97
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:85:18-97
 	android:usesCleartextTraffic
 		ADDED from [:FtcRobotController] /home/jacob/Desktop/AndriodStudioProjects/Decode5361/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:18:9-44
 uses-sdk
@@ -96,32 +96,32 @@ INJECTED from /home/jacob/Desktop/AndriodStudioProjects/Decode5361/TeamCode/src/
 INJECTED from /home/jacob/Desktop/AndriodStudioProjects/Decode5361/TeamCode/src/main/AndroidManifest.xml
 MERGED from [:FtcRobotController] /home/jacob/Desktop/AndriodStudioProjects/Decode5361/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:5-44
 MERGED from [:FtcRobotController] /home/jacob/Desktop/AndriodStudioProjects/Decode5361/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:5-44
+MERGED from [com.pedropathing:ftc:2.0.4] /home/jacob/.gradle/caches/8.13/transforms/f614825d36b2a0ef37cc5165179f353b/transformed/ftc-2.0.4/AndroidManifest.xml:5:5-44
+MERGED from [com.pedropathing:ftc:2.0.4] /home/jacob/.gradle/caches/8.13/transforms/f614825d36b2a0ef37cc5165179f353b/transformed/ftc-2.0.4/AndroidManifest.xml:5:5-44
 MERGED from [com.rowanmcalpin.nextftc:pedro:0.6.1] /home/jacob/.gradle/caches/8.13/transforms/4c4690366eba42ba060af55b80aff472/transformed/pedro-0.6.1/AndroidManifest.xml:5:5-44
 MERGED from [com.rowanmcalpin.nextftc:pedro:0.6.1] /home/jacob/.gradle/caches/8.13/transforms/4c4690366eba42ba060af55b80aff472/transformed/pedro-0.6.1/AndroidManifest.xml:5:5-44
 MERGED from [com.rowanmcalpin.nextftc:ftc:0.6.1] /home/jacob/.gradle/caches/8.13/transforms/a3f8368cdaef5300b1560c12800de64e/transformed/ftc-0.6.1/AndroidManifest.xml:5:5-44
 MERGED from [com.rowanmcalpin.nextftc:ftc:0.6.1] /home/jacob/.gradle/caches/8.13/transforms/a3f8368cdaef5300b1560c12800de64e/transformed/ftc-0.6.1/AndroidManifest.xml:5:5-44
 MERGED from [com.rowanmcalpin.nextftc:core:0.6.1] /home/jacob/.gradle/caches/8.13/transforms/a37f95c2b1d43f7855ee0107eca229e0/transformed/core-0.6.1/AndroidManifest.xml:5:5-44
 MERGED from [com.rowanmcalpin.nextftc:core:0.6.1] /home/jacob/.gradle/caches/8.13/transforms/a37f95c2b1d43f7855ee0107eca229e0/transformed/core-0.6.1/AndroidManifest.xml:5:5-44
-MERGED from [com.pedropathing:pedro:1.0.8] /home/jacob/.gradle/caches/8.13/transforms/9d37065436b3a672309a52cd1ae68a95/transformed/pedro-1.0.8/AndroidManifest.xml:5:5-44
-MERGED from [com.pedropathing:pedro:1.0.8] /home/jacob/.gradle/caches/8.13/transforms/9d37065436b3a672309a52cd1ae68a95/transformed/pedro-1.0.8/AndroidManifest.xml:5:5-44
 MERGED from [com.acmerobotics.dashboard:dashboard:0.5.1] /home/jacob/.gradle/caches/8.13/transforms/1f553c29017399f7dd103bc9e832182e/transformed/dashboard-0.5.1/AndroidManifest.xml:5:5-44
 MERGED from [com.acmerobotics.dashboard:dashboard:0.5.1] /home/jacob/.gradle/caches/8.13/transforms/1f553c29017399f7dd103bc9e832182e/transformed/dashboard-0.5.1/AndroidManifest.xml:5:5-44
-MERGED from [org.firstinspires.ftc:OnBotJava:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/6e9c46d29f8763d6eb33fd4135ce2e14/transformed/OnBotJava-10.2.0/AndroidManifest.xml:39:5-44
-MERGED from [org.firstinspires.ftc:OnBotJava:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/6e9c46d29f8763d6eb33fd4135ce2e14/transformed/OnBotJava-10.2.0/AndroidManifest.xml:39:5-44
-MERGED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:7:5-44
-MERGED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:7:5-44
-MERGED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:8:5-44
-MERGED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:8:5-44
-MERGED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:7:5-44
-MERGED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:7:5-44
-MERGED from [org.firstinspires.ftc:RobotServer:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/496d9e03950196029dc762854cf810bb/transformed/RobotServer-10.2.0/AndroidManifest.xml:7:5-44
-MERGED from [org.firstinspires.ftc:RobotServer:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/496d9e03950196029dc762854cf810bb/transformed/RobotServer-10.2.0/AndroidManifest.xml:7:5-44
-MERGED from [org.firstinspires.ftc:Hardware:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1e1cc8319db873c2ab838465b7f0e728/transformed/Hardware-10.2.0/AndroidManifest.xml:7:5-44
-MERGED from [org.firstinspires.ftc:Hardware:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1e1cc8319db873c2ab838465b7f0e728/transformed/Hardware-10.2.0/AndroidManifest.xml:7:5-44
-MERGED from [org.firstinspires.ftc:Vision:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/d3b778150e2a6b12067990e038d02659/transformed/Vision-10.2.0/AndroidManifest.xml:5:5-44
-MERGED from [org.firstinspires.ftc:Vision:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/d3b778150e2a6b12067990e038d02659/transformed/Vision-10.2.0/AndroidManifest.xml:5:5-44
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:7:5-44
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:7:5-44
+MERGED from [org.firstinspires.ftc:OnBotJava:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/c3ff6b8dbf3be482dceaf62a202656ad/transformed/OnBotJava-11.0.0/AndroidManifest.xml:39:5-44
+MERGED from [org.firstinspires.ftc:OnBotJava:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/c3ff6b8dbf3be482dceaf62a202656ad/transformed/OnBotJava-11.0.0/AndroidManifest.xml:39:5-44
+MERGED from [org.firstinspires.ftc:Blocks:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/0c4435a800b46d922939e22c9b2ed244/transformed/Blocks-11.0.0/AndroidManifest.xml:7:5-44
+MERGED from [org.firstinspires.ftc:Blocks:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/0c4435a800b46d922939e22c9b2ed244/transformed/Blocks-11.0.0/AndroidManifest.xml:7:5-44
+MERGED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:8:5-44
+MERGED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:8:5-44
+MERGED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:7:5-44
+MERGED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:7:5-44
+MERGED from [org.firstinspires.ftc:RobotServer:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/8ea70e7d0b402b67a076f9c29164c927/transformed/RobotServer-11.0.0/AndroidManifest.xml:7:5-44
+MERGED from [org.firstinspires.ftc:RobotServer:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/8ea70e7d0b402b67a076f9c29164c927/transformed/RobotServer-11.0.0/AndroidManifest.xml:7:5-44
+MERGED from [org.firstinspires.ftc:Hardware:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/497f4da412ce60c5f1978befb551f87b/transformed/Hardware-11.0.0/AndroidManifest.xml:7:5-44
+MERGED from [org.firstinspires.ftc:Hardware:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/497f4da412ce60c5f1978befb551f87b/transformed/Hardware-11.0.0/AndroidManifest.xml:7:5-44
+MERGED from [org.firstinspires.ftc:Vision:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/601f04e8656c6ff1986ed13a931a3794/transformed/Vision-11.0.0/AndroidManifest.xml:5:5-44
+MERGED from [org.firstinspires.ftc:Vision:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/601f04e8656c6ff1986ed13a931a3794/transformed/Vision-11.0.0/AndroidManifest.xml:5:5-44
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:7:5-44
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:7:5-44
 MERGED from [androidx.appcompat:appcompat:1.2.0] /home/jacob/.gradle/caches/8.13/transforms/9e6c9ea72ae78f2ffd4e9ea0a3d59803/transformed/appcompat-1.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat:1.2.0] /home/jacob/.gradle/caches/8.13/transforms/9e6c9ea72ae78f2ffd4e9ea0a3d59803/transformed/appcompat-1.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.1.0] /home/jacob/.gradle/caches/8.13/transforms/e213dcf54a5df8f7e2d12a44271f2b1b/transformed/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
@@ -269,469 +269,469 @@ ADDED from [:FtcRobotController] /home/jacob/Desktop/AndriodStudioProjects/Decod
 	android:name
 		ADDED from [:FtcRobotController] /home/jacob/Desktop/AndriodStudioProjects/Decode5361/FtcRobotController/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:73:25-79
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:9:5-11:35
-MERGED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:11:5-13:35
-MERGED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:11:5-13:35
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:26:5-28:35
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:26:5-28:35
+ADDED from [org.firstinspires.ftc:Blocks:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/0c4435a800b46d922939e22c9b2ed244/transformed/Blocks-11.0.0/AndroidManifest.xml:9:5-11:35
+MERGED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:11:5-13:35
+MERGED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:11:5-13:35
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:26:5-28:35
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:26:5-28:35
 	android:required
-		ADDED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:11:9-32
+		ADDED from [org.firstinspires.ftc:Blocks:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/0c4435a800b46d922939e22c9b2ed244/transformed/Blocks-11.0.0/AndroidManifest.xml:11:9-32
 	android:name
-		ADDED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:10:9-65
+		ADDED from [org.firstinspires.ftc:Blocks:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/0c4435a800b46d922939e22c9b2ed244/transformed/Blocks-11.0.0/AndroidManifest.xml:10:9-65
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:12:5-14:35
-MERGED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:14:5-16:35
-MERGED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:14:5-16:35
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:30:5-32:35
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:30:5-32:35
+ADDED from [org.firstinspires.ftc:Blocks:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/0c4435a800b46d922939e22c9b2ed244/transformed/Blocks-11.0.0/AndroidManifest.xml:12:5-14:35
+MERGED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:14:5-16:35
+MERGED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:14:5-16:35
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:30:5-32:35
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:30:5-32:35
 	android:required
-		ADDED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:14:9-32
+		ADDED from [org.firstinspires.ftc:Blocks:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/0c4435a800b46d922939e22c9b2ed244/transformed/Blocks-11.0.0/AndroidManifest.xml:14:9-32
 	android:name
-		ADDED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:13:9-64
+		ADDED from [org.firstinspires.ftc:Blocks:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/0c4435a800b46d922939e22c9b2ed244/transformed/Blocks-11.0.0/AndroidManifest.xml:13:9-64
 activity#org.firstinspires.ftc.ftccommon.internal.ProgramAndManageActivity
-ADDED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:17:9-21:20
+ADDED from [org.firstinspires.ftc:Blocks:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/0c4435a800b46d922939e22c9b2ed244/transformed/Blocks-11.0.0/AndroidManifest.xml:17:9-21:20
 	android:label
-		ADDED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:20:13-64
+		ADDED from [org.firstinspires.ftc:Blocks:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/0c4435a800b46d922939e22c9b2ed244/transformed/Blocks-11.0.0/AndroidManifest.xml:20:13-64
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:19:13-59
+		ADDED from [org.firstinspires.ftc:Blocks:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/0c4435a800b46d922939e22c9b2ed244/transformed/Blocks-11.0.0/AndroidManifest.xml:19:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:Blocks:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/024c01a1c4ac82a20e6d2777233d7644/transformed/Blocks-10.2.0/AndroidManifest.xml:18:13-93
+		ADDED from [org.firstinspires.ftc:Blocks:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/0c4435a800b46d922939e22c9b2ed244/transformed/Blocks-11.0.0/AndroidManifest.xml:18:13-93
 uses-permission#android.permission.ACCESS_WIFI_STATE
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:10:5-76
-MERGED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:9:5-76
-MERGED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:9:5-76
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:9:5-11:35
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:9:5-11:35
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:10:5-76
+MERGED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:9:5-76
+MERGED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:9:5-76
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:9:5-11:35
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:9:5-11:35
 	android:required
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:11:9-32
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:11:9-32
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:10:22-73
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:10:22-73
 uses-permission#android.permission.WRITE_SETTINGS
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:17:5-19:35
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:35:5-37:35
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:35:5-37:35
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:17:5-19:35
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:35:5-37:35
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:35:5-37:35
 	android:required
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:19:9-32
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:19:9-32
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:18:9-57
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:18:9-57
 activity#com.qualcomm.ftccommon.StackTraceActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:24:9-28:47
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:24:9-28:47
 	android:launchMode
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:28:13-44
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:28:13-44
 	android:exported
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:27:13-36
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:27:13-36
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:26:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:26:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:25:13-69
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:25:13-69
 activity#com.qualcomm.ftccommon.FtcRobotControllerSettingsActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:29:9-33:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:29:9-33:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:32:13-54
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:32:13-54
 	android:exported
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:31:13-36
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:31:13-36
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:30:13-85
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:30:13-85
 activity#com.qualcomm.ftccommon.configuration.FtcLoadFileActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:34:9-39:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:34:9-39:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:38:13-55
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:38:13-55
 	android:exported
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:37:13-36
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:37:13-36
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:36:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:36:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:35:13-84
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:35:13-84
 activity#com.qualcomm.ftccommon.configuration.ConfigureFromTemplateActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:40:9-45:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:40:9-45:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:44:13-70
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:44:13-70
 	android:exported
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:43:13-36
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:43:13-36
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:42:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:42:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:41:13-94
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:41:13-94
 activity#com.qualcomm.ftccommon.ViewLogsActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:46:9-51:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:46:9-51:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:50:13-55
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:50:13-55
 	android:exported
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:49:13-36
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:49:13-36
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:48:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:48:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:47:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:47:13-67
 activity#com.qualcomm.ftccommon.configuration.FtcConfigurationActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:52:9-56:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:52:9-56:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:55:13-45
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:55:13-45
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:54:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:54:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:53:13-89
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:53:13-89
 activity#com.qualcomm.ftccommon.configuration.FtcNewFileActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:57:9-61:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:57:9-61:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:60:13-45
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:60:13-45
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:59:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:59:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:58:13-83
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:58:13-83
 activity#com.qualcomm.ftccommon.FtcAdvancedRCSettingsActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:62:9-66:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:62:9-66:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:65:13-60
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:65:13-60
 	android:exported
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:64:13-36
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:64:13-36
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:63:13-80
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:63:13-80
 activity#com.qualcomm.ftccommon.FtcLynxFirmwareUpdateActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:67:9-70:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:67:9-70:20
 	android:exported
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:69:13-36
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:69:13-36
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:68:13-80
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:68:13-80
 activity#com.qualcomm.ftccommon.FtcLynxModuleAddressUpdateActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:71:9-74:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:71:9-74:20
 	android:exported
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:73:13-36
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:73:13-36
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:72:13-85
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:72:13-85
 activity#com.qualcomm.ftccommon.FtcWifiDirectChannelSelectorActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:75:9-79:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:75:9-79:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:78:13-73
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:78:13-73
 	android:exported
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:77:13-36
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:77:13-36
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:76:13-87
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:76:13-87
 activity#com.qualcomm.ftccommon.FtcWifiDirectRememberedGroupsActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:80:9-84:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:80:9-84:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:83:13-81
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:83:13-81
 	android:exported
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:82:13-36
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:82:13-36
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:81:13-88
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:81:13-88
 activity#com.qualcomm.ftccommon.AboutActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:85:9-88:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:85:9-88:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:87:13-51
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:87:13-51
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:86:13-64
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:86:13-64
 activity#com.qualcomm.ftccommon.FtcAboutActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:89:9-92:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:89:9-92:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:91:13-55
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:91:13-55
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:90:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:90:13-67
 activity#com.qualcomm.ftccommon.configuration.EditSwapUsbDevices
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:93:9-98:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:93:9-98:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:96:13-63
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:96:13-63
 	android:windowSoftInputMode
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:97:13-54
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:97:13-54
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:95:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:95:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:94:13-83
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:94:13-83
 activity#com.qualcomm.ftccommon.configuration.EditMotorListActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:99:9-104:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:99:9-104:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:102:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:102:13-67
 	android:windowSoftInputMode
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:103:13-54
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:103:13-54
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:101:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:101:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:100:13-86
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:100:13-86
 activity#com.qualcomm.ftccommon.configuration.EditServoListActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:105:9-110:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:105:9-110:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:108:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:108:13-67
 	android:windowSoftInputMode
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:109:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:109:13-67
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:107:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:107:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:106:13-86
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:106:13-86
 activity#com.qualcomm.ftccommon.configuration.EditLynxModuleActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:111:9-116:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:111:9-116:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:114:13-73
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:114:13-73
 	android:windowSoftInputMode
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:115:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:115:13-67
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:113:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:113:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:112:13-87
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:112:13-87
 activity#com.qualcomm.ftccommon.configuration.EditLynxUsbDeviceActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:117:9-122:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:117:9-122:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:120:13-66
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:120:13-66
 	android:windowSoftInputMode
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:121:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:121:13-67
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:119:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:119:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:118:13-90
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:118:13-90
 activity#com.qualcomm.ftccommon.configuration.EditWebcamActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:123:9-128:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:123:9-128:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:126:13-57
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:126:13-57
 	android:windowSoftInputMode
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:127:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:127:13-67
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:125:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:125:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:124:13-83
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:124:13-83
 activity#com.qualcomm.ftccommon.configuration.EditPWMDevicesActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:129:9-134:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:129:9-134:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:132:13-62
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:132:13-62
 	android:windowSoftInputMode
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:133:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:133:13-67
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:131:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:131:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:130:13-87
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:130:13-87
 activity#com.qualcomm.ftccommon.configuration.EditAnalogInputDevicesActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:135:9-140:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:135:9-140:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:138:13-71
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:138:13-71
 	android:windowSoftInputMode
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:139:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:139:13-67
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:137:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:137:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:136:13-95
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:136:13-95
 activity#com.qualcomm.ftccommon.configuration.EditDigitalDevicesActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:141:9-146:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:141:9-146:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:144:13-66
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:144:13-66
 	android:windowSoftInputMode
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:145:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:145:13-67
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:143:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:143:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:142:13-91
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:142:13-91
 activity#com.qualcomm.ftccommon.configuration.EditDigitalDevicesActivityLynx
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:147:9-152:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:147:9-152:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:150:13-71
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:150:13-71
 	android:windowSoftInputMode
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:151:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:151:13-67
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:149:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:149:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:148:13-95
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:148:13-95
 activity#com.qualcomm.ftccommon.configuration.EditI2cDevicesActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:153:9-158:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:153:9-158:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:156:13-62
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:156:13-62
 	android:windowSoftInputMode
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:157:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:157:13-67
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:155:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:155:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:154:13-87
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:154:13-87
 activity#com.qualcomm.ftccommon.configuration.EditI2cDevicesActivityLynx
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:159:9-164:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:159:9-164:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:162:13-62
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:162:13-62
 	android:windowSoftInputMode
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:163:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:163:13-67
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:161:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:161:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:160:13-91
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:160:13-91
 activity#com.qualcomm.ftccommon.configuration.EditEthernetOverUsbActivity
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:165:9-170:20
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:165:9-170:20
 	android:label
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:168:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:168:13-67
 	android:windowSoftInputMode
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:169:13-67
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:169:13-67
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:167:13-59
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:167:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:166:13-92
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:166:13-92
 service#org.firstinspires.ftc.ftccommon.internal.FtcRobotControllerWatchdogService
-ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:173:9-175:38
+ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:173:9-175:38
 	android:enabled
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:175:13-35
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:175:13-35
 	android:name
-		ADDED from [org.firstinspires.ftc:FtcCommon:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/1a3f0508db169a93a2f295052c361e22/transformed/FtcCommon-10.2.0/AndroidManifest.xml:174:13-102
+		ADDED from [org.firstinspires.ftc:FtcCommon:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/b185b5aa9e3e46d4a559bfc2cfa940fd/transformed/FtcCommon-11.0.0/AndroidManifest.xml:174:13-102
 uses-permission#android.permission.BLUETOOTH_ADMIN
-ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:10:5-74
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:63:5-74
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:63:5-74
+ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:10:5-74
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:63:5-74
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:63:5-74
 	android:name
-		ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:10:22-71
+		ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:10:22-71
 uses-permission#android.permission.CHANGE_WIFI_STATE
-ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:11:5-76
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:12:5-14:35
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:12:5-14:35
+ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:11:5-76
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:12:5-14:35
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:12:5-14:35
 	android:required
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:14:9-32
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:14:9-32
 	android:name
-		ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:11:22-73
+		ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:11:22-73
 uses-permission#android.permission.CHANGE_NETWORK_STATE
-ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:12:5-79
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:18:5-20:35
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:18:5-20:35
+ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:12:5-79
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:18:5-20:35
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:18:5-20:35
 	android:required
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:20:9-32
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:20:9-32
 	android:name
-		ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:12:22-76
+		ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:12:22-76
 uses-permission#android.permission.INTERNET
-ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:13:5-67
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:21:5-23:35
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:21:5-23:35
+ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:13:5-67
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:21:5-23:35
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:21:5-23:35
 	android:required
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:23:9-32
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:23:9-32
 	android:name
-		ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:13:22-64
+		ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:13:22-64
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:14:5-79
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:15:5-17:35
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:15:5-17:35
+ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:14:5-79
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:15:5-17:35
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:15:5-17:35
 	android:required
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:17:9-32
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:17:9-32
 	android:name
-		ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:14:22-76
+		ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:14:22-76
 uses-permission#android.permission.BLUETOOTH
-ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:15:5-68
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:62:5-68
-MERGED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:62:5-68
+ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:15:5-68
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:62:5-68
+MERGED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:62:5-68
 	android:name
-		ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:15:22-65
+		ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:15:22-65
 activity#org.firstinspires.inspection.DsInspectionActivity
-ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:18:9-22:20
+ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:18:9-22:20
 	android:label
-		ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:21:13-56
+		ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:21:13-56
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:20:13-59
+		ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:20:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:19:13-77
+		ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:19:13-77
 activity#org.firstinspires.inspection.RcInspectionActivity
-ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:23:9-27:20
+ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:23:9-27:20
 	android:label
-		ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:26:13-56
+		ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:26:13-56
 	android:configChanges
-		ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:25:13-59
+		ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:25:13-59
 	android:name
-		ADDED from [org.firstinspires.ftc:Inspection:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/b2b5133cb24923b255a9e052636ee75d/transformed/Inspection-10.2.0/AndroidManifest.xml:24:13-77
+		ADDED from [org.firstinspires.ftc:Inspection:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/301c3c08f40fa4c1825306ac16a1506e/transformed/Inspection-11.0.0/AndroidManifest.xml:24:13-77
 uses-permission#android.permission.SET_TIME_ZONE
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:40:5-42:35
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:40:5-42:35
 	android:required
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:42:9-32
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:42:9-32
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:41:9-56
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:41:9-56
 uses-permission#android.permission.WAKE_LOCK
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:49:5-51:35
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:49:5-51:35
 	android:required
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:51:9-32
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:51:9-32
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:50:9-52
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:50:9-52
 uses-permission#android.permission.CAMERA
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:52:5-65
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:52:5-65
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/jacob/.gradle/caches/8.13/transforms/27e6f9927b3e9040663c0a604e34a094/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:22:5-65
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/jacob/.gradle/caches/8.13/transforms/27e6f9927b3e9040663c0a604e34a094/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:22:5-65
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:52:22-62
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:52:22-62
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:53:5-55:35
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:53:5-55:35
 	android:required
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:55:9-32
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:55:9-32
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:54:9-65
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:54:9-65
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:56:5-58:35
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:56:5-58:35
 	android:required
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:58:9-32
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:58:9-32
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:57:9-63
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:57:9-63
 uses-permission#android.permission.READ_PHONE_STATE
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:59:5-61:35
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:59:5-61:35
 	android:required
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:61:9-32
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:61:9-32
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:60:9-59
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:60:9-59
 uses-permission#com.revrobotics.permission.UPDATE_CONTROL_HUB
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:64:5-66:35
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:64:5-66:35
 	android:required
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:66:9-32
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:66:9-32
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:65:9-69
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:65:9-69
 uses-feature#android.hardware.usb.accessory
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:68:5-67
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:68:5-67
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:68:19-64
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:68:19-64
 uses-feature#0x00020000
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:69:5-54
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:69:5-54
 	android:glEsVersion
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:69:19-51
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:69:19-51
 uses-feature#android.hardware.camera
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:83:5-60
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:83:5-60
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/jacob/.gradle/caches/8.13/transforms/27e6f9927b3e9040663c0a604e34a094/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:25:5-27:36
 MERGED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/jacob/.gradle/caches/8.13/transforms/27e6f9927b3e9040663c0a604e34a094/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:25:5-27:36
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:83:19-57
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:83:19-57
 provider#androidx.core.content.FileProvider
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:91:9-99:20
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:91:9-99:20
 	android:grantUriPermissions
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:95:13-47
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:95:13-47
 	android:authorities
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:93:13-60
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:93:13-60
 	android:exported
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:94:13-37
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:94:13-37
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:92:13-62
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:92:13-62
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:96:13-98:63
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:96:13-98:63
 	android:resource
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:98:17-60
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:98:17-60
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:97:17-67
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:97:17-67
 service#org.firstinspires.ftc.robotcore.internal.files.MediaTransferProtocolMonitorService
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:102:9-104:38
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:102:9-104:38
 	android:enabled
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:104:13-35
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:104:13-35
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:103:13-110
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:103:13-110
 meta-data#autoStartService.org.firstinspires.ftc.robotcore.internal.files.MediaTransferProtocolMonitorService
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:106:9-108:41
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:106:9-108:41
 	android:value
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:108:13-38
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:108:13-38
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:107:13-127
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:107:13-127
 service#org.firstinspires.ftc.onbotjava.OnBotJavaService
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:111:9-113:38
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:111:9-113:38
 	android:enabled
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:113:13-35
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:113:13-35
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:112:13-76
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:112:13-76
 meta-data#autoStartService.org.firstinspires.ftc.onbotjava.OnBotJavaService
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:115:9-117:39
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:115:9-117:39
 	android:value
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:117:13-36
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:117:13-36
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:116:13-93
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:116:13-93
 receiver#org.firstinspires.ftc.robotserver.internal.webserver.controlhubupdater.ChUpdaterCommManager$ChUpdaterBroadcastReceiver
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:119:9-126:20
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:119:9-126:20
 	android:exported
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:121:13-36
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:121:13-36
 	android:permission
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:122:13-69
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:122:13-69
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:120:13-146
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:120:13-146
 intent-filter#action:name:com.revrobotics.controlhubupdater.broadcast.RESULT_BROADCAST
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:123:13-125:29
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:123:13-125:29
 action#com.revrobotics.controlhubupdater.broadcast.RESULT_BROADCAST
-ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:124:17-103
+ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:124:17-103
 	android:name
-		ADDED from [org.firstinspires.ftc:RobotCore:10.2.0] /home/jacob/.gradle/caches/8.13/transforms/8545a7e1cb396b51071208d849e29c5d/transformed/RobotCore-10.2.0/AndroidManifest.xml:124:25-100
+		ADDED from [org.firstinspires.ftc:RobotCore:11.0.0] /home/jacob/.gradle/caches/8.13/transforms/334c5441fb3dc0980e92a572943d2ff1/transformed/RobotCore-11.0.0/AndroidManifest.xml:124:25-100
 uses-feature#android.hardware.camera.front
 ADDED from [com.journeyapps:zxing-android-embedded:4.3.0] /home/jacob/.gradle/caches/8.13/transforms/27e6f9927b3e9040663c0a604e34a094/transformed/zxing-android-embedded-4.3.0/AndroidManifest.xml:28:5-30:36
 	android:required

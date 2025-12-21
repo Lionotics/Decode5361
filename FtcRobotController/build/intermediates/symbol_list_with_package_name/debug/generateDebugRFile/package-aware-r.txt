@@ -138,6 +138,7 @@ attr colorMediumLight
 attr colorMediumMedium
 attr colorPrimary
 attr colorPrimaryDark
+attr colorReady
 attr colorSwitchThumbNormal
 attr colorVeryVeryDark
 attr colors
@@ -776,11 +777,13 @@ drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable button_shape
 drawable centerstage_background
+drawable decode_background
 drawable feedback_shape_orange
 drawable freightfrenzy_background
 drawable ic_arrow_back_black_24dp
 drawable ic_check_circle
 drawable ic_error
+drawable ic_error_yellow
 drawable ic_launcher
 drawable ic_warning
 drawable icon_menu
@@ -850,7 +853,6 @@ id action_container
 id action_context_bar
 id action_divider
 id action_exit_app
-id action_help
 id action_image
 id action_inspection_mode
 id action_menu_divider
@@ -911,6 +913,9 @@ id configIsReadOnlyFeedback
 id configureButton
 id configureFromTemplate
 id configureFromTemplateArea
+id connectedToDevice
+id connectedToLayout
+id connectedTo_img
 id container
 id content
 id contentPanel
@@ -1059,6 +1064,7 @@ id readOnlyExplanation
 id right
 id right_icon
 id right_side
+id robotControllerNameLabel
 id robotIcon
 id row_port
 id row_port_digital_device
@@ -1292,17 +1298,14 @@ layout zxing_capture
 menu ftc_robot_controller
 menu inspection_menu_rc_remote
 menu inspection_menu_rcds_local
-menu menu_server
 raw chimeconnect
 raw chimedisconnect
 raw color_fragment_shader
 raw cube_mesh_fragment_shader
 raw cube_mesh_vertex_shader
 raw errormessage
-raw gold
 raw nxtstartupsound
 raw rev_bhi260_ap_fw_20
-raw silver
 raw simple_vertex_shader
 raw ss_alarm
 raw ss_bb8_down
@@ -1455,7 +1458,6 @@ string availableConfigsInfoMessage
 string availableTemplateListCaption
 string batteryLevelLabel
 string blocks_activity
-string blocks_menu_item
 string bluetoothLabel
 string bluetoothOnContext
 string buttonExitWithoutSaving
@@ -1546,6 +1548,7 @@ string configTypePulseWidthDevices
 string configTypeRevTouchSensor
 string configTypeServo
 string configTypeServoController
+string configTypeServoFullRange
 string configTypeServos
 string configTypeUnknown
 string configTypeWebcam
@@ -1557,6 +1560,7 @@ string configure_robot_menu_item
 string configure_settings
 string confirmConfigDeleteMessage
 string confirmConfigDeleteTitle
+string connectedToContext
 string connection_owner_default
 string connection_owner_password_default
 string continuous_servo_description
@@ -1604,6 +1608,7 @@ string driverHubOsVersionLabel
 string driverStationInstalledOnRobotControllerContext
 string driverStationIsObsoleteContext
 string driverStationLabel
+string driverStationNameLabel
 string dsVersionMismatch
 string duplicateWebcam
 string duplicateWebcamWithName
@@ -1954,6 +1959,7 @@ string robotControllerInstalledOnDriverStationContext
 string robotControllerIsNotInstalledContext
 string robotControllerIsObsoleteContext
 string robotControllerLabel
+string robotControllerNameLabel
 string robotOffTip
 string robotStateEmergencyStop
 string robotStateInit
@@ -2002,6 +2008,7 @@ string sparkfun_led_stick_description
 string sparkfun_led_stick_name
 string sparkfun_optical_odometry_description
 string sparkfun_optical_odometry_name
+string standardWifiConnected
 string standard_servo_description
 string status_bar_notification_info_overflow
 string stringManufacturer
@@ -2140,12 +2147,7 @@ style Animation_AppCompat_DropDownUp
 style Animation_AppCompat_Tooltip
 style AppBaseTheme
 style AppTheme
-style AppThemeBlueRC
-style AppThemeGreenRC
-style AppThemeOrangeRC
-style AppThemePurpleRC
 style AppThemeRedRC
-style AppThemeTealRC
 style AppTheme_Blue
 style AppTheme_Green
 style AppTheme_Orange

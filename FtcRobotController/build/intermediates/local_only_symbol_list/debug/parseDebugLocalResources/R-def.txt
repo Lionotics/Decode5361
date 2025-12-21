@@ -1,6 +1,5 @@
 R_DEF: Internal format may change without notice
 local
-array app_theme_ids
 dimen activity_horizontal_margin
 dimen activity_vertical_margin
 drawable icon_menu
@@ -30,11 +29,8 @@ id top_bar
 id webViewBlocksRuntime
 layout activity_ftc_controller
 menu ftc_robot_controller
-raw gold
-raw silver
 string about_menu_item
 string app_name
-string blocks_menu_item
 string configure_robot_menu_item
 string exit_menu_item
 string inspection_mode_menu_item
@@ -46,11 +42,6 @@ string settings_menu_item
 string toastRestartingRobot
 string toastWifiConfigurationComplete
 string toastWifiUpBeforeProgrammingMode
-style AppThemeBlueRC
-style AppThemeGreenRC
-style AppThemeOrangeRC
-style AppThemePurpleRC
 style AppThemeRedRC
-style AppThemeTealRC
 xml app_settings
 xml device_filter

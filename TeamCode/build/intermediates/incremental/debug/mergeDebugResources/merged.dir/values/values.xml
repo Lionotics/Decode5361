@@ -9,13 +9,13 @@
         <item>@color/medium_light_teal</item>
     </array>
     <integer-array name="app_theme_ids">
-      <item>@style/AppThemeRedRC</item>
-      <item>@style/AppThemeGreenRC</item>
-      <item>@style/AppThemeBlueRC</item>
-      <item>@style/AppThemePurpleRC</item>
-      <item>@style/AppThemeOrangeRC</item>
-      <item>@style/AppThemeTealRC</item>
-  </integer-array>
+        <item>@style/AppTheme.Red</item>
+        <item>@style/AppTheme.Green</item>
+        <item>@style/AppTheme.Blue</item>
+        <item>@style/AppTheme.Purple</item>
+        <item>@style/AppTheme.Orange</item>
+        <item>@style/AppTheme.Teal</item>
+    </integer-array>
     <string-array name="app_theme_names">
         <item>Red</item>
         <item>Green</item>
@@ -102,6 +102,7 @@
     <attr format="color" name="colorMedium"/>
     <attr format="color" name="colorMediumLight"/>
     <attr format="color" name="colorMediumMedium"/>
+    <attr format="color" name="colorReady"/>
     <attr format="color" name="colorVeryVeryDark"/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="color" name="feedbackBackground"/>
@@ -583,7 +584,6 @@
     <string name="availableTemplateListCaption">Available templates:</string>
     <string name="batteryLevelLabel">Battery Level:</string>
     <string name="blocks_activity">Blocks</string>
-    <string name="blocks_menu_item">Blocks</string>
     <string name="bluetoothLabel">Bluetooth:</string>
     <string name="bluetoothOnContext">Bluetooth should be turned off.</string>
     <string name="buttonExitWithoutSaving">Exit Without Saving</string>
@@ -655,6 +655,7 @@
     <string name="configTypePulseWidthDevice">Pulse Width Device</string>
     <string name="configTypeRevTouchSensor">REV Touch Sensor</string>
     <string name="configTypeServo">Servo</string>
+    <string name="configTypeServoFullRange">Full Range Servo</string>
     <string name="configTypeServos">Servos</string>
     <string name="configTypeUnknown">[Unknown]</string>
     <string name="configTypeWebcam">Webcam</string>
@@ -666,6 +667,7 @@
     <string name="configure_settings">Change Channel</string>
     <string name="confirmConfigDeleteMessage">Are you sure you want to delete this configuration?</string>
     <string name="confirmConfigDeleteTitle">Confirm Configuration Delete</string>
+    <string name="connectedToContext">The team numbers in the robot controller and driver station names do not match. Refer to the FTC Competition Manual for device naming rules.</string>
     <string name="connection_owner_default">NONE</string>
     <string name="connection_owner_password_default">password</string>
     <string name="continuous_servo_description">a continuous rotation servo</string>
@@ -691,7 +693,7 @@
     <string name="descriptionLynxEmbeddedModule">Embedded Expansion Hub</string>
     <string name="deviceDisplayNameUnknownUSBDevice">unknown USB device [%s]</string>
     <string name="deviceInterfaceModuleName">Device Interface Module</string>
-    <string name="deviceNameContext">The device is not named properly.  Refer to the Game Manual for the proper name format.</string>
+    <string name="deviceNameContext">The device is not named properly.  Refer to the FTC Competition Manual for the proper name format.</string>
     <string name="device_info">Device Info</string>
     <string name="device_name_format_ds">0000-%s-DS</string>
     <string name="device_name_format_rc">0000-%s-RC</string>
@@ -712,6 +714,7 @@
     <string name="driverStationInstalledOnRobotControllerContext">The Driver Station app is installed on the Robot Controller.</string>
     <string name="driverStationIsObsoleteContext">The Driver Station app is obsolete.  Ensure your device has the correct date.  If the date is correct, install the latest Driver Station for the current season.</string>
     <string name="driverStationLabel">Driver Station:</string>
+    <string name="driverStationNameLabel">Driver Station Name:</string>
     <string name="dsVersionMismatch">No, the DS version is %1$d.%2$d</string>
     <string name="duplicateWebcam">Multiple webcams found with serial number %1$s.</string>
     <string name="duplicateWebcamWithName">Multiple webcams found with serial number of \"%1$s\" (%2$s).</string>
@@ -745,7 +748,7 @@
     <string name="file_prompt">Choose Configuration File</string>
     <string name="filename_editText">Filename</string>
     <string name="filler_text">lorem ipsum</string>
-    <string name="firmwareContext">The firmware version of the Control Hub and/or Expansion Hub is less than the minimum version, %1$s, specified in the Game Manual.</string>
+    <string name="firmwareContext">The firmware version of the Control Hub and/or Expansion Hub is less than the minimum version, %1$s, specified in the FTC Competition Manual.</string>
     <string name="fixFailDuplicate">Unable to fix \"%1$s\": no unique replacement %2$s attached</string>
     <string name="fixFailNoneAvailable">Unable to fix \"%1$s\": no replacement %2$s attached</string>
     <string name="flashingControlHubImu">Flashing Control Hub IMU firmware</string>
@@ -879,7 +882,7 @@
     <string name="notAllDevicesFoundTitle">Some Devices Not Found</string>
     <string name="not_available">&lt;NOT AVAILABLE></string>
     <string name="optical_distance_sensor_description">a Modern Robotics optical distance sensor</string>
-    <string name="osContext">The Android OS version running on this device is lower than the minimum version, %1$s, specified in the Game Manual.</string>
+    <string name="osContext">The Android OS version running on this device is lower than the minimum version, %1$s, specified in the FTC Competition Manual.</string>
     <string name="ota_result_type_device_not_supported">This update file does not support this device.</string>
     <string name="ota_result_type_downgrade_not_authorized">This update file is older than the currently running operating system.\nAre you sure you want to install it?</string>
     <string name="ota_result_type_error_reading_file">Error reading the uploaded update file. Please try again.</string>
@@ -1073,6 +1076,7 @@
     <string name="robotControllerIsNotInstalledContext">The Robot Controller app is not installed on the Control Hub.</string>
     <string name="robotControllerIsObsoleteContext">The Robot Controller app is obsolete.  Ensure your device has the correct date.  If the date is correct, install the latest Robot Controller for the current season.</string>
     <string name="robotControllerLabel">Robot Controller:</string>
+    <string name="robotControllerNameLabel">Robot Controller Name:</string>
     <string name="robotOffTip">Make sure that your robot is turned on.</string>
     <string name="robotStateEmergencyStop">EMERGENCY STOP</string>
     <string name="robotStateInit">initializing</string>
@@ -1121,6 +1125,7 @@
     <string name="sparkfun_led_stick_name" ns2:ignore="ExtraTranslation">SparkFun QWIIC LED Stick</string>
     <string name="sparkfun_optical_odometry_description" ns2:ignore="ExtraTranslation">a SparkFun optical odometry sensor</string>
     <string name="sparkfun_optical_odometry_name" ns2:ignore="ExtraTranslation">SparkFun Optical Odometry Sensor</string>
+    <string name="standardWifiConnected">During FTC competitions the device should not be connected to other Wifi networks.</string>
     <string name="standard_servo_description">a servo</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="stringManufacturer">Manufacturer:</string>
@@ -1239,7 +1244,7 @@
     <string name="webcamNotFound">Unable to find webcam with serial number %s.</string>
     <string name="webcamNotFoundWithName">Unable to find webcam \"%1$s\" with serial number %2$s.</string>
     <string name="webcam_name_prompt">Enter the name for this webcam here</string>
-    <string name="wifiAccessPointLabel">Wi-Fi Access Point</string>
+    <string name="wifiAccessPointLabel">Wi-Fi Access Point:</string>
     <string name="wifiApDescription">Wireless access point pairing is used to pair a driver station with a robot controller
         running on a Control Hub (use Wi-Fi Direct to pair with other robot controllers).\n\nEach Control Hub robot controller hosts its
         own Wi-Fi network named with the name of the robot controller (default password: \"password\"). Click the button below to use the system Wi-Fi Settings of
@@ -1270,6 +1275,7 @@
         <item name="android:textViewStyle">@style/FtcTextViewStyle</item>
         <item name="android:buttonStyle">@style/FtcButtonStyle</item>
         <item name="textWhite">@color/text_white</item>
+        <item name="colorReady">@color/light_green</item>
     </style>
     <style name="AppTheme.Blue">
         <item name="textBright">@color/bright_blue</item>
@@ -1445,17 +1451,7 @@
         <item name="feedbackBorder">@color/border_orange</item>
         <item name="feedbackShape">@drawable/feedback_shape_orange</item>
     </style>
-    <style name="AppThemeBlueRC" parent="AppTheme.Blue">
-    </style>
-    <style name="AppThemeGreenRC" parent="AppTheme.Green">
-    </style>
-    <style name="AppThemeOrangeRC" parent="AppTheme.Orange">
-    </style>
-    <style name="AppThemePurpleRC" parent="AppTheme.Purple">
-    </style>
     <style name="AppThemeRedRC" parent="AppTheme.Red">
-    </style>
-    <style name="AppThemeTealRC" parent="AppTheme.Teal">
     </style>
     <style name="Base.AlertDialog.AppCompat" parent="android:Widget">
         <item name="android:layout">@layout/abc_alert_dialog_material</item>

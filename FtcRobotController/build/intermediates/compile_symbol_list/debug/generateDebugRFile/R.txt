@@ -137,6 +137,7 @@ int attr colorMediumLight 0x0
 int attr colorMediumMedium 0x0
 int attr colorPrimary 0x0
 int attr colorPrimaryDark 0x0
+int attr colorReady 0x0
 int attr colorSwitchThumbNormal 0x0
 int attr colorVeryVeryDark 0x0
 int attr colors 0x0
@@ -775,11 +776,13 @@ int drawable btn_radio_on_mtrl 0x0
 int drawable btn_radio_on_to_off_mtrl_animation 0x0
 int drawable button_shape 0x0
 int drawable centerstage_background 0x0
+int drawable decode_background 0x0
 int drawable feedback_shape_orange 0x0
 int drawable freightfrenzy_background 0x0
 int drawable ic_arrow_back_black_24dp 0x0
 int drawable ic_check_circle 0x0
 int drawable ic_error 0x0
+int drawable ic_error_yellow 0x0
 int drawable ic_launcher 0x0
 int drawable ic_warning 0x0
 int drawable icon_menu 0x0
@@ -849,7 +852,6 @@ int id action_container 0x0
 int id action_context_bar 0x0
 int id action_divider 0x0
 int id action_exit_app 0x0
-int id action_help 0x0
 int id action_image 0x0
 int id action_inspection_mode 0x0
 int id action_menu_divider 0x0
@@ -910,6 +912,9 @@ int id configIsReadOnlyFeedback 0x0
 int id configureButton 0x0
 int id configureFromTemplate 0x0
 int id configureFromTemplateArea 0x0
+int id connectedToDevice 0x0
+int id connectedToLayout 0x0
+int id connectedTo_img 0x0
 int id container 0x0
 int id content 0x0
 int id contentPanel 0x0
@@ -1058,6 +1063,7 @@ int id readOnlyExplanation 0x0
 int id right 0x0
 int id right_icon 0x0
 int id right_side 0x0
+int id robotControllerNameLabel 0x0
 int id robotIcon 0x0
 int id row_port 0x0
 int id row_port_digital_device 0x0
@@ -1291,17 +1297,14 @@ int layout zxing_capture 0x0
 int menu ftc_robot_controller 0x0
 int menu inspection_menu_rc_remote 0x0
 int menu inspection_menu_rcds_local 0x0
-int menu menu_server 0x0
 int raw chimeconnect 0x0
 int raw chimedisconnect 0x0
 int raw color_fragment_shader 0x0
 int raw cube_mesh_fragment_shader 0x0
 int raw cube_mesh_vertex_shader 0x0
 int raw errormessage 0x0
-int raw gold 0x0
 int raw nxtstartupsound 0x0
 int raw rev_bhi260_ap_fw_20 0x0
-int raw silver 0x0
 int raw simple_vertex_shader 0x0
 int raw ss_alarm 0x0
 int raw ss_bb8_down 0x0
@@ -1454,7 +1457,6 @@ int string availableConfigsInfoMessage 0x0
 int string availableTemplateListCaption 0x0
 int string batteryLevelLabel 0x0
 int string blocks_activity 0x0
-int string blocks_menu_item 0x0
 int string bluetoothLabel 0x0
 int string bluetoothOnContext 0x0
 int string buttonExitWithoutSaving 0x0
@@ -1545,6 +1547,7 @@ int string configTypePulseWidthDevices 0x0
 int string configTypeRevTouchSensor 0x0
 int string configTypeServo 0x0
 int string configTypeServoController 0x0
+int string configTypeServoFullRange 0x0
 int string configTypeServos 0x0
 int string configTypeUnknown 0x0
 int string configTypeWebcam 0x0
@@ -1556,6 +1559,7 @@ int string configure_robot_menu_item 0x0
 int string configure_settings 0x0
 int string confirmConfigDeleteMessage 0x0
 int string confirmConfigDeleteTitle 0x0
+int string connectedToContext 0x0
 int string connection_owner_default 0x0
 int string connection_owner_password_default 0x0
 int string continuous_servo_description 0x0
@@ -1603,6 +1607,7 @@ int string driverHubOsVersionLabel 0x0
 int string driverStationInstalledOnRobotControllerContext 0x0
 int string driverStationIsObsoleteContext 0x0
 int string driverStationLabel 0x0
+int string driverStationNameLabel 0x0
 int string dsVersionMismatch 0x0
 int string duplicateWebcam 0x0
 int string duplicateWebcamWithName 0x0
@@ -1953,6 +1958,7 @@ int string robotControllerInstalledOnDriverStationContext 0x0
 int string robotControllerIsNotInstalledContext 0x0
 int string robotControllerIsObsoleteContext 0x0
 int string robotControllerLabel 0x0
+int string robotControllerNameLabel 0x0
 int string robotOffTip 0x0
 int string robotStateEmergencyStop 0x0
 int string robotStateInit 0x0
@@ -2001,6 +2007,7 @@ int string sparkfun_led_stick_description 0x0
 int string sparkfun_led_stick_name 0x0
 int string sparkfun_optical_odometry_description 0x0
 int string sparkfun_optical_odometry_name 0x0
+int string standardWifiConnected 0x0
 int string standard_servo_description 0x0
 int string status_bar_notification_info_overflow 0x0
 int string stringManufacturer 0x0
@@ -2139,12 +2146,7 @@ int style Animation_AppCompat_DropDownUp 0x0
 int style Animation_AppCompat_Tooltip 0x0
 int style AppBaseTheme 0x0
 int style AppTheme 0x0
-int style AppThemeBlueRC 0x0
-int style AppThemeGreenRC 0x0
-int style AppThemeOrangeRC 0x0
-int style AppThemePurpleRC 0x0
 int style AppThemeRedRC 0x0
-int style AppThemeTealRC 0x0
 int style AppTheme_Blue 0x0
 int style AppTheme_Green 0x0
 int style AppTheme_Orange 0x0
