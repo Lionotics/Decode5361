@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.pedroPathing;
 
+
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
@@ -23,16 +24,28 @@ public class PedroAutonomous extends OpMode {
     private int pathState; // Current autonomous path state (state machine)
     private Paths paths; // Paths defined in the Paths class
 
+    public static double startAngle = 90;
+
+    public static double endY = 50;
+
+
     @Override
     public void init() {
-        panelsTelemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+        panelsTelemetry =  new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         follower = Constants.createFollower(hardwareMap);
-        follower.setStartingPose(new Pose(72, 8, Math.toRadians(90)));
+        follower.setStartingPose(new Pose(56, 8, Math.toRadians(startAngle)));
 
         paths = new Paths(follower); // Build paths
 
-        panelsTelemetry.addData("Status", "Initialized");
+        follower.update();
+
+        panelsTelemetry.addLine("Status Initialized");
+        panelsTelemetry.addData("Path State", pathState);
+        panelsTelemetry.addData("X", follower.getPose().getX());
+        panelsTelemetry.addData("Y", follower.getPose().getY());
+        panelsTelemetry.addData("Heading", follower.getPose().getHeading());
+
         panelsTelemetry.update();
     }
 
@@ -52,32 +65,40 @@ public class PedroAutonomous extends OpMode {
     public static class Paths {
 
         public PathChain Path1;
-        public PathChain Path2;
 
         public Paths(Follower follower) {
             Path1 = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(56.000, 8.000), new Pose(48.000, 95.689))
+                            new BezierLine(new Pose(56.000, 8.000), new Pose(56.000, endY))
                     )
-                    .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(135))
-                    .build();
-
-            Path2 = follower
-                    .pathBuilder()
-                    .addPath(
-                            new BezierLine(new Pose(48.000, 95.689), new Pose(48.000, 95.689))
-                    )
-                    .setLinearHeadingInterpolation(Math.toRadians(135), Math.toRadians(90))
+                    .setLinearHeadingInterpolation(Math.toRadians(startAngle), Math.toRadians(startAngle))
                     .build();
         }
     }
 
     public int autonomousPathUpdate() {
-        // Add your state machine Here
-        // Access paths with paths.pathName
-        // Refer to the Pedro Pathing Docs (Auto Example) for an example state machine
+        switch (pathState) {
+            case 0:
+                // Start following Path1 once at the beginning
+                follower.followPath(paths.Path1);
+                pathState = 1;
+                break;
+
+            case 1:
+                // Wait until the follower is done with the path
+                if (!follower.isBusy()) {
+                    // Path finished – you could start another path here
+                    pathState = 2;
+                }
+                break;
+
+            case 2:
+                // Done – robot will just hold position
+                break;
+        }
+
         return pathState;
     }
-}
 
+}

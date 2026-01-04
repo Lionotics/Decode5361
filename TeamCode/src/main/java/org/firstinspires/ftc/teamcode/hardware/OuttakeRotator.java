@@ -9,9 +9,9 @@ import com.rowanmcalpin.nextftc.ftc.OpModeData;
 @Config
 public class OuttakeRotator extends Subsystem {
 
-    public Servo rotatorMotor;
+    private Servo hood;
 
-    public  static double rotatorDefaultPosition = 0.2;
+    public  static double rotatorDefaultPosition = 0.05;
     public static final double rotatorStep = 0.01;
 
     private  OuttakeRotator() {}
@@ -19,20 +19,25 @@ public class OuttakeRotator extends Subsystem {
     public static OuttakeRotator INSTANCE = new OuttakeRotator();
 
     public void initialize() {
-        rotatorMotor = OpModeData.INSTANCE.getHardwareMap().get(Servo.class, "Hood");
+        hood = OpModeData.INSTANCE.getHardwareMap().get(Servo.class, "Hood");
 
-        rotatorMotor.setPosition(rotatorDefaultPosition);
+        hood.setPosition(rotatorDefaultPosition);
     }
 
     public InstantCommand rotateUp() {
         return new InstantCommand(()-> {
-            rotatorMotor.setPosition( rotatorMotor.getPosition() + rotatorStep );
+            hood.setPosition( hood.getPosition() + rotatorStep );
         });
     }
 
     public InstantCommand rotateDown() {
         return new InstantCommand(()-> {
-            rotatorMotor.setPosition( rotatorMotor.getPosition() - rotatorStep );
+            hood.setPosition( hood.getPosition() - rotatorStep );
         });
     }
+
+    public  double getHoodPosition() {
+        return hood.getPosition();
+    }
+
 }

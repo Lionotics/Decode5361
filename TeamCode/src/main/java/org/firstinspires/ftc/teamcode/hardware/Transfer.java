@@ -6,6 +6,7 @@ import com.rowanmcalpin.nextftc.core.Subsystem;
 import com.rowanmcalpin.nextftc.core.command.Command;
 import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
+import com.rowanmcalpin.nextftc.core.command.utility.NullCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.delays.Delay;
 import com.rowanmcalpin.nextftc.ftc.OpModeData;
 
@@ -51,15 +52,18 @@ public class Transfer extends Subsystem {
 
     public Command kickBall() {
         // protector moves, wait, then kicker moves
-        return new SequentialGroup(
-                new InstantCommand(() -> protector.setPosition(protectorPosition2)),
-                new Delay(kickDelaySeconds),
-                new InstantCommand(() -> kicker.setPosition(kickerPosition2)),
-                new Delay(preReturnDelaySeconds),
-                keepBall(),
-                new Delay(postReturnDelaySeconds),
-                Intake.INSTANCE.loadBall(loadDelaySecond)
-                );
+        if (   Math.abs( Outtake.motorVelocityTarget -  ( ( Outtake.INSTANCE.getMotorCurrentLeftVelocity() + Outtake.INSTANCE.getMotorCurrentRightVelocity()      )/2  )    ) < Outtake.motorVelocityThreashhold ) {
+            return new SequentialGroup(
+                    new InstantCommand(() -> protector.setPosition(protectorPosition2)),
+                    new Delay(kickDelaySeconds),
+                    new InstantCommand(() -> kicker.setPosition(kickerPosition2)),
+                    new Delay(preReturnDelaySeconds),
+                    keepBall(),
+                    new Delay(postReturnDelaySeconds),
+                    Intake.INSTANCE.loadBall(loadDelaySecond)
+            );
+        } else { return new NullCommand();
+        }
     }
 
 

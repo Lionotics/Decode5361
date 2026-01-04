@@ -23,9 +23,11 @@ public class Outtake extends Subsystem {
     public  static  double kD = 0.000;
 
     public  static double motorVelocityTargetLower = 1240;
-    public  static double motorVelocityTargetHigher = 1650;
+    public  static double motorVelocityTargetHigher = 1600;
 
     public  static double motorVelocityTarget = motorVelocityTargetHigher;
+
+    public  static  double motorVelocityThreashhold = 80;
 
     private boolean motorRunning = false;
 
