@@ -8,6 +8,7 @@ import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.NullCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.delays.Delay;
+import com.rowanmcalpin.nextftc.core.command.utility.delays.WaitUntil;
 import com.rowanmcalpin.nextftc.ftc.OpModeData;
 
 @Config
@@ -24,7 +25,9 @@ public class Transfer extends Subsystem {
     public static double preReturnDelaySeconds = 0.2;
     public static double postReturnDelaySeconds = 0.4;
 
-    public static  double loadDelaySecond = 0.5;
+    public static  double loadDelaySecond = 2.5;
+
+    public int scoreTimes = 0;
 
 
 
@@ -41,6 +44,8 @@ public class Transfer extends Subsystem {
 
         kicker.setPosition(kickerPosition1);
         protector.setPosition(protectorPosition1);
+
+        scoreTimes = 0;
     }
 
     public InstantCommand keepBall() {
@@ -51,19 +56,17 @@ public class Transfer extends Subsystem {
     }
 
     public Command kickBall() {
-        // protector moves, wait, then kicker moves
-        if (   Math.abs( Outtake.motorVelocityTarget -  ( ( Outtake.INSTANCE.getMotorCurrentLeftVelocity() + Outtake.INSTANCE.getMotorCurrentRightVelocity()      )/2  )    ) < Outtake.motorVelocityThreashhold ) {
-            return new SequentialGroup(
-                    new InstantCommand(() -> protector.setPosition(protectorPosition2)),
-                    new Delay(kickDelaySeconds),
-                    new InstantCommand(() -> kicker.setPosition(kickerPosition2)),
-                    new Delay(preReturnDelaySeconds),
-                    keepBall(),
-                    new Delay(postReturnDelaySeconds),
-                    Intake.INSTANCE.loadBall(loadDelaySecond)
-            );
-        } else { return new NullCommand();
-        }
+        return new SequentialGroup(
+                new WaitUntil(() -> Outtake.INSTANCE.flywheelReady(Outtake.motorVelocityTarget)),
+                new InstantCommand(() -> protector.setPosition(protectorPosition2)),
+                new Delay(kickDelaySeconds),
+                new InstantCommand(() -> kicker.setPosition(kickerPosition2)),
+                new Delay(preReturnDelaySeconds),
+                keepBall(),
+                new Delay(postReturnDelaySeconds),
+                Intake.INSTANCE.loadBall(loadDelaySecond),
+                new InstantCommand(() -> scoreTimes += 1)
+        );
     }
 
 

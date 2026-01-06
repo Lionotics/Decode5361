@@ -17,7 +17,7 @@ public class Intake extends Subsystem {
 
     // ---------------- FULL DETECTION TUNABLES (FTC Dashboard) ----------------
     /** If filtered velocity (ticks/sec) is below this for FULL_DEBOUNCE_MS while intaking => FULL. */
-    public static double FULL_VELOCITY_TPS = 1900.0;
+    public static double FULL_VELOCITY_TPS = 2000;
 
     /** How long velocity must stay below threshold to count as FULL (debounce). */
     public static long FULL_DEBOUNCE_MS = 100;
@@ -26,7 +26,7 @@ public class Intake extends Subsystem {
     public static double VEL_EMA_ALPHA = 0.20;
 
     /** If FULL and velocity rises above this, we clear FULL (prevents “sticky” full when balls leave). */
-    public static double CLEAR_FULL_VELOCITY_TPS = 1950.0;
+    public static double CLEAR_FULL_VELOCITY_TPS = 2000;
 
     /** Intake direction check: your eat() uses power -1, so “intaking” is power < -0.05. */
     private static final double INTAKING_POWER_EPS = 0.05;
@@ -46,8 +46,8 @@ public class Intake extends Subsystem {
 
     public  MotorGroup intake;
 
-    public static  double RED   = 0.277;
-    public static final double GREEN = 0.500;
+    public static double NOCOLOR = 0.0;
+    public static double GREEN = 0.500;
 
     private Intake() { }
 
@@ -86,6 +86,8 @@ public class Intake extends Subsystem {
     public void periodic() {
         if (full) {
             setLightColor(GREEN);
+        } else {
+            setLightColor(NOCOLOR);
         }
     }
 
@@ -116,8 +118,11 @@ public class Intake extends Subsystem {
     public Command loadBall(double loadDelaySecond) {
         return new SequentialGroup(
                 new InstantCommand(() -> intake.setPower(-1)),
+                new InstantCommand( ()-> intaking = true ),
                 new Delay(loadDelaySecond),
-                new InstantCommand(() -> intake.setPower(0))
+                new InstantCommand(() -> intake.setPower(0)),
+                new InstantCommand( ()-> intaking = false )
+
         );
     }
 

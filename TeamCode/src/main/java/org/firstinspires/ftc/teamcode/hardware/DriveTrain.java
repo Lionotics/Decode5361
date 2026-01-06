@@ -101,13 +101,15 @@ public class DriveTrain extends Subsystem {
     final int BLUE_GOAL_TAG_ID = 20;
 
     // Tune these:
-    final double kP = 0.015;       // turning proportional gain
+
+    public static double desiredTilt = 7;
+    public static double turnSpeedWhenInRange = 0.2;       // turning proportional gain
     final double maxTurn = 0.45;   // cap turn power
     final double minTurn = 0.08;   // minimum to overcome friction
     public static double deadbandDeg = 2.0;
     public static long timeoutMs = 25000;
 
-    public  static double turnPowerValue = 0.3;
+    public  static double turnPowerValue = 0.25;
 
     // tiny “mutable holders” for lambdas
     final long[] startTime = new long[1];
@@ -124,24 +126,37 @@ public class DriveTrain extends Subsystem {
                 AprilTagDetection d = Webcam.INSTANCE.getDetectionById(BLUE_GOAL_TAG_ID);
 
                 // If tag not visible, optionally slow-spin to “hunt” (still not moving closer)
-                if ( (d == null || d.ftcPose == null) ) {
+                double error = 0;
+                if (!(d == null || d.ftcPose == null)  ) {
+                    sawTag[0] = true;
+                    error = desiredTilt -d.ftcPose.yaw;   // degrees
+                    lastErrorDeg[0] =   error;
+                    if (Math.abs(lastErrorDeg[0]) < deadbandDeg) {
+                        DriveTrain.INSTANCE.setTurnPower(0.0);
+                        return;
+                    }
+                }
+
+
+                if (  (d == null || d.ftcPose == null) ) {
                     DriveTrain.INSTANCE.setTurnPower(turnPowerValue);
                     return;
                 }
 
-                sawTag[0] = true;
 
                 // IMPORTANT:
                 // For “face the tag”, you almost always want BEARING (center the tag).
                 // If you truly meant “match tag plane rotation”, use d.ftcPose.yaw instead.
-                double error = d.ftcPose.bearing;   // degrees
-                lastErrorDeg[0] = error;
 
-                double turn = Range.clip(kP * error, -maxTurn, maxTurn);
 
-                if (Math.abs(turn) < minTurn && Math.abs(error) > deadbandDeg) {
-                    turn = Math.copySign(minTurn, turn);
+                double turn = 0;
+                if (error > 0) {
+                    turn = turnSpeedWhenInRange;
+                } else {
+                    turn = -turnSpeedWhenInRange;
                 }
+
+
 
                 DriveTrain.INSTANCE.setTurnPower(turn);
             })
@@ -153,7 +168,7 @@ public class DriveTrain extends Subsystem {
                 if (!sawTag[0]) {
                     return false;
                 } // keep hunting until timeout
-                return Math.abs(lastErrorDeg[0]) < deadbandDeg;
+                return Math.abs( lastErrorDeg[0])  < deadbandDeg;
             })
             .setStop(interrupted -> {
                 DriveTrain.INSTANCE.stopDrive();

@@ -83,7 +83,6 @@ public class Outtake extends Subsystem {
 
         if (!motorRunning) {
             motorRunning = true;
-
             return new RunToVelocity(
                     flywheelGroup,
                     targetTemp,
@@ -97,6 +96,25 @@ public class Outtake extends Subsystem {
         }
 
     }
+
+
+
+    public Command holdVelocity(double targetTempRaw) {
+        double targetTemp = targetVelocityToActualVelocity(targetTempRaw);
+        // Runs the controller forever until interrupted by another Outtake command.
+        return new RunToVelocity(
+                        flywheelGroup,
+                        targetTemp,
+                        outtakeVelocityController,
+                        this
+                );
+    }
+
+    public   boolean flywheelReady(double targetRaw) {
+        double avg = (getMotorCurrentLeftVelocity() + getMotorCurrentRightVelocity()) / 2.0;
+        return Math.abs(targetRaw - avg) < motorVelocityThreashhold;
+    }
+
 
     public Command stopMotor() {
         return new RunToVelocity(

@@ -12,6 +12,9 @@ public class OuttakeRotator extends Subsystem {
     private Servo hood;
 
     public  static double rotatorDefaultPosition = 0.05;
+
+    public  static  double rotatorSecondPosition = 0.1;
+
     public static final double rotatorStep = 0.01;
 
     private  OuttakeRotator() {}
@@ -33,6 +36,18 @@ public class OuttakeRotator extends Subsystem {
     public InstantCommand rotateDown() {
         return new InstantCommand(()-> {
             hood.setPosition( hood.getPosition() - rotatorStep );
+        });
+    }
+
+    public InstantCommand setHoodToDefaultPosition() {
+        return new InstantCommand(()-> {
+            hood.setPosition( rotatorDefaultPosition );
+        });
+    }
+
+    public InstantCommand setHoodToSecondPosition() {
+        return new InstantCommand(()-> {
+            hood.setPosition( rotatorSecondPosition );
         });
     }
 

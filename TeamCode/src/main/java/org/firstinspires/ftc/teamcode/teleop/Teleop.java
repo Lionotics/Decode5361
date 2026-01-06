@@ -5,10 +5,16 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.rowanmcalpin.nextftc.core.command.Command;
+import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
+import com.rowanmcalpin.nextftc.core.command.utility.ForcedParallelCommand;
+import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
+import com.rowanmcalpin.nextftc.core.command.utility.PerpetualCommand;
+import com.rowanmcalpin.nextftc.core.command.utility.delays.Delay;
 import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadEx;
 
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
@@ -22,6 +28,8 @@ import org.firstinspires.ftc.teamcode.hardware.Webcam;
 @Config
 @TeleOp(name = "5361Teleop", group = "Teleop")
 public class Teleop extends NextFTCOpMode {
+
+    public  static double delayInitial = 0;
 
     public Command driverControlled;
 
@@ -79,10 +87,11 @@ public class Teleop extends NextFTCOpMode {
        // gp1.getDpadUp().setHeldCommand( ()-> Outtake.INSTANCE.raiseMotorVelocity() );
        // gp1.getDpadDown().setHeldCommand( ()-> Outtake.INSTANCE.lowerMotorVelocity() );
 
-         gp1.getDpadUp().setHeldCommand( ()-> OuttakeRotator.INSTANCE.rotateUp() );
-         gp1.getDpadDown().setHeldCommand( ()-> OuttakeRotator.INSTANCE.rotateDown() );
+         gp1.getDpadUp().setHeldCommand( ()-> OuttakeRotator.INSTANCE.setHoodToDefaultPosition() );
+         gp1.getDpadDown().setHeldCommand( ()-> OuttakeRotator.INSTANCE.setHoodToSecondPosition() );
 
-        gp1.getLeftBumper().setPressedCommand( ()-> DriveTrain.INSTANCE.faceBlueGoal );
+
+        gp1.getLeftBumper().setPressedCommand( ()-> autoScore() );
     }
 
     @Override
@@ -121,6 +130,10 @@ public class Teleop extends NextFTCOpMode {
         telemetry.addData("Motor Velocity Is Higher (true if Higher, false if Lower): ",  Outtake.motorIsOnHigher);
 
 
+        telemetry.addData("Score Times", Transfer.INSTANCE.scoreTimes);
+        telemetry.addData("Temp", temp);
+
+
         Webcam.INSTANCE.addTelemetry(telemetry);
         telemetry.update();
     }
@@ -130,5 +143,52 @@ public class Teleop extends NextFTCOpMode {
         Webcam.INSTANCE.close();
         FtcDashboard.getInstance().stopCameraStream();
     }
+
+
+
+    public Command autoScore() {
+        Transfer.INSTANCE.scoreTimes = 0;
+        return  new SequentialGroup(
+                DriveTrain.INSTANCE.faceBlueGoal,
+                new ForcedParallelCommand(Outtake.INSTANCE.holdVelocity(Outtake.motorVelocityTarget)  ),
+                new Delay(delayInitial),
+                score3Times(),
+                Outtake.INSTANCE.stopMotor()
+        );
+    }
+
+
+
+    public Command score3Times(){
+        return new Command() {
+            private Command currentShot;
+
+            @Override
+            public void start() {
+                Transfer.INSTANCE.scoreTimes = 0;
+
+               // currentShot = Transfer.INSTANCE.kickBall();
+               // currentShot.invoke(); // schedule first shot ONCE
+            }
+
+            @Override
+            public void update() {
+                if (Transfer.INSTANCE.scoreTimes >= 3) return;
+
+                // only look at the SAME command you scheduled
+                if ( Transfer.INSTANCE.scoreTimes == 0 ||  (currentShot != null && currentShot.isDone()) ) {
+                    currentShot = Transfer.INSTANCE.kickBall();
+                    currentShot.invoke(); // schedule next shot ONCE
+                }
+            }
+
+            @Override
+            public boolean isDone() {
+                return Transfer.INSTANCE.scoreTimes >= 3;
+            }
+        };
+    }
+
+
 
 }
