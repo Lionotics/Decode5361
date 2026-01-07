@@ -17,7 +17,7 @@ public class Intake extends Subsystem {
 
     // ---------------- FULL DETECTION TUNABLES (FTC Dashboard) ----------------
     /** If filtered velocity (ticks/sec) is below this for FULL_DEBOUNCE_MS while intaking => FULL. */
-    public static double FULL_VELOCITY_TPS = 2000;
+    public static double FULL_VELOCITY_TPS = 2200;
 
     /** How long velocity must stay below threshold to count as FULL (debounce). */
     public static long FULL_DEBOUNCE_MS = 100;
@@ -26,7 +26,7 @@ public class Intake extends Subsystem {
     public static double VEL_EMA_ALPHA = 0.20;
 
     /** If FULL and velocity rises above this, we clear FULL (prevents “sticky” full when balls leave). */
-    public static double CLEAR_FULL_VELOCITY_TPS = 2000;
+    public static double CLEAR_FULL_VELOCITY_TPS = 2200;
 
     /** Intake direction check: your eat() uses power -1, so “intaking” is power < -0.05. */
     private static final double INTAKING_POWER_EPS = 0.05;

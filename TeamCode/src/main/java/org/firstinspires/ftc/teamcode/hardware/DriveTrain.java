@@ -34,7 +34,6 @@ public class DriveTrain extends Subsystem {
     public static final DriveTrain INSTANCE = new DriveTrain();
     private DriveTrain() {
     }
-    public static double maxSpeed = 1;
     private MotorEx frontLeft, frontRight, backLeft, backRight;
 
     public GoBildaPinpointDriver odometry;
@@ -54,6 +53,7 @@ public class DriveTrain extends Subsystem {
         frontRight = new MotorEx("backRight");
         backLeft = new MotorEx("frontLeft");
         backRight = new MotorEx("frontRight");
+
 
         odometry = OpModeData.INSTANCE.getHardwareMap().get(GoBildaPinpointDriver.class, "Odometry");
 
@@ -102,14 +102,14 @@ public class DriveTrain extends Subsystem {
 
     // Tune these:
 
-    public static double desiredTilt = 7;
-    public static double turnSpeedWhenInRange = 0.2;       // turning proportional gain
+    public static double desiredTilt = 0;
+    public static double turnSpeedWhenInRange = 0.23;       // turning proportional gain
     final double maxTurn = 0.45;   // cap turn power
     final double minTurn = 0.08;   // minimum to overcome friction
     public static double deadbandDeg = 2.0;
     public static long timeoutMs = 25000;
 
-    public  static double turnPowerValue = 0.25;
+    public  static double turnPowerValue = 0.37;
 
     // tiny “mutable holders” for lambdas
     final long[] startTime = new long[1];
@@ -129,7 +129,7 @@ public class DriveTrain extends Subsystem {
                 double error = 0;
                 if (!(d == null || d.ftcPose == null)  ) {
                     sawTag[0] = true;
-                    error = desiredTilt -d.ftcPose.yaw;   // degrees
+                    error = desiredTilt -d.ftcPose.bearing;   // degrees
                     lastErrorDeg[0] =   error;
                     if (Math.abs(lastErrorDeg[0]) < deadbandDeg) {
                         DriveTrain.INSTANCE.setTurnPower(0.0);

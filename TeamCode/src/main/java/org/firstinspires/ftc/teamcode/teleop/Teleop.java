@@ -29,7 +29,6 @@ import org.firstinspires.ftc.teamcode.hardware.Webcam;
 @TeleOp(name = "5361Teleop", group = "Teleop")
 public class Teleop extends NextFTCOpMode {
 
-    public  static double delayInitial = 0;
 
     public Command driverControlled;
 
@@ -131,7 +130,6 @@ public class Teleop extends NextFTCOpMode {
 
 
         telemetry.addData("Score Times", Transfer.INSTANCE.scoreTimes);
-        telemetry.addData("Temp", temp);
 
 
         Webcam.INSTANCE.addTelemetry(telemetry);
@@ -151,7 +149,6 @@ public class Teleop extends NextFTCOpMode {
         return  new SequentialGroup(
                 DriveTrain.INSTANCE.faceBlueGoal,
                 new ForcedParallelCommand(Outtake.INSTANCE.holdVelocity(Outtake.motorVelocityTarget)  ),
-                new Delay(delayInitial),
                 score3Times(),
                 Outtake.INSTANCE.stopMotor()
         );
@@ -162,6 +159,9 @@ public class Teleop extends NextFTCOpMode {
     public Command score3Times(){
         return new Command() {
             private Command currentShot;
+
+
+            boolean shotYet = false;
 
             @Override
             public void start() {
@@ -176,7 +176,9 @@ public class Teleop extends NextFTCOpMode {
                 if (Transfer.INSTANCE.scoreTimes >= 3) return;
 
                 // only look at the SAME command you scheduled
-                if ( Transfer.INSTANCE.scoreTimes == 0 ||  (currentShot != null && currentShot.isDone()) ) {
+                if ( !shotYet ||  (currentShot != null && currentShot.isDone()) ) {
+
+                    shotYet = true;
                     currentShot = Transfer.INSTANCE.kickBall();
                     currentShot.invoke(); // schedule next shot ONCE
                 }

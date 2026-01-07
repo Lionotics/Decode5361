@@ -25,7 +25,7 @@ public class Transfer extends Subsystem {
     public static double preReturnDelaySeconds = 0.2;
     public static double postReturnDelaySeconds = 0.4;
 
-    public static  double loadDelaySecond = 2.5;
+    public static  double loadDelaySecond = 0.5;
 
     public int scoreTimes = 0;
 
@@ -66,7 +66,7 @@ public class Transfer extends Subsystem {
                 new Delay(postReturnDelaySeconds),
                 Intake.INSTANCE.loadBall(loadDelaySecond),
                 new InstantCommand(() -> scoreTimes += 1)
-        );
+                );
     }
 
 

@@ -27,7 +27,7 @@ public class Outtake extends Subsystem {
 
     public  static double motorVelocityTarget = motorVelocityTargetHigher;
 
-    public  static  double motorVelocityThreashhold = 80;
+    public  static  double motorVelocityThreashhold = 30;
 
     private boolean motorRunning = false;
 
@@ -73,8 +73,6 @@ public class Outtake extends Subsystem {
         return new InstantCommand(()-> {
             //motorOuttakeRight.setPower(i*motorPower);
             flywheelGroup.setPower(i*motorPower);
-
-
         });
     }
 
@@ -90,7 +88,6 @@ public class Outtake extends Subsystem {
                     this
             );
         } else{
-
             motorRunning = false;
             return  stopMotor();
         }
