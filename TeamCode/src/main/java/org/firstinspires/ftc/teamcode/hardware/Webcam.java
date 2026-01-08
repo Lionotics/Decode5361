@@ -79,6 +79,7 @@ public class Webcam extends Subsystem {
                 // Recommended common resolution; helps consistency with common webcam calibrations
                 .setCameraResolution(new Size(640, 480))
                 .addProcessor(aprilTag)
+               // .setStreamFormat(VisionPortal.StreamFormat.MJPEG)
                 .build();
     }
 

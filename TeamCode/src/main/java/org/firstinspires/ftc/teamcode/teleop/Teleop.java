@@ -7,14 +7,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.rowanmcalpin.nextftc.core.command.Command;
 import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.ForcedParallelCommand;
-import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
-import com.rowanmcalpin.nextftc.core.command.utility.PerpetualCommand;
-import com.rowanmcalpin.nextftc.core.command.utility.delays.Delay;
 import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadEx;
 
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
@@ -148,7 +144,7 @@ public class Teleop extends NextFTCOpMode {
         Transfer.INSTANCE.scoreTimes = 0;
         return  new SequentialGroup(
                 DriveTrain.INSTANCE.faceBlueGoal,
-                new ForcedParallelCommand(Outtake.INSTANCE.holdVelocity(Outtake.motorVelocityTarget)  ),
+                new ForcedParallelCommand(Outtake.INSTANCE.goToVelocity(Outtake.motorVelocityTarget)  ),
                 score3Times(),
                 Outtake.INSTANCE.stopMotor()
         );

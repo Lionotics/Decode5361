@@ -56,17 +56,22 @@ public class Transfer extends Subsystem {
     }
 
     public Command kickBall() {
-        return new SequentialGroup(
-                new WaitUntil(() -> Outtake.INSTANCE.flywheelReady(Outtake.motorVelocityTarget)),
-                new InstantCommand(() -> protector.setPosition(protectorPosition2)),
-                new Delay(kickDelaySeconds),
-                new InstantCommand(() -> kicker.setPosition(kickerPosition2)),
-                new Delay(preReturnDelaySeconds),
-                keepBall(),
-                new Delay(postReturnDelaySeconds),
-                Intake.INSTANCE.loadBall(loadDelaySecond),
-                new InstantCommand(() -> scoreTimes += 1)
-                );
+        if (Outtake.INSTANCE.getMotorCurrentLeftVelocity() != 0 || Outtake.INSTANCE.getMotorCurrentRightVelocity() != 0) {
+            return new SequentialGroup(
+                    new WaitUntil(() -> Outtake.INSTANCE.flywheelReady(Outtake.motorVelocityTarget)),
+                    new InstantCommand(() -> protector.setPosition(protectorPosition2)),
+                    new Delay(kickDelaySeconds),
+                    new InstantCommand(() -> kicker.setPosition(kickerPosition2)),
+                    new Delay(preReturnDelaySeconds),
+                    keepBall(),
+                    new Delay(postReturnDelaySeconds),
+                    Intake.INSTANCE.loadBall(loadDelaySecond),
+                    new InstantCommand(() -> scoreTimes += 1)
+            );
+        } else {
+            return  new NullCommand();
+        }
+
     }
 
 
