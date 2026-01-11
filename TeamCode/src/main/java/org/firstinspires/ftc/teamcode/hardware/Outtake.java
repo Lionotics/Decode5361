@@ -1,23 +1,15 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.rowanmcalpin.nextftc.core.Subsystem;
 import com.rowanmcalpin.nextftc.core.command.Command;
 import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
 import com.rowanmcalpin.nextftc.core.control.controllers.PIDFController;
-import com.rowanmcalpin.nextftc.ftc.OpModeData;
-import com.rowanmcalpin.nextftc.ftc.hardware.controllables.HoldVelocity;
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx;
 
 
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorGroup;
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.RunToVelocity;
-import com.rowanmcalpin.nextftc.ftc.hardware.controllables.SetPower;
-
-import org.jetbrains.annotations.NotNull;
 
 @Config
 public class Outtake extends Subsystem {
@@ -27,7 +19,7 @@ public class Outtake extends Subsystem {
     public  static double motorPower = 0.5;
 
     public  static  double kP = 0.01;
-    public  static  double kI = 0.005;
+    public  static  double kI = 0.00;
     public  static  double kD = 0.000;
 
     public  static double motorVelocityTargetLower = 1240;
@@ -40,10 +32,6 @@ public class Outtake extends Subsystem {
     private boolean motorRunning = false;
 
     public  static  boolean motorIsOnHigher = true;
-
-    public  static double velocityBooster = 0;
-
-
 
 
     private final PIDFController outtakeVelocityController = new PIDFController(
@@ -63,50 +51,44 @@ public class Outtake extends Subsystem {
     private  MotorGroup flywheelGroup;
 
     public double targetVelocityToActualVelocity(double targetVelocity) {
-        return  -targetVelocity-velocityBooster;
+        return  -targetVelocity-20;
         //return  0.0418 * targetVelocity + 5;
     }
 
 
     public void initialize() {
-        //motorOuttakeRight = OpModeData.INSTANCE.getHardwareMap().get(DcMotorEx.class, "flyWheelRight");
-        //motorOuttakeLeft = OpModeData.INSTANCE.getHardwareMap().get(DcMotorEx.class, "flyWheelLeft");
-
-      //  motorOuttakeLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-       // motorOuttakeRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-
-
         motorOuttakeRight = new MotorEx("flyWheelRight");
         motorOuttakeLeft = new MotorEx("flyWheelLeft");
 
-
-
+        //  motorOuttakeLeft.reverse();
+        //  motorOuttakeRight.reverse();
 
         flywheelGroup = new MotorGroup(motorOuttakeLeft, motorOuttakeRight);
-
         motorRunning = false;
         motorVelocityTarget = motorVelocityTargetHigher;
         motorIsOnHigher = true;
     }
 
-    public InstantCommand setPowerToMotorS(double i) {
-        return new InstantCommand(()-> {
-            //motorOuttakeRight.setPower(i*motorPower);
-            flywheelGroup.setPower(i*motorPower);
-        });
+
+    public double distanceToVelocity(double distance) {
+        return  4.8 * distance + 974;
     }
 
-    public Command handleMotor(double targetTempRaw ) {
-        double targetTemp = targetVelocityToActualVelocity(targetTempRaw);
+    public double distanceToHoodPosition(double distance) {
+        //return  -0.0000089*distance*distance + 0.0023 * distance - 0.06;
+                 return distance*distance*distance * 0.00000028  -0.0000776*distance*distance + 0.0073 * distance - 0.15;
+    }
 
+
+
+
+    public Command handleMotor(double WebCamDistance) {
         if (!motorRunning) {
             motorRunning = true;
-            return new RunToVelocity(
-                    flywheelGroup,
-                    targetTemp,
-                    outtakeVelocityController,
-                    this
-            );
+            double targetTempRaw = distanceToVelocity(WebCamDistance);
+            OuttakeRotator.INSTANCE.setHoodPosition( distanceToHoodPosition(WebCamDistance) );
+
+            return  holdVelocity(targetTempRaw);
         } else{
             motorRunning = false;
             return  stopMotor();
@@ -114,29 +96,19 @@ public class Outtake extends Subsystem {
 
     }
 
-    @NotNull
-    @Override
-    public Command getDefaultCommand() {
-        // If we're "on", hold the last velocity; if we're "off", keep power at 0 (coast).
-        if (motorRunning) {
-            return new HoldVelocity(flywheelGroup, outtakeVelocityController, this);
-        }
-        return new SetPower(flywheelGroup, 0.0, this);
-    }
 
 
-
-
-    public Command goToVelocity(double targetTempRaw) {
-        double targetTemp = targetVelocityToActualVelocity(targetTempRaw);
+    public Command holdVelocity(double targetTempRaw) {
         motorRunning = true;
+        double targetTemp = targetVelocityToActualVelocity(targetTempRaw);
+        motorVelocityTarget  = targetTempRaw;
         // Runs the controller forever until interrupted by another Outtake command.
         return new RunToVelocity(
-                        flywheelGroup,
-                        targetTemp,
-                        outtakeVelocityController,
-                        this
-                );
+                flywheelGroup,
+                targetTemp,
+                outtakeVelocityController,
+                this
+        );
     }
 
     public   boolean flywheelReady(double targetRaw) {
@@ -146,10 +118,17 @@ public class Outtake extends Subsystem {
 
 
     public Command stopMotor() {
-        motorRunning = false;
-        return new SetPower(flywheelGroup, 0.0, this);
-    }
+        return new RunToVelocity(
+                flywheelGroup,
+                0,
+                outtakeVelocityController,
+                this
+        );
 
+        // return new InstantCommand(() -> {
+        //   flywheelGroup.setPower(0);
+        // });
+    }
 
     public Command raiseMotorVelocity() {
         return new InstantCommand(() -> {

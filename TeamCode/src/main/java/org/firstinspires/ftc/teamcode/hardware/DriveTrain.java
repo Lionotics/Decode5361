@@ -109,7 +109,7 @@ public class DriveTrain extends Subsystem {
     public static double deadbandDeg = 2.0;
     public static long timeoutMs = 25000;
 
-    public  static double turnPowerValue = 0.37;
+    public  static double turnPowerValue = 0.33;
 
     // tiny “mutable holders” for lambdas
     final long[] startTime = new long[1];

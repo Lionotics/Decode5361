@@ -51,6 +51,14 @@ public class OuttakeRotator extends Subsystem {
         });
     }
 
+    public InstantCommand setHoodPosition(double hoodPosition) {
+        return new InstantCommand(()-> {
+            hood.setPosition( hoodPosition );
+        });
+    }
+
+
+
     public  double getHoodPosition() {
         return hood.getPosition();
     }

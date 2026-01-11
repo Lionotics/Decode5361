@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.rowanmcalpin.nextftc.core.command.Command;
 import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.ForcedParallelCommand;
+import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
 import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadEx;
 
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
@@ -70,7 +71,7 @@ public class Teleop extends NextFTCOpMode {
         gp1.getB().setPressedCommand(() -> Intake.INSTANCE.eat());
 
 
-        gp1.getRightBumper().setPressedCommand(() -> Outtake.INSTANCE.handleMotor( Outtake.motorVelocityTarget ));
+        gp1.getRightBumper().setPressedCommand(() -> Outtake.INSTANCE.handleMotor(Webcam.INSTANCE.getRange()));
 
         gp1.getY().setPressedCommand(() -> Intake.INSTANCE.spit());
 
@@ -127,8 +128,10 @@ public class Teleop extends NextFTCOpMode {
 
         telemetry.addData("Score Times", Transfer.INSTANCE.scoreTimes);
 
-
         Webcam.INSTANCE.addTelemetry(telemetry);
+
+
+
         telemetry.update();
     }
 
@@ -142,9 +145,16 @@ public class Teleop extends NextFTCOpMode {
 
     public Command autoScore() {
         Transfer.INSTANCE.scoreTimes = 0;
+        double WebCamDistance = Webcam.INSTANCE.getRange();
+        double targetTempRaw = Outtake.INSTANCE.distanceToVelocity(WebCamDistance);
+
+
         return  new SequentialGroup(
                 DriveTrain.INSTANCE.faceBlueGoal,
-                new ForcedParallelCommand(Outtake.INSTANCE.goToVelocity(Outtake.motorVelocityTarget)  ),
+
+
+                new ForcedParallelCommand(Outtake.INSTANCE.holdVelocity(targetTempRaw)  ),
+                OuttakeRotator.INSTANCE.setHoodPosition( Outtake.INSTANCE.distanceToHoodPosition(WebCamDistance) ),
                 score3Times(),
                 Outtake.INSTANCE.stopMotor()
         );

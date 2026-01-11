@@ -206,4 +206,15 @@ public class Webcam extends Subsystem {
     }
 
 
+    public double getRange() {
+        return bestGoalDetection.ftcPose.range;
+    }
+
+    public  boolean seesTag() {
+        if (bestGoalDetection == null) {
+            return false;
+        }
+        return   bestGoalDetection.ftcPose != null;
+    }
+
 }
