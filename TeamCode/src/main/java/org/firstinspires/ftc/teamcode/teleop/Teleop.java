@@ -144,21 +144,56 @@ public class Teleop extends NextFTCOpMode {
 
 
     public Command autoScore() {
-        Transfer.INSTANCE.scoreTimes = 0;
-        double WebCamDistance = Webcam.INSTANCE.getRange();
-        double targetTempRaw = Outtake.INSTANCE.distanceToVelocity(WebCamDistance);
-
-
-        return  new SequentialGroup(
+        return new SequentialGroup(
                 DriveTrain.INSTANCE.faceBlueGoal,
 
+                // This step runs ONLY after faceBlueGoal is finished
+                new Command() {
+                    private Command afterFace;
 
-                new ForcedParallelCommand(Outtake.INSTANCE.holdVelocity(targetTempRaw)  ),
-                OuttakeRotator.INSTANCE.setHoodPosition( Outtake.INSTANCE.distanceToHoodPosition(WebCamDistance) ),
-                score3Times(),
-                Outtake.INSTANCE.stopMotor()
+                    @Override
+                    public void start() {
+                        double webCamDistance;
+                        if (Webcam.INSTANCE.seesTag()) {
+                            webCamDistance = Webcam.INSTANCE.getRange();
+                        } else {
+                            // pick a safe fallback (or you can "return" by building a stop-only command)
+                            webCamDistance = 30.0;
+                        }
+
+                        double targetTempRaw = Outtake.INSTANCE.distanceToVelocity(webCamDistance);
+
+                        afterFace = new SequentialGroup(
+                                new ForcedParallelCommand(Outtake.INSTANCE.holdVelocity(targetTempRaw)),
+                                OuttakeRotator.INSTANCE.setHoodPosition(
+                                        Outtake.INSTANCE.distanceToHoodPosition(webCamDistance)
+                                ),
+                                score3Times(),
+                                Outtake.INSTANCE.stopMotor()
+                        );
+
+                        afterFace.invoke();
+                    }
+
+                    @Override
+                    public void update() { }
+
+                    @Override
+                    public boolean isDone() {
+                        return afterFace != null && afterFace.isDone();
+                    }
+
+                    @Override
+                    public void stop(boolean interrupted) {
+                        if (interrupted) {
+                            Outtake.INSTANCE.stopMotor().invoke();
+                        }
+                    }
+                }
         );
     }
+
+
 
 
 

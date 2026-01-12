@@ -24,9 +24,7 @@ public class PedroAutonomous extends OpMode {
     private int pathState; // Current autonomous path state (state machine)
     private Paths paths; // Paths defined in the Paths class
 
-    public static double startAngle = 90;
 
-    public static double endY = 50;
 
 
     @Override
@@ -34,7 +32,7 @@ public class PedroAutonomous extends OpMode {
         panelsTelemetry =  new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
         follower = Constants.createFollower(hardwareMap);
-        follower.setStartingPose(new Pose(56, 8, Math.toRadians(startAngle)));
+        follower.setStartingPose(new Pose(56, 8, Math.toRadians(90)));
 
         paths = new Paths(follower); // Build paths
 
@@ -70,9 +68,9 @@ public class PedroAutonomous extends OpMode {
             Path1 = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(56.000, 8.000), new Pose(56.000, endY))
+                            new BezierLine(new Pose(56.000, 8.000), new Pose(56.000, 50))
                     )
-                    .setLinearHeadingInterpolation(Math.toRadians(startAngle), Math.toRadians(startAngle))
+                    .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(90))
                     .build();
         }
     }

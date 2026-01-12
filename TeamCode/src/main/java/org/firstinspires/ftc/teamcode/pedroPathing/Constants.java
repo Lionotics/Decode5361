@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.pedroPathing;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.pedropathing.control.FilteredPIDFCoefficients;
 import com.pedropathing.control.PIDFCoefficients;
 import com.pedropathing.follower.Follower;
@@ -18,7 +19,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  * PedroPathing + NextFTC constants.
  * Uses mecanum drivetrain and a goBILDA Pinpoint odometry pod named "Odometry".
  */
+
+@Config
 public class Constants {
+    public  static  double xVelocityRealValue = 50.0;
+    public  static  double yVelocityRealValue = 34.0;
+
+
 
     // ---------------- Follower (mass + PIDF etc.) ----------------
     public static FollowerConstants followerConstants = new FollowerConstants()
@@ -49,14 +56,14 @@ public class Constants {
             .rightRearMotorName("backRight")
 
             // Directions must match how the robot actually drives
-            .leftFrontMotorDirection(DcMotorSimple.Direction.FORWARD)
-            .leftRearMotorDirection(DcMotorSimple.Direction.FORWARD)
-            .rightFrontMotorDirection(DcMotorSimple.Direction.REVERSE)
-            .rightRearMotorDirection(DcMotorSimple.Direction.REVERSE)
+            .leftFrontMotorDirection(DcMotorSimple.Direction.REVERSE)
+            .leftRearMotorDirection(DcMotorSimple.Direction.REVERSE)
+            .rightFrontMotorDirection(DcMotorSimple.Direction.FORWARD)
+            .rightRearMotorDirection(DcMotorSimple.Direction.FORWARD)
 
             // Placeholders until you run the Forward/Lateral Velocity tuners
-            .xVelocity(40.0)   // in/s, forward max velocity (tune later)
-            .yVelocity(40.0);  // in/s, strafe max velocity (tune later)
+            .xVelocity(xVelocityRealValue)   // in/s, forward max velocity (tune later)
+            .yVelocity(yVelocityRealValue);  // in/s, strafe max velocity (tune later)
 
     // ---------------- Pinpoint odometry localizer ----------------
     // goBILDA Pinpoint I2C device named "Odometry"
@@ -72,7 +79,7 @@ public class Constants {
             .encoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD)
 
             // Encoder directions (flip if your X/Y go the wrong way)
-            .forwardEncoderDirection(GoBildaPinpointDriver.EncoderDirection.FORWARD)
+            .forwardEncoderDirection(GoBildaPinpointDriver.EncoderDirection.REVERSED)
             .strafeEncoderDirection(GoBildaPinpointDriver.EncoderDirection.FORWARD);
 
     // ---------------- Path constraints (end-of-path tolerances) ----------------
