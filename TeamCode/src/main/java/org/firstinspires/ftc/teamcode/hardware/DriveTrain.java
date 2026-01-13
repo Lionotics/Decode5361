@@ -194,66 +194,6 @@ public class DriveTrain extends Subsystem {
     final double[] lastErrorDeg = new double[1];
 
 
-    /* Old version
-    public Command faceBlueGoal = new LambdaCommand()
-            .setStart(() -> {
-                startTime[0] = System.currentTimeMillis();
-                sawTag[0] = false;
-                lastErrorDeg[0] = 999;
-            })
-            .setUpdate(() -> {
-                AprilTagDetection d = Webcam.INSTANCE.getDetectionById(BLUE_GOAL_TAG_ID);
-
-                // If tag not visible, optionally slow-spin to “hunt” (still not moving closer)
-                double error = 0;
-                if (!(d == null || d.ftcPose == null)  ) {
-                    sawTag[0] = true;
-                    error = desiredTilt -d.ftcPose.bearing;   // degrees
-                    lastErrorDeg[0] =   error;
-                    if (Math.abs(lastErrorDeg[0]) < deadbandDeg) {
-                        DriveTrain.INSTANCE.setTurnPower(0.0);
-                        return;
-                    }
-                }
-
-
-                if (  (d == null || d.ftcPose == null) ) {
-                    DriveTrain.INSTANCE.setTurnPower(turnPowerValue);
-                    return;
-                }
-
-
-                // IMPORTANT:
-                // For “face the tag”, you almost always want BEARING (center the tag).
-                // If you truly meant “match tag plane rotation”, use d.ftcPose.yaw instead.
-
-
-                double turn = 0;
-                if (error > 0) {
-                    turn = turnSpeedWhenInRange;
-                } else {
-                    turn = -turnSpeedWhenInRange;
-                }
-
-
-
-                DriveTrain.INSTANCE.setTurnPower(turn);
-            })
-            .setIsDone(() -> {
-                long elapsed = System.currentTimeMillis() - startTime[0];
-                if (elapsed > timeoutMs) {
-                      return true;
-                }
-                if (!sawTag[0]) {
-                    return false;
-                } // keep hunting until timeout
-                return Math.abs( lastErrorDeg[0])  < deadbandDeg;
-            })
-            .setStop(interrupted -> {
-                DriveTrain.INSTANCE.stopDrive();
-                // resume normal teleop drive when done (or interrupted)
-            }); */
-
     public Command faceBlueGoal = new LambdaCommand()
             .setStart(() -> {
                 startTime[0] = System.currentTimeMillis();
