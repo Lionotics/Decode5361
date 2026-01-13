@@ -152,7 +152,7 @@ public class DriveTrain extends Subsystem {
         MecanumDriverControlled cmd =
                 new MecanumDriverControlled(motors, gamepad, robotOreinted, imu);
 
-        cmd.setSubsystems(this);   // <-- claim the drivetrain subsystem
+       // cmd.setSubsystems(this);   // <-- claim the drivetrain subsystem
         return cmd;
     }
 
