@@ -1,18 +1,10 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
-import static com.qualcomm.hardware.rev.RevHubOrientationOnRobot.zyxOrientation;
-
-import androidx.annotation.NonNull;
-
 
 import com.acmerobotics.dashboard.config.Config;
-import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.Range;
 import com.rowanmcalpin.nextftc.core.Subsystem;
@@ -26,9 +18,9 @@ import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
-import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
-import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadEx;
+
+import java.util.Collections;
 
 
 @Config
@@ -157,8 +149,30 @@ public class DriveTrain extends Subsystem {
     }
 
     public Command Drive(GamepadEx gamepad, boolean robotOreinted) {
-        return new MecanumDriverControlled(motors, gamepad, robotOreinted, imu);
+        MecanumDriverControlled cmd =
+                new MecanumDriverControlled(motors, gamepad, robotOreinted, imu);
+
+        cmd.setSubsystems(this);   // <-- claim the drivetrain subsystem
+        return cmd;
     }
+
+    public void driveRobotCentricForOrbit(double forward, double strafe, double turn) {
+        // forward: + = forward (x+), strafe: + = left (y+), turn: + = CCW (adjust if needed)
+
+        double fl = forward + strafe + turn;
+        double fr = forward - strafe - turn;
+        double bl = forward - strafe + turn;
+        double br = forward + strafe - turn;
+
+        double max = Math.max(1.0, Math.max(Math.abs(fl),
+                Math.max(Math.abs(fr), Math.max(Math.abs(bl), Math.abs(br)))));
+
+        frontLeft.setPower(fl / max);
+        frontRight.setPower(fr / max);
+        backLeft.setPower(bl / max);
+        backRight.setPower(br / max);
+    }
+
 
     public void setTurnPower(double turn) {
         turn = Range.clip(turn, -1.0, 1.0);
@@ -194,7 +208,24 @@ public class DriveTrain extends Subsystem {
     final double[] lastErrorDeg = new double[1];
 
 
+
+
+    // --- Orbit / heading lock tuning ---
+    public static double orbitDriveScale = 0.75;   // overall translation speed in orbit mode
+    public static double orbitDeadbandDeg = 2.0;
+
+    public static double kP_orbitHeading = 0.02;
+    public static double maxTurn_orbit = 0.35;
+    public static double minTurn_orbit = 0.06;
+
+    // If your GamepadEx returns inverted Y (some wrappers do), flip this.
+// Try +1 first, if "up" moves the wrong way set to -1.
+    public static double leftYSign = 1.0;
+
+
+
     public Command faceBlueGoal = new LambdaCommand()
+            .setSubsystems(this)
             .setStart(() -> {
                 startTime[0] = System.currentTimeMillis();
                 sawTag[0] = false;
@@ -275,6 +306,91 @@ public class DriveTrain extends Subsystem {
                 DriveTrain.INSTANCE.stopDrive();
                 // resume normal teleop drive when done (or interrupted)
             });
+
+
+
+
+    public Command orbitBlueGoalDrive(GamepadEx gp1) {
+        LambdaCommand cmd = new LambdaCommand()
+                .setSubsystems(this)
+                .setStart(() -> {
+                    // nothing special; assumes faceBlueGoal already ran and/or we have an estimate
+                })
+                .setUpdate(() -> {
+                    // Keep tag estimate fresh if we see it
+                    AprilTagDetection d = Webcam.INSTANCE.getDetectionById(BLUE_GOAL_TAG_ID);
+                    if (d != null && d.ftcPose != null) {
+                        updateBlueTagEstimate(d);
+                    }
+
+                    // If we don't know where the tag is yet, just hold still (or you can call faceBlueGoal)
+                    if (!haveBlueTagEstimate || odometry == null) {
+                        driveRobotCentricForOrbit(0, 0, 0);
+                        return;
+                    }
+
+                    Pose2D pose = odometry.getPosition();
+                    double rx = pose.getX(DistanceUnit.INCH);
+                    double ry = pose.getY(DistanceUnit.INCH);
+                    double hDeg = pose.getHeading(AngleUnit.DEGREES);
+
+                    // Vector robot -> tag in FIELD frame (x forward, y left)
+                    double dx = blueTagX_in - rx;
+                    double dy = blueTagY_in - ry;
+
+                    double dist = Math.hypot(dx, dy);
+                    if (dist < 1e-6) {
+                        driveRobotCentricForOrbit(0, 0, 0);
+                        return;
+                    }
+
+                    // Unit vectors in FIELD frame:
+                    // rHat points TOWARD tag; moving AWAY from tag is -rHat
+                    double rHatX = dx / dist;
+                    double rHatY = dy / dist;
+
+                    // tHat is CCW tangent (orbit left) around tag
+                    double tHatX = -rHatY;
+                    double tHatY =  rHatX;
+
+                    // Joystick commands (left stick):
+                    // Up = farther from tag, Down = closer, Left/Right = orbit
+                    // NOTE: depending on GamepadEx, getLeftY might already be inverted; leftYSign handles it.
+                    double radialCmd = (-leftYSign) * gp1.getLeftStick().getY();  // make "up" positive
+                    double tangCmd  = gp1.getLeftStick().getX();
+
+                    // Field-frame desired translation
+                    double vFieldX = orbitDriveScale * (radialCmd * (-rHatX) + tangCmd * tHatX);
+                    double vFieldY = orbitDriveScale * (radialCmd * (-rHatY) + tangCmd * tHatY);
+
+                    // Convert field -> robot frame
+                    double hRad = Math.toRadians(hDeg);
+                    double forward =  vFieldX * Math.cos(hRad) + vFieldY * Math.sin(hRad);
+                    double strafe  = -vFieldX * Math.sin(hRad) + vFieldY * Math.cos(hRad);
+
+                    // Heading lock: face the tag center at all times
+                    double dirToTagDeg = Math.toDegrees(Math.atan2(dy, dx));
+                    double headingTargetDeg = dirToTagDeg - desiredTilt;
+                    double errDeg = wrapDeg(headingTargetDeg - hDeg);
+                    errDeg *= -1;
+
+                    double turn = 0.0;
+                    if (Math.abs(errDeg) > orbitDeadbandDeg) {
+                        turn = Range.clip(kP_orbitHeading * errDeg, -maxTurn_orbit, maxTurn_orbit);
+                        turn = signedMinPower(turn, minTurn_orbit);
+                    }
+
+                    // Manual turning NOT allowed: we ignore right stick entirely and only use 'turn' from lock.
+                    driveRobotCentricForOrbit(forward, strafe, turn);
+                })
+                .setIsDone(() -> false) // runs until another drive command replaces it
+                .setStop(interrupted -> driveRobotCentricForOrbit(0, 0, 0));
+
+
+        return  cmd;
+
+    }
+
 
 }
 

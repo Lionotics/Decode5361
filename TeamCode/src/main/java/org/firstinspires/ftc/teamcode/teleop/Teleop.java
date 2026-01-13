@@ -39,10 +39,11 @@ public class Teleop extends NextFTCOpMode {
     public void onStartButtonPressed() {
         FtcDashboard.getInstance().startCameraStream(Webcam.INSTANCE.getVisionPortal(), 30);
 
-        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
-        driverControlled = DriveTrain.INSTANCE.Drive(gamepadManager.getGamepad1(), false);
-        driverControlled.invoke();
         GamepadEx gp1 = gamepadManager.getGamepad1();
+
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+        driverControlled = DriveTrain.INSTANCE.Drive(gp1, false);
+        driverControlled.invoke();
        // GamepadEx gp2 = gamepadManager.getGamepad2();
 
 
@@ -83,8 +84,23 @@ public class Teleop extends NextFTCOpMode {
 
 
 
-        gp1.getDpadUp().setPressedCommand( ()-> DriveTrain.INSTANCE.faceBlueGoal );
         gp1.getDpadDown().setPressedCommand( ()-> autoScore() );
+
+        gp1.getDpadUp().setPressedCommand(() ->
+                new SequentialGroup(
+                        DriveTrain.INSTANCE.faceBlueGoal,
+                        DriveTrain.INSTANCE.orbitBlueGoalDrive(gp1)
+                )
+        );
+
+// Return to normal field-centric driving
+        gp1.getDpadLeft().setPressedCommand(() ->
+                new InstantCommand(   ()-> {
+                    driverControlled.invoke();
+                }
+                )
+        );
+
 
     }
 
@@ -110,9 +126,6 @@ public class Teleop extends NextFTCOpMode {
         // Update intake fullness detection once per loop
         Intake.INSTANCE.updateFullDetection();
 
-        telemetry.addData("Intaking Boolean", Intake.INSTANCE.intaking);
-        telemetry.addData("Intake Vel Raw (tps)", Intake.INSTANCE.getRawVelocityTps());
-        telemetry.addData("Intake Vel Filtered (tps)", Intake.INSTANCE.getFilteredVelocityTps());
         telemetry.addData("INTAKE FULL (3 balls)", Intake.INSTANCE.isFull() ? "YES" : "NO");
 
 
@@ -121,10 +134,7 @@ public class Teleop extends NextFTCOpMode {
         telemetry.addData("Motor Outtake Left Current Velocity: ",  Outtake.INSTANCE.getMotorCurrentLeftVelocity());
         telemetry.addData("Motor Outtake Right Current Velocity: ",  Outtake.INSTANCE.getMotorCurrentRightVelocity());
         telemetry.addData("Motor Outtake Target Velocity: ",  Outtake.motorVelocityTarget);
-        telemetry.addData("Motor Velocity Is Higher (true if Higher, false if Lower): ",  Outtake.motorIsOnHigher);
 
-
-        telemetry.addData("Score Times", Transfer.INSTANCE.scoreTimes);
 
         Webcam.INSTANCE.addTelemetry(telemetry);
 
