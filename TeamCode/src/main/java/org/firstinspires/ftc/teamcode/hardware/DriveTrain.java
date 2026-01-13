@@ -149,11 +149,11 @@ public class DriveTrain extends Subsystem {
     }
 
     public Command Drive(GamepadEx gamepad, boolean robotOreinted) {
-        MecanumDriverControlled cmd =
+        MecanumDriverControlled cmod =
                 new MecanumDriverControlled(motors, gamepad, robotOreinted, imu);
 
        // cmd.setSubsystems(this);   // <-- claim the drivetrain subsystem
-        return cmd;
+        return cmod;
     }
 
     public void driveRobotCentricForOrbit(double forward, double strafe, double turn) {
