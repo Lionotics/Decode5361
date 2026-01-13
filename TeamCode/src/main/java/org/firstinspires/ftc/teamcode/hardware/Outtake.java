@@ -71,7 +71,7 @@ public class Outtake extends Subsystem {
 
 
     public double distanceToVelocity(double distance) {
-        return  4.8 * distance + 974;
+        return  4.8 * distance + /*974*/ 1020;
     }
 
     public double distanceToHoodPosition(double distance) {
