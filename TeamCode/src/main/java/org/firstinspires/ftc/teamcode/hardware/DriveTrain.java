@@ -19,8 +19,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
+import java.util.Set;
 
 
 @Config
@@ -148,12 +150,41 @@ public class DriveTrain extends Subsystem {
         odometry.resetPosAndIMU();
     }
 
-    public Command Drive(GamepadEx gamepad, boolean robotOreinted) {
-        MecanumDriverControlled cmod =
-                new MecanumDriverControlled(motors, gamepad, robotOreinted, imu);
+    public Command Drive(GamepadEx gamepad, boolean robotOriented) {
 
-       // cmd.setSubsystems(this);   // <-- claim the drivetrain subsystem
-        return cmod;
+        // The normal NextFTC drive command
+        MecanumDriverControlled inner =
+                new MecanumDriverControlled(motors, gamepad, robotOriented, imu);
+
+        // Wrap it so it REQUIRES (claims) this drivetrain subsystem
+        return new Command() {
+
+            @NotNull
+            @Override
+            public Set<Subsystem> getSubsystems() {
+                return Collections.singleton(DriveTrain.this);
+            }
+
+            @Override
+            public boolean isDone() {
+                return false;
+            }
+
+            @Override
+            public void start() {
+                inner.start();
+            }
+
+            @Override
+            public void update() {
+                inner.update();
+            }
+
+            @Override
+            public void stop(boolean interrupted) {
+                inner.stop(interrupted);
+            }
+        };
     }
 
     public void driveRobotCentricForOrbit(double forward, double strafe, double turn) {
