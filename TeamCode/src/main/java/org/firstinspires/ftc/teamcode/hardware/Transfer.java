@@ -22,10 +22,10 @@ public class Transfer extends Subsystem {
     public  static double protectorPosition2 = 0.4;
 
     public static double kickDelaySeconds = 0.13;
-    public static double preReturnDelaySeconds = 0.2;
-    public static double postReturnDelaySeconds = 0.4;
+    public static double preReturnDelaySeconds = 0.1;
+    public static double postReturnDelaySeconds = 0.0;
 
-    public static  double loadDelaySecond = 0.5;
+    public static  double loadDelaySecond = 0.4;
 
     public int scoreTimes = 0;
 

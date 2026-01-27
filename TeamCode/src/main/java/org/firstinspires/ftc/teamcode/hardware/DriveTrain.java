@@ -28,16 +28,16 @@ import java.util.Set;
 @Config
 public class DriveTrain extends Subsystem {
     public static final DriveTrain INSTANCE = new DriveTrain();
+
     private DriveTrain() {
     }
+
     private MotorEx frontLeft, frontRight, backLeft, backRight;
 
     public GoBildaPinpointDriver odometry;
 
     private MotorEx[] motors;
     private IMU imu;
-
-
 
 
     // --- Tag world estimate (odometry frame) ---
@@ -56,14 +56,18 @@ public class DriveTrain extends Subsystem {
     // Turning behavior when tag is NOT visible
     public static double kP_noTag = 0.05;     // power per degree
     public static double maxTurn_noTag = 0.6;
-    public static double minTurn_noTag = 0.08;
+    public static double minTurn_noTag = 0.15;
 
     // Turning behavior when tag IS visible (fine alignment)
     public static double kP_inTag = 0.05;
-    public static double maxTurn_inTag = 0.25;
-    public static double minTurn_inTag = 0.06;
+    public static double maxTurn_inTag = 0.15;
+    public static double minTurn_inTag = 0.2;
 
-    public  static double searchPowerBeforeTag = 0.35;
+    public static double searchPowerBeforeTag = 0.35;
+
+
+
+    public  boolean drivingFieldCentricNoTurnIsActivated = false;
 
 
     private static double wrapDeg(double deg) {
@@ -85,6 +89,8 @@ public class DriveTrain extends Subsystem {
         double rx = pose.getX(DistanceUnit.INCH);
         double ry = pose.getY(DistanceUnit.INCH);
         double hDeg = pose.getHeading(AngleUnit.DEGREES);
+        //double hDeg = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES); // we use Imu for heading since using pose caused some problem with MechnamControlled
+
 
         // Camera position in world frame (approx)
         double hRad = Math.toRadians(hDeg);
@@ -110,16 +116,11 @@ public class DriveTrain extends Subsystem {
     }
 
 
-
-
-
-
-
     public void initialize() {
-      //  frontLeft = new MotorEx("frontLeft");
-       // frontRight = new MotorEx("frontRight");
-       // backLeft = new MotorEx("backLeft");
-       // backRight = new MotorEx("backRight");
+        //  frontLeft = new MotorEx("frontLeft");
+        // frontRight = new MotorEx("frontRight");
+        // backLeft = new MotorEx("backLeft");
+        // backRight = new MotorEx("backRight");
 
         frontLeft = new MotorEx("backLeft");
         frontRight = new MotorEx("backRight");
@@ -130,13 +131,14 @@ public class DriveTrain extends Subsystem {
         odometry = OpModeData.INSTANCE.getHardwareMap().get(GoBildaPinpointDriver.class, "Odometry");
 
 
-
         frontLeft.reverse();
         backLeft.reverse();
 
         motors = new MotorEx[]{frontLeft, frontRight, backLeft, backRight};
 
         initIMU(OpModeData.INSTANCE.getHardwareMap());
+
+        drivingFieldCentricNoTurnIsActivated = false;
     }
 
     public void initIMU(HardwareMap hwMap) {
@@ -172,6 +174,7 @@ public class DriveTrain extends Subsystem {
 
             @Override
             public void start() {
+                drivingFieldCentricNoTurnIsActivated = false;
                 inner.start();
             }
 
@@ -220,10 +223,7 @@ public class DriveTrain extends Subsystem {
     }
 
 
-
-
-
-    final int BLUE_GOAL_TAG_ID = 20;
+    int GOAL_TAG_ID = 0;
 
     // Tune these:
 
@@ -231,14 +231,12 @@ public class DriveTrain extends Subsystem {
     public static double deadbandDeg = 2.0;
     public static long timeoutMs = 25000;
 
-    public  static double turnPowerValue = 0.33;
+    public static double turnPowerValue = 0.33;
 
     // tiny “mutable holders” for lambdas
     final long[] startTime = new long[1];
     final boolean[] sawTag = new boolean[1];
     final double[] lastErrorDeg = new double[1];
-
-
 
 
     // --- Orbit / heading lock tuning ---
@@ -253,7 +251,21 @@ public class DriveTrain extends Subsystem {
 // Try +1 first, if "up" moves the wrong way set to -1.
     public static double leftYSign = 1.0;
 
+    private AprilTagDetection d;
 
+
+    public void periodic() {
+        d = Webcam.INSTANCE.getDetectionById(GOAL_TAG_ID);
+
+        // Always keep odometry-based estimate fresh when tag is visible
+        if (d != null && d.ftcPose != null) {
+            updateBlueTagEstimate(d);
+        }
+    }
+
+    public void setGoalID(int id) {
+        GOAL_TAG_ID = id;
+    }
 
     public Command faceBlueGoal = new LambdaCommand()
             .setSubsystems(this)
@@ -263,12 +275,6 @@ public class DriveTrain extends Subsystem {
                 lastErrorDeg[0] = 999;
             })
             .setUpdate(() -> {
-                AprilTagDetection d = Webcam.INSTANCE.getDetectionById(BLUE_GOAL_TAG_ID);
-
-                // Always keep odometry-based estimate fresh when tag is visible
-                if (d != null && d.ftcPose != null) {
-                    updateBlueTagEstimate(d);
-                }
 
                 // If tag is visible: fine align using BEARING
                 if (d != null && d.ftcPose != null) {
@@ -294,6 +300,8 @@ public class DriveTrain extends Subsystem {
                     double rx = pose.getX(DistanceUnit.INCH);
                     double ry = pose.getY(DistanceUnit.INCH);
                     double hDeg = pose.getHeading(AngleUnit.DEGREES);
+                    //double hDeg = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+
 
                     double dx = blueTagX_in - rx;
                     double dy = blueTagY_in - ry;
@@ -303,11 +311,11 @@ public class DriveTrain extends Subsystem {
 
                     // We want camera bearing to be desiredTilt, so:
                     // bearing ≈ dirToTag - heading  =>  headingTarget ≈ dirToTag - desiredTilt
-                    double headingTargetDeg = dirToTagDeg - desiredTilt;
+                    double headingTargetDeg = wrapDeg( dirToTagDeg - desiredTilt);
 
                     double errorDeg = wrapDeg(headingTargetDeg - hDeg);
                     errorDeg = -1 * errorDeg;
-                    lastErrorDeg[0] = errorDeg;
+                    lastErrorDeg[0] = 999; // only allow the "facebluegoaL" to be done if robot sees the april tag
 
                     if (Math.abs(errorDeg) < deadbandDeg) {
                         DriveTrain.INSTANCE.setTurnPower(0.0);
@@ -331,7 +339,7 @@ public class DriveTrain extends Subsystem {
                 if (!sawTag[0]) {
                     return false;
                 } // keep hunting until timeout
-                return Math.abs( lastErrorDeg[0])  < deadbandDeg;
+                return Math.abs(lastErrorDeg[0]) < deadbandDeg;
             })
             .setStop(interrupted -> {
                 DriveTrain.INSTANCE.stopDrive();
@@ -341,86 +349,123 @@ public class DriveTrain extends Subsystem {
 
 
 
-    public Command orbitBlueGoalDrive(GamepadEx gp1) {
-        LambdaCommand cmd = new LambdaCommand()
-                .setSubsystems(this)
-                .setStart(() -> {
-                    // nothing special; assumes faceBlueGoal already ran and/or we have an estimate
-                })
-                .setUpdate(() -> {
-                    // Keep tag estimate fresh if we see it
-                    AprilTagDetection d = Webcam.INSTANCE.getDetectionById(BLUE_GOAL_TAG_ID);
-                    if (d != null && d.ftcPose != null) {
-                        updateBlueTagEstimate(d);
-                    }
-
-                    // If we don't know where the tag is yet, just hold still (or you can call faceBlueGoal)
-                    if (!haveBlueTagEstimate || odometry == null) {
-                        driveRobotCentricForOrbit(0, 0, 0);
-                        return;
-                    }
-
-                    Pose2D pose = odometry.getPosition();
-                    double rx = pose.getX(DistanceUnit.INCH);
-                    double ry = pose.getY(DistanceUnit.INCH);
-                    double hDeg = pose.getHeading(AngleUnit.DEGREES);
-
-                    // Vector robot -> tag in FIELD frame (x forward, y left)
-                    double dx = blueTagX_in - rx;
-                    double dy = blueTagY_in - ry;
-
-                    double dist = Math.hypot(dx, dy);
-                    if (dist < 1e-6) {
-                        driveRobotCentricForOrbit(0, 0, 0);
-                        return;
-                    }
-
-                    // Unit vectors in FIELD frame:
-                    // rHat points TOWARD tag; moving AWAY from tag is -rHat
-                    double rHatX = dx / dist;
-                    double rHatY = dy / dist;
-
-                    // tHat is CCW tangent (orbit left) around tag
-                    double tHatX = -rHatY;
-                    double tHatY =  rHatX;
-
-                    // Joystick commands (left stick):
-                    // Up = farther from tag, Down = closer, Left/Right = orbit
-                    // NOTE: depending on GamepadEx, getLeftY might already be inverted; leftYSign handles it.
-                    double radialCmd = (-leftYSign) * gp1.getLeftStick().getY();  // make "up" positive
-                    double tangCmd  = gp1.getLeftStick().getX();
-
-                    // Field-frame desired translation
-                    double vFieldX = orbitDriveScale * (radialCmd * (-rHatX) + tangCmd * tHatX);
-                    double vFieldY = orbitDriveScale * (radialCmd * (-rHatY) + tangCmd * tHatY);
-
-                    // Convert field -> robot frame
-                    double hRad = Math.toRadians(hDeg);
-                    double forward =  vFieldX * Math.cos(hRad) + vFieldY * Math.sin(hRad);
-                    double strafe  = -vFieldX * Math.sin(hRad) + vFieldY * Math.cos(hRad);
-
-                    // Heading lock: face the tag center at all times
-                    double dirToTagDeg = Math.toDegrees(Math.atan2(dy, dx));
-                    double headingTargetDeg = dirToTagDeg - desiredTilt;
-                    double errDeg = wrapDeg(headingTargetDeg - hDeg);
-                    errDeg *= -1;
-
-                    double turn = 0.0;
-                    if (Math.abs(errDeg) > orbitDeadbandDeg) {
-                        turn = Range.clip(kP_orbitHeading * errDeg, -maxTurn_orbit, maxTurn_orbit);
-                        turn = signedMinPower(turn, minTurn_orbit);
-                    }
-
-                    // Manual turning NOT allowed: we ignore right stick entirely and only use 'turn' from lock.
-                    driveRobotCentricForOrbit(forward, strafe, turn);
-                })
-                .setIsDone(() -> false) // runs until another drive command replaces it
-                .setStop(interrupted -> driveRobotCentricForOrbit(0, 0, 0));
+    public Command drivingFieldCentricFacingGoal(GamepadEx gp1) {
+        // --- Tuning knobs (you can @Config these if you want) ---
+        final double stickDeadband = 0.04;
+        final double maxTurnPower = 0.60;     // cap rotation so it doesn’t whip
+        final double maxTurnErrorDeg = 45.0;  // for optional scaling / sanity
+        final boolean turnAtAll[] = new boolean[1];
+        turnAtAll[0] = true;
 
 
-        return  cmd;
+        // If your robot turns the wrong direction, flip this to -1.
+        final double turnSign = 1.0;
 
+        // --- Helpers ---
+        java.util.function.DoubleUnaryOperator deadband = (v) ->
+                (Math.abs(v) < stickDeadband) ? 0.0 : v;
+
+        java.util.function.DoubleUnaryOperator clip = (v) ->
+                Math.max(-1.0, Math.min(1.0, v));
+
+        java.util.function.DoubleUnaryOperator wrapDeg = (deg) -> {
+            double a = deg;
+            while (a <= -180) a += 360;
+            while (a > 180) a -= 360;
+            return a;
+        };
+
+        // --- Axis reads (ONE of these styles will match your GamepadEx API) ---
+        // Style A (FTCLib-like):
+        java.util.function.DoubleSupplier driveIn = () -> gp1.getLeftStick().getY();   // forward is negative stick Y
+        java.util.function.DoubleSupplier strafeIn = () ->  gp1.getLeftStick().getX();
+
+
+        // If your GamepadEx does NOT have getLeftX/getLeftY/getRightX, swap to whatever your API is:
+        // e.g. gp1.leftStickY.get(), gp1.leftStickX.get(), gp1.rightStickX.get(), etc.
+
+        // --- Turn supplier: always face blue goal ---
+        java.util.function.DoubleSupplier turnIn = () -> {
+
+            // 1) Tag visible: use live bearing (same logic as your faceBlueGoal)
+            if (d != null && d.ftcPose != null) {
+                double errorDeg = wrapDeg(desiredTilt - d.ftcPose.bearing);
+                if (Math.abs(errorDeg) < deadbandDeg ) {
+                    turnAtAll[0] = false;
+                    return  0.0;
+                } {
+                    turnAtAll[0] = true;
+                }
+
+
+                double turn = Range.clip(kP_inTag * errorDeg, -maxTurn_inTag, maxTurn_inTag);
+                turn = signedMinPower(turn, minTurn_inTag);
+                return turn;
+            }
+
+            // 2) Tag not visible: use your odometry-based tag estimate (blueTagX_in / blueTagY_in)
+            if (haveBlueTagEstimate && odometry != null) {
+                Pose2D pose = odometry.getPosition();
+
+                double rx = pose.getX(DistanceUnit.INCH);
+                double ry = pose.getY(DistanceUnit.INCH);
+
+               // double hDeg = pose.getHeading(AngleUnit.DEGREES);
+                double hDeg = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+
+                double dx = blueTagX_in - rx;
+                double dy = blueTagY_in - ry;
+
+                double dirToTagDeg = Math.toDegrees(Math.atan2(dy, dx));
+
+                // Same derivation you used in faceBlueGoal:
+                // headingTarget ≈ dirToTag - desiredTilt
+                double headingTargetDeg = dirToTagDeg - desiredTilt;
+
+                double errorDeg = wrapDeg(headingTargetDeg - hDeg);
+                errorDeg = -errorDeg; // keep your sign convention consistent
+
+                double turn = Range.clip(kP_noTag * errorDeg, -maxTurn_noTag, maxTurn_noTag);
+                turn = signedMinPower(turn, minTurn_noTag);
+                return turn;
+            }
+
+            // 3) No estimate yet: gentle search turn
+            return searchPowerBeforeTag;
+        };
+
+        // --- Build a field-centric MecanumDriverControlled using suppliers ---
+        MecanumDriverControlled driverControlled = new MecanumDriverControlled(
+                motors,
+                () -> (float) clip.applyAsDouble(deadband.applyAsDouble(driveIn.getAsDouble())),
+                () -> (float) clip.applyAsDouble(deadband.applyAsDouble(strafeIn.getAsDouble())),
+                () -> {
+
+                    double autoTurn = turnIn.getAsDouble();
+
+                    return (float) clip.applyAsDouble(autoTurn);
+                },
+                false,   // robotCentric = false => FIELD CENTRIC
+                imu      // IMU used for field-centric transform
+        );
+
+        // Match your existing pattern of “wrap a command so DriveTrain is a requirement”
+        return new Command() {
+            @Override public void start() { driverControlled.start(); }
+            @Override public void update() {
+                if (true ) {
+                    driverControlled.update();
+                }
+            }
+            @Override public void stop(boolean interrupted) { driverControlled.stop(interrupted); }
+            @Override public boolean isDone() { return false; }
+            @Override public Set<Subsystem> getSubsystems() {
+                return Collections.singleton(DriveTrain.this);
+            }
+
+        };
     }
+
 
 
 }
