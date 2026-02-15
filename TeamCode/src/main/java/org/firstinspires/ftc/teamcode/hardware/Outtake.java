@@ -27,7 +27,9 @@ public class Outtake extends Subsystem {
 
     public  static double motorVelocityTarget = motorVelocityTargetHigher;
 
-    public  static  double motorVelocityThreashhold = 30;
+    public  static  double motorVelocityThreashholdLower = 30;
+    public  static  double motorVelocityThreashholdHigher = 50;
+
 
     private boolean motorRunning = false;
 
@@ -71,12 +73,14 @@ public class Outtake extends Subsystem {
 
 
     public double distanceToVelocity(double distance) {
-        return  4.8 * distance + /*974*/ 1000;
+       // not outdated, just linearer return  6.01105 * distance + 878.10236;
+        return 0.0147602 * distance * distance + 3.54619 * distance + 966;
     }
 
     public double distanceToHoodPosition(double distance) {
+        return 0.00079863 * distance + 0.0436113;
         //return  -0.0000089*distance*distance + 0.0023 * distance - 0.06;
-                 return distance*distance*distance * 0.00000028  -0.0000776*distance*distance + 0.0073 * distance - 0.15;
+        //return distance*distance*distance * 0.00000028  -0.0000776*distance*distance + 0.0073 * distance - 0.15;
     }
 
 
@@ -113,7 +117,14 @@ public class Outtake extends Subsystem {
 
     public   boolean flywheelReady(double targetRaw) {
         double avg = (getMotorCurrentLeftVelocity() + getMotorCurrentRightVelocity()) / 2.0;
-        return Math.abs(targetRaw - avg) < motorVelocityThreashhold;
+         avg = (getMotorCurrentLeftVelocity() );
+
+        if (avg < 1500) {
+            return Math.abs(targetRaw - avg) < motorVelocityThreashholdLower;
+        } else {
+            return Math.abs(targetRaw - avg) < motorVelocityThreashholdHigher;
+
+        }
     }
 
 

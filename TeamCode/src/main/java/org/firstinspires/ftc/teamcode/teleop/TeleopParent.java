@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode.teleop;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.rowanmcalpin.nextftc.core.command.Command;
+import com.rowanmcalpin.nextftc.core.command.groups.ParallelGroup;
 import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.ForcedParallelCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
@@ -28,7 +28,7 @@ public class TeleopParent extends NextFTCOpMode {
     public final int BLUE_TAG_ID = 20;
     public final int RED_TAG_ID = 24;
 
-
+    public static double targetHoodPosition = 0.05;
     public Command driverControlled;
 
     public TeleopParent() {
@@ -39,7 +39,7 @@ public class TeleopParent extends NextFTCOpMode {
 
     @Override
     public void onStartButtonPressed() {
-        FtcDashboard.getInstance().startCameraStream(Webcam.INSTANCE.getVisionPortal(), 30);
+       FtcDashboard.getInstance().startCameraStream(Webcam.INSTANCE.getVisionPortal(), 30);
 
         GamepadEx gp1 = gamepadManager.getGamepad1();
 
@@ -47,20 +47,19 @@ public class TeleopParent extends NextFTCOpMode {
         driverControlled = DriveTrain.INSTANCE.Drive(gp1, false);
         driverControlled.invoke();
 
-        gp1.getA().setPressedCommand(() -> Transfer.INSTANCE.kickBall());
+      //  gp1.getA().setPressedCommand(() -> Test());
 
         gp1.getB().setPressedCommand(() -> Intake.INSTANCE.eat());
 
 
-        gp1.getDpadDown().setPressedCommand(() -> Outtake.INSTANCE.handleMotor(Webcam.INSTANCE.getRange()));
+        gp1.getDpadDown().setPressedCommand(() -> Outtake.INSTANCE.handleMotor(0));
 
         gp1.getY().setPressedCommand(() -> Intake.INSTANCE.spit());
 
 
 
 
-       // gp1.getDpadUp().setHeldCommand( ()-> Outtake.INSTANCE.raiseMotorVelocity() );
-       // gp1.getDpadDown().setHeldCommand( ()-> Outtake.INSTANCE.lowerMotorVelocity() );
+        gp1.getDpadUp().setHeldCommand( ()-> Transfer.INSTANCE.kickBall());
 
 
 
@@ -103,6 +102,7 @@ public class TeleopParent extends NextFTCOpMode {
         }
 
         telemetry.addData("Hood Position", OuttakeRotator.INSTANCE.getHoodPosition());
+        telemetry.addData("Hood Position Target", targetHoodPosition);
 
         // Update intake fullness detection once per loop
         Intake.INSTANCE.updateFullDetection();
@@ -122,6 +122,8 @@ public class TeleopParent extends NextFTCOpMode {
         telemetry.addData("drivingFieldCentricNoTurnIsActivated", DriveTrain.INSTANCE.drivingFieldCentricNoTurnIsActivated);
 
 
+       // telemetry.addData("Robot Sees Tag? ", DriveTrain.INSTANCE.TagStatus);
+
 
         telemetry.update();
     }
@@ -129,7 +131,7 @@ public class TeleopParent extends NextFTCOpMode {
     @Override
     public  void onStop() {
         Webcam.INSTANCE.close();
-        FtcDashboard.getInstance().stopCameraStream();
+       FtcDashboard.getInstance().stopCameraStream();
     }
 
 
@@ -147,7 +149,7 @@ public class TeleopParent extends NextFTCOpMode {
                         double webCamDistance;
                         if (Webcam.INSTANCE.seesTag()) {
                             webCamDistance = Webcam.INSTANCE.getRange();
-                        } else if (DriveTrain.haveBlueTagEstimate && DriveTrain.INSTANCE.odometry != null) {
+                        } else if (DriveTrain.haveTagEstimate && DriveTrain.INSTANCE.odometry != null) {
                             // Make sure pose is fresh right now (not just onUpdate)
                             DriveTrain.INSTANCE.odometry.update();
 
@@ -201,7 +203,13 @@ public class TeleopParent extends NextFTCOpMode {
 
 
     public Command score3Times(){
-        return new Command() {
+       /*  return new SequentialGroup(
+                Transfer.INSTANCE.kickBall(),
+                Transfer.INSTANCE.kickBall(),
+                Transfer.INSTANCE.kickBall()
+        );  */
+
+       return new Command() {
             private Command currentShot;
 
 
@@ -234,7 +242,30 @@ public class TeleopParent extends NextFTCOpMode {
             }
         };
     }
+    public Command Test(){
+            return new Command() {
+                    Command inrCmd;
+                    @Override
+                    public void start () {
+                         inrCmd =
+                        new ParallelGroup(
+                                Outtake.INSTANCE.holdVelocity(Outtake.motorVelocityTarget)//,
+                               // OuttakeRotator.INSTANCE.setHoodPosition(targetHoodPosition)
+                        );
+                        inrCmd.invoke();
+                    }
+                    @Override
+                    public void update () {
 
+                    }
+
+                    @Override
+                    public boolean isDone () {
+                        return (inrCmd != null && inrCmd.isDone());
+                    }
+
+        };
+    }
 
 
 }

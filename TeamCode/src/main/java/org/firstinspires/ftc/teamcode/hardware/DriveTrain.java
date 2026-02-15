@@ -41,7 +41,7 @@ public class DriveTrain extends Subsystem {
 
 
     // --- Tag world estimate (odometry frame) ---
-    public static boolean haveBlueTagEstimate = false;
+    public static boolean haveTagEstimate = false;
     public static double blueTagX_in = 0.0;
     public static double blueTagY_in = 0.0;
 
@@ -104,10 +104,10 @@ public class DriveTrain extends Subsystem {
         double measTagX = camX + d.ftcPose.range * Math.cos(dirRad);
         double measTagY = camY + d.ftcPose.range * Math.sin(dirRad);
 
-        if (!haveBlueTagEstimate) {
+        if (!haveTagEstimate) {
             blueTagX_in = measTagX;
             blueTagY_in = measTagY;
-            haveBlueTagEstimate = true;
+            haveTagEstimate = true;
         } else {
             // EMA filter to smooth noise
             blueTagX_in = (1 - tagEstimateAlpha) * blueTagX_in + tagEstimateAlpha * measTagX;
@@ -139,6 +139,8 @@ public class DriveTrain extends Subsystem {
         initIMU(OpModeData.INSTANCE.getHardwareMap());
 
         drivingFieldCentricNoTurnIsActivated = false;
+
+        //Webcam.INSTANCE.setSoleTagID(GOAL_TAG_ID);
     }
 
     public void initIMU(HardwareMap hwMap) {
@@ -231,25 +233,12 @@ public class DriveTrain extends Subsystem {
     public static double deadbandDeg = 2.0;
     public static long timeoutMs = 25000;
 
-    public static double turnPowerValue = 0.33;
 
     // tiny “mutable holders” for lambdas
     final long[] startTime = new long[1];
     final boolean[] sawTag = new boolean[1];
     final double[] lastErrorDeg = new double[1];
 
-
-    // --- Orbit / heading lock tuning ---
-    public static double orbitDriveScale = 0.75;   // overall translation speed in orbit mode
-    public static double orbitDeadbandDeg = 2.0;
-
-    public static double kP_orbitHeading = 0.02;
-    public static double maxTurn_orbit = 0.35;
-    public static double minTurn_orbit = 0.06;
-
-    // If your GamepadEx returns inverted Y (some wrappers do), flip this.
-// Try +1 first, if "up" moves the wrong way set to -1.
-    public static double leftYSign = 1.0;
 
     private AprilTagDetection d;
 
@@ -295,7 +284,7 @@ public class DriveTrain extends Subsystem {
                 }
 
                 // Tag NOT visible: use odometry to "pre-aim" toward where we think the tag is
-                if (haveBlueTagEstimate && odometry != null) {
+                if (haveTagEstimate && odometry != null) {
                     Pose2D pose = odometry.getPosition();
                     double rx = pose.getX(DistanceUnit.INCH);
                     double ry = pose.getY(DistanceUnit.INCH);
@@ -404,13 +393,13 @@ public class DriveTrain extends Subsystem {
             }
 
             // 2) Tag not visible: use your odometry-based tag estimate (blueTagX_in / blueTagY_in)
-            if (haveBlueTagEstimate && odometry != null) {
+            if (haveTagEstimate && odometry != null) {
                 Pose2D pose = odometry.getPosition();
 
                 double rx = pose.getX(DistanceUnit.INCH);
                 double ry = pose.getY(DistanceUnit.INCH);
 
-               // double hDeg = pose.getHeading(AngleUnit.DEGREES);
+                // double hDeg = pose.getHeading(AngleUnit.DEGREES);
                 double hDeg = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
 
                 double dx = blueTagX_in - rx;
@@ -469,5 +458,3 @@ public class DriveTrain extends Subsystem {
 
 
 }
-
-

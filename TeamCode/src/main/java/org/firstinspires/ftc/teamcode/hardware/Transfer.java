@@ -27,6 +27,8 @@ public class Transfer extends Subsystem {
 
     public static  double loadDelaySecond = 0.4;
 
+    public static double shootDelaySeconds = 1;
+
     public int scoreTimes = 0;
 
 
@@ -59,6 +61,7 @@ public class Transfer extends Subsystem {
         if (Outtake.INSTANCE.getMotorCurrentLeftVelocity() != 0 || Outtake.INSTANCE.getMotorCurrentRightVelocity() != 0) {
             return new SequentialGroup(
                     new WaitUntil(() -> Outtake.INSTANCE.flywheelReady(Outtake.motorVelocityTarget)),
+                    new Delay(shootDelaySeconds),
                     new InstantCommand(() -> protector.setPosition(protectorPosition2)),
                     new Delay(kickDelaySeconds),
                     new InstantCommand(() -> kicker.setPosition(kickerPosition2)),
