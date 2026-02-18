@@ -11,6 +11,7 @@ import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.rowanmcalpin.nextftc.core.units.Angle;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
@@ -68,7 +69,7 @@ public class PedroAutonomous extends OpMode {
             Path1 = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(56.000, 8.000), new Pose(56.000, 50))
+                            new BezierLine(new Pose(56.000, 8.000), new Pose(56, 8))
                     )
                     .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(90))
                     .build();
@@ -79,7 +80,7 @@ public class PedroAutonomous extends OpMode {
         switch (pathState) {
             case 0:
                 // Start following Path1 once at the beginning
-                follower.followPath(paths.Path1);
+                //  follower.followPath(paths.Path1);
                 pathState = 1;
                 break;
 
@@ -87,6 +88,7 @@ public class PedroAutonomous extends OpMode {
                 // Wait until the follower is done with the path
                 if (!follower.isBusy()) {
                     // Path finished – you could start another path here
+                    follower.turn(Math.toRadians(180));
                     pathState = 2;
                 }
                 break;

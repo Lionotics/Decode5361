@@ -192,23 +192,6 @@ public class DriveTrain extends Subsystem {
         };
     }
 
-    public void driveRobotCentricForOrbit(double forward, double strafe, double turn) {
-        // forward: + = forward (x+), strafe: + = left (y+), turn: + = CCW (adjust if needed)
-
-        double fl = forward + strafe + turn;
-        double fr = forward - strafe - turn;
-        double bl = forward - strafe + turn;
-        double br = forward + strafe - turn;
-
-        double max = Math.max(1.0, Math.max(Math.abs(fl),
-                Math.max(Math.abs(fr), Math.max(Math.abs(bl), Math.abs(br)))));
-
-        frontLeft.setPower(fl / max);
-        frontRight.setPower(fr / max);
-        backLeft.setPower(bl / max);
-        backRight.setPower(br / max);
-    }
-
 
     public void setTurnPower(double turn) {
         turn = Range.clip(turn, -1.0, 1.0);
@@ -338,7 +321,7 @@ public class DriveTrain extends Subsystem {
 
 
 
-    public Command drivingFieldCentricFacingGoal(GamepadEx gp1) {
+    /*public Command drivingFieldCentricFacingGoal(GamepadEx gp1) {
         // --- Tuning knobs (you can @Config these if you want) ---
         final double stickDeadband = 0.04;
         final double maxTurnPower = 0.60;     // cap rotation so it doesn’t whip
@@ -453,7 +436,7 @@ public class DriveTrain extends Subsystem {
             }
 
         };
-    }
+    } */
 
 
 

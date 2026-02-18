@@ -67,8 +67,8 @@ public class TeleopParent extends NextFTCOpMode {
 
         gp1.getLeftBumper().setPressedCommand(() ->
                 new SequentialGroup(
-                        DriveTrain.INSTANCE.faceBlueGoal,
-                        DriveTrain.INSTANCE.drivingFieldCentricFacingGoal(gp1)
+                        DriveTrain.INSTANCE.faceBlueGoal//,
+                       // DriveTrain.INSTANCE.drivingFieldCentricFacingGoal(gp1)
 
                 )
         );

@@ -22,15 +22,15 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 @Config
 public class Constants {
-    public  static  double xVelocityRealValue = 50.0;
-    public  static  double yVelocityRealValue = 34.0;
+    public  static  double xVelocityRealValue = 69.9;
+    public  static  double yVelocityRealValue = 47.59;
 
 
 
     // ---------------- Follower (mass + PIDF etc.) ----------------
     public static FollowerConstants followerConstants = new FollowerConstants()
             // rough mass in kg – replace with real robot mass
-            .mass(12.7)
+             .mass(14.6)
 
             // You’ll eventually tune these with Pedro’s tuners;
             // these values are just placeholders.
@@ -42,7 +42,10 @@ public class Constants {
             ))
             .drivePIDFCoefficients(new FilteredPIDFCoefficients(
                     0.03, 0.0, 0.0, 0.0, 0.0
-            ));
+            ))
+            .forwardZeroPowerAcceleration(-38.5)
+            .lateralZeroPowerAcceleration(-86.65)
+            ;
 
     // ---------------- Mecanum drivetrain constants ----------------
     public static MecanumConstants driveConstants = new MecanumConstants()
@@ -50,10 +53,15 @@ public class Constants {
             .maxPower(1.0)
 
             // Motor names must match your RC config and DriveTrain.java
-            .leftFrontMotorName("frontLeft")
-            .leftRearMotorName("backLeft")
-            .rightFrontMotorName("frontRight")
-            .rightRearMotorName("backRight")
+        //    .leftFrontMotorName("frontLeft")
+          //  .leftRearMotorName("backLeft")
+          //  .rightFrontMotorName("frontRight")
+          //  .rightRearMotorName("backRight")
+
+            .leftFrontMotorName("backLeft")
+            .leftRearMotorName("frontLeft")
+            .rightFrontMotorName("backRight")
+            .rightRearMotorName("frontRight")
 
             // Directions must match how the robot actually drives
             .leftFrontMotorDirection(DcMotorSimple.Direction.REVERSE)
@@ -70,13 +78,13 @@ public class Constants {
     public static PinpointConstants localizerConstants = new PinpointConstants()
             // Pod offsets RELATIVE TO ROBOT CENTER (in inches).
             // Measure these and replace 0.0s later:
-            .forwardPodY(6.0)      // + = pod is in front of center, - = behind
-            .strafePodX(0.0)       // + = pod is to the left,  - = to the right
+            .forwardPodY(-7.5)      // + = pod is in front of center, - = behind
+            .strafePodX(-1.0)       // + = pod is to the left,  - = to the right
 
             // Units + hardware map name + encoder model
             .distanceUnit(DistanceUnit.INCH)
             .hardwareMapName("Odometry")
-            .encoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD)
+            .encoderResolution(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_SWINGARM_POD)
 
             // Encoder directions (flip if your X/Y go the wrong way)
             .forwardEncoderDirection(GoBildaPinpointDriver.EncoderDirection.REVERSED)
