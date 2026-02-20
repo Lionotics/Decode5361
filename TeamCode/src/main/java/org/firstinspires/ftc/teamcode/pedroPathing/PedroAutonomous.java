@@ -44,6 +44,8 @@ public class PedroAutonomous extends OpMode {
         panelsTelemetry.addData("X", follower.getPose().getX());
         panelsTelemetry.addData("Y", follower.getPose().getY());
         panelsTelemetry.addData("Heading", follower.getPose().getHeading());
+        panelsTelemetry.addData("Heading (deg)", Math.toDegrees(follower.getPose().getHeading()));
+
 
         panelsTelemetry.update();
     }
@@ -58,6 +60,8 @@ public class PedroAutonomous extends OpMode {
         panelsTelemetry.addData("X", follower.getPose().getX());
         panelsTelemetry.addData("Y", follower.getPose().getY());
         panelsTelemetry.addData("Heading", follower.getPose().getHeading());
+        panelsTelemetry.addData("Heading (deg)", Math.toDegrees(follower.getPose().getHeading()));
+
         panelsTelemetry.update();
     }
 
@@ -69,9 +73,9 @@ public class PedroAutonomous extends OpMode {
             Path1 = follower
                     .pathBuilder()
                     .addPath(
-                            new BezierLine(new Pose(56.000, 8.000), new Pose(56, 8))
+                            new BezierLine(new Pose(56.000, 8.000), new Pose(100, 100))
                     )
-                    .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(90))
+                    .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(45))
                     .build();
         }
     }
@@ -80,13 +84,13 @@ public class PedroAutonomous extends OpMode {
         switch (pathState) {
             case 0:
                 // Start following Path1 once at the beginning
-                //  follower.followPath(paths.Path1);
+                 follower.followPath(paths.Path1);
                 pathState = 1;
                 break;
 
             case 1:
                 // Wait until the follower is done with the path
-                if (!follower.isBusy()) {
+                if (false && !follower.isBusy()) {
                     // Path finished – you could start another path here
                     follower.turn(Math.toRadians(180));
                     pathState = 2;

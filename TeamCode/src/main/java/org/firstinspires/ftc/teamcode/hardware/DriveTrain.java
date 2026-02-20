@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.hardware;
 
 
 import com.acmerobotics.dashboard.config.Config;
+import com.pedropathing.follower.Follower;
+import com.pedropathing.geometry.Pose;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -53,21 +55,24 @@ public class DriveTrain extends Subsystem {
     // How aggressively we trust new measurements (0..1). Higher = updates faster.
     public static double tagEstimateAlpha = 0.25;
 
-    // Turning behavior when tag is NOT visible
-    public static double kP_noTag = 0.05;     // power per degree
-    public static double maxTurn_noTag = 0.6;
-    public static double minTurn_noTag = 0.15;
-
-    // Turning behavior when tag IS visible (fine alignment)
-    public static double kP_inTag = 0.05;
-    public static double maxTurn_inTag = 0.15;
-    public static double minTurn_inTag = 0.2;
-
-    public static double searchPowerBeforeTag = 0.35;
 
 
 
     public  boolean drivingFieldCentricNoTurnIsActivated = false;
+
+
+    // --- debug telemetry for faceBlueGoalPedro ---
+    public static double faceGoal_targetHeadingDeg = Double.NaN;
+    public static double faceGoal_dirToTagDeg = Double.NaN;
+    public static double faceGoal_liveBearingDeg = Double.NaN;
+    public static String faceGoal_source = "NONE";
+
+    public static double faceGoal_lastTargetHeadingDeg = Double.NaN;  // "tilt to face goal since last check"
+    public static long   faceGoal_lastComputedAtMs = 0;
+
+    public  boolean followerIsActive = false;
+
+
 
 
     private static double wrapDeg(double deg) {
@@ -140,7 +145,9 @@ public class DriveTrain extends Subsystem {
 
         drivingFieldCentricNoTurnIsActivated = false;
 
-        //Webcam.INSTANCE.setSoleTagID(GOAL_TAG_ID);
+        Webcam.INSTANCE.setSoleTagID(GOAL_TAG_ID);
+
+        followerIsActive = false;
     }
 
     public void initIMU(HardwareMap hwMap) {
@@ -213,14 +220,7 @@ public class DriveTrain extends Subsystem {
     // Tune these:
 
     public static double desiredTilt = 0;
-    public static double deadbandDeg = 2.0;
-    public static long timeoutMs = 25000;
 
-
-    // tiny “mutable holders” for lambdas
-    final long[] startTime = new long[1];
-    final boolean[] sawTag = new boolean[1];
-    final double[] lastErrorDeg = new double[1];
 
 
     private AprilTagDetection d;
@@ -239,85 +239,124 @@ public class DriveTrain extends Subsystem {
         GOAL_TAG_ID = id;
     }
 
-    public Command faceBlueGoal = new LambdaCommand()
-            .setSubsystems(this)
-            .setStart(() -> {
-                startTime[0] = System.currentTimeMillis();
-                sawTag[0] = false;
-                lastErrorDeg[0] = 999;
-            })
-            .setUpdate(() -> {
+    private void syncFollowerPoseToOdometry(Follower follower) {
+        if (follower == null || odometry == null) return;
 
-                // If tag is visible: fine align using BEARING
-                if (d != null && d.ftcPose != null) {
-                    sawTag[0] = true;
+        odometry.update();
+        Pose2D pose = odometry.getPosition();
+        if (pose == null) return;
 
-                    double errorDeg = wrapDeg(desiredTilt - d.ftcPose.bearing);
-                    lastErrorDeg[0] = errorDeg;
+        double xIn = pose.getX(DistanceUnit.INCH);
+        double yIn = pose.getY(DistanceUnit.INCH);
 
-                    if (Math.abs(errorDeg) < deadbandDeg) {
-                        DriveTrain.INSTANCE.setTurnPower(0.0);
-                        return;
+        double headingDeg = pose.getHeading(AngleUnit.DEGREES);
+        if (!Double.isFinite(headingDeg) && imu != null) {
+            headingDeg = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+        }
+        if (!Double.isFinite(xIn) || !Double.isFinite(yIn) || !Double.isFinite(headingDeg)) return;
+
+        // Pedro headings are radians; Pose expects x/y + heading.
+        follower.setStartingPose(new Pose(xIn, yIn, Math.toRadians(headingDeg)));
+
+        // Optional but nice: ensures the follower internal state is refreshed immediately
+        follower.update();
+    }
+
+    public Command faceBlueGoal(Follower follower, double tiltAngle) {
+        return new LambdaCommand()
+                .setSubsystems(this) // claims DriveTrain so normal driving won’t fight it
+                .setStart(() -> {
+                    followerIsActive = true;
+                    double targetDeg = tiltAngle; //calcFaceBlueGoalTargetDeg(); // your method returns DEGREES
+                    syncFollowerPoseToOdometry(follower);
+                    if (Double.isFinite(targetDeg)) {
+                        follower.turn(Math.toRadians(targetDeg));  // absolute “turn to heading”
                     }
+                })
+                .setUpdate(() -> {
+                    follower.update(); // REQUIRED every loop for Pedro to actually run
+                })
+                .setIsDone(() -> !follower.isBusy())
+                .setStop(interrupted -> {
+                    // Optional: you can stop motors or just let TeleOp drive resume afterwards
+                   stopDrive();
+                   follower.breakFollowing();
+                    followerIsActive = false;
 
-                    double turn = Range.clip(kP_inTag * errorDeg, -maxTurn_inTag, maxTurn_inTag);
-                    turn = signedMinPower(turn, minTurn_inTag);
-                    DriveTrain.INSTANCE.setTurnPower(turn);
-                    return;
-                }
+                });
+    }
 
-                // Tag NOT visible: use odometry to "pre-aim" toward where we think the tag is
-                if (haveTagEstimate && odometry != null) {
-                    Pose2D pose = odometry.getPosition();
-                    double rx = pose.getX(DistanceUnit.INCH);
-                    double ry = pose.getY(DistanceUnit.INCH);
-                    double hDeg = pose.getHeading(AngleUnit.DEGREES);
-                    //double hDeg = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+    public double calcFaceBlueGoalTargetDeg() {
 
+        faceGoal_source = "NONE";
+        faceGoal_lastTargetHeadingDeg = Double.NaN;
+        faceGoal_dirToTagDeg = Double.NaN;
+        faceGoal_liveBearingDeg = Double.NaN;
 
-                    double dx = blueTagX_in - rx;
-                    double dy = blueTagY_in - ry;
+        // Always grab a fresh detection (don’t rely on periodic timing)
+        AprilTagDetection det = Webcam.INSTANCE.getDetectionById(GOAL_TAG_ID);
 
-                    // heading to face the tag (in your x-forward, y-left frame)
-                    double dirToTagDeg = Math.toDegrees(Math.atan2(dy, dx));
+        // Update odometry pose
+        if (odometry != null) odometry.update();
+        Pose2D pose = (odometry != null) ? odometry.getPosition() : null;
+        if (pose == null) {
+            faceGoal_source = "NO_POSE";
+            return Double.NaN;
+        }
 
-                    // We want camera bearing to be desiredTilt, so:
-                    // bearing ≈ dirToTag - heading  =>  headingTarget ≈ dirToTag - desiredTilt
-                    double headingTargetDeg = wrapDeg( dirToTagDeg - desiredTilt);
+        // If Pinpoint heading ever glitches, use IMU as fallback
+        double hDeg = pose.getHeading(AngleUnit.DEGREES);
+        if (!Double.isFinite(hDeg) && imu != null) {
+            hDeg = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+        }
+        if (!Double.isFinite(hDeg)) {
+            faceGoal_source = "BAD_HEADING";
+            return Double.NaN;
+        }
 
-                    double errorDeg = wrapDeg(headingTargetDeg - hDeg);
-                    errorDeg = -1 * errorDeg;
-                    lastErrorDeg[0] = 999; // only allow the "facebluegoaL" to be done if robot sees the april tag
+        // LIVE TAG branch (only if bearing is valid)
+        if (det != null && det.ftcPose != null && Double.isFinite(det.ftcPose.bearing)) {
+            faceGoal_source = "LIVE_TAG";
+            faceGoal_liveBearingDeg = det.ftcPose.bearing;
 
-                    if (Math.abs(errorDeg) < deadbandDeg) {
-                        DriveTrain.INSTANCE.setTurnPower(0.0);
-                        return;
-                    }
+            // Direction from robot to tag in FIELD frame (deg)
+            // (heading + bearing) points from robot toward tag.
+            faceGoal_dirToTagDeg = wrapDeg(hDeg + det.ftcPose.bearing);
 
-                    double turn = Range.clip(kP_noTag * errorDeg, -maxTurn_noTag, maxTurn_noTag);
-                    turn = signedMinPower(turn, minTurn_noTag);
-                    DriveTrain.INSTANCE.setTurnPower(turn);
-                    return;
-                }
+            // Heading that makes bearing -> desiredTilt (usually 0)
+            double targetHeadingDeg = wrapDeg(hDeg + (det.ftcPose.bearing - desiredTilt));
 
-                // If we have NO estimate yet: do a gentle alternating search (prevents "always clockwise")
-                DriveTrain.INSTANCE.setTurnPower(searchPowerBeforeTag);
-            })
-            .setIsDone(() -> {
-                long elapsed = System.currentTimeMillis() - startTime[0];
-                if (elapsed > timeoutMs) {
-                    return true;
-                }
-                if (!sawTag[0]) {
-                    return false;
-                } // keep hunting until timeout
-                return Math.abs(lastErrorDeg[0]) < deadbandDeg;
-            })
-            .setStop(interrupted -> {
-                DriveTrain.INSTANCE.stopDrive();
-                // resume normal teleop drive when done (or interrupted)
-            });
+            faceGoal_lastTargetHeadingDeg = targetHeadingDeg;
+            faceGoal_lastComputedAtMs = System.currentTimeMillis();
+            return targetHeadingDeg;
+        }
 
+        // Keep estimate fresh if pose exists but bearing is invalid this frame
+        if (det != null && det.ftcPose != null) {
+            updateBlueTagEstimate(det);
+        }
+
+        // ODOMETRY ESTIMATE fallback
+        if (haveTagEstimate) {
+            faceGoal_source = "ODO_ESTIMATE";
+
+            double rx = pose.getX(DistanceUnit.INCH);
+            double ry = pose.getY(DistanceUnit.INCH);
+
+            double dx = blueTagX_in - rx;
+            double dy = blueTagY_in - ry;
+
+            faceGoal_dirToTagDeg = Math.toDegrees(Math.atan2(dy, dx));
+            faceGoal_lastTargetHeadingDeg = wrapDeg(faceGoal_dirToTagDeg - desiredTilt);
+            faceGoal_lastComputedAtMs = System.currentTimeMillis();
+            return faceGoal_lastTargetHeadingDeg;
+        }
+
+        faceGoal_source = "NO_TAG_NO_ESTIMATE";
+        faceGoal_lastTargetHeadingDeg = wrapDeg(hDeg);
+        faceGoal_lastComputedAtMs = System.currentTimeMillis();
+        return faceGoal_lastTargetHeadingDeg;
+    }
 
 
 

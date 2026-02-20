@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.teleop;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.pedropathing.follower.Follower;
+import com.pedropathing.geometry.Pose;
 import com.rowanmcalpin.nextftc.core.command.Command;
 import com.rowanmcalpin.nextftc.core.command.groups.ParallelGroup;
 import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
@@ -21,6 +23,7 @@ import org.firstinspires.ftc.teamcode.hardware.Transfer;
 import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.Outtake;
 import org.firstinspires.ftc.teamcode.hardware.Webcam;
+import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 @Config
 public class TeleopParent extends NextFTCOpMode {
@@ -29,6 +32,10 @@ public class TeleopParent extends NextFTCOpMode {
     public final int RED_TAG_ID = 24;
 
     public static double targetHoodPosition = 0.05;
+
+    public  static  double testTiltAngle = 90;
+
+    private Follower follower;
     public Command driverControlled;
 
     public TeleopParent() {
@@ -40,6 +47,11 @@ public class TeleopParent extends NextFTCOpMode {
     @Override
     public void onStartButtonPressed() {
        FtcDashboard.getInstance().startCameraStream(Webcam.INSTANCE.getVisionPortal(), 30);
+
+        follower = Constants.createFollower(hardwareMap);
+
+        // Optional but recommended: set a starting pose (pick something reasonable)
+        follower.setStartingPose(new Pose(0, 0, 0));
 
         GamepadEx gp1 = gamepadManager.getGamepad1();
 
@@ -65,13 +77,17 @@ public class TeleopParent extends NextFTCOpMode {
 
         gp1.getRightBumper().setPressedCommand( ()-> autoScore() );
 
+
+
         gp1.getLeftBumper().setPressedCommand(() ->
                 new SequentialGroup(
-                        DriveTrain.INSTANCE.faceBlueGoal//,
-                       // DriveTrain.INSTANCE.drivingFieldCentricFacingGoal(gp1)
-
+                        new InstantCommand(() -> driverControlled.stop(true)),
+                        DriveTrain.INSTANCE.faceBlueGoal(follower, testTiltAngle),
+                        new InstantCommand(() -> driverControlled.invoke())
                 )
         );
+
+
 
 // Return to normal field-centric driving
         gp1.getDpadLeft().setPressedCommand(() ->
@@ -80,6 +96,8 @@ public class TeleopParent extends NextFTCOpMode {
                 }
                 )
         );
+
+
 
 
     }
@@ -119,10 +137,19 @@ public class TeleopParent extends NextFTCOpMode {
 
         Webcam.INSTANCE.addTelemetry(telemetry);
 
-        telemetry.addData("drivingFieldCentricNoTurnIsActivated", DriveTrain.INSTANCE.drivingFieldCentricNoTurnIsActivated);
+        double targetDeg = DriveTrain.faceGoal_lastTargetHeadingDeg;
 
 
-       // telemetry.addData("Robot Sees Tag? ", DriveTrain.INSTANCE.TagStatus);
+
+        telemetry.addData("FaceGoal last target heading (deg)", targetDeg);
+
+        long ageMs = System.currentTimeMillis() - DriveTrain.faceGoal_lastComputedAtMs;
+        telemetry.addData("FaceGoal age (ms)", ageMs);
+        telemetry.addData("FaceGoal source", DriveTrain.faceGoal_source);
+        telemetry.addData("FaceGoal dirToTag (deg)", DriveTrain.faceGoal_dirToTagDeg);
+        telemetry.addData("FaceGoal liveBearing (deg)", DriveTrain.faceGoal_liveBearingDeg);
+
+        telemetry.addData("Is follower active: ", DriveTrain.INSTANCE.followerIsActive);
 
 
         telemetry.update();
@@ -138,7 +165,7 @@ public class TeleopParent extends NextFTCOpMode {
 
     public Command autoScore() {
         return new SequentialGroup(
-                DriveTrain.INSTANCE.faceBlueGoal,
+                DriveTrain.INSTANCE.faceBlueGoal(follower,testTiltAngle),
 
                 // This step runs ONLY after faceBlueGoal is finished
                 new Command() {

@@ -35,13 +35,13 @@ public class Constants {
             // You’ll eventually tune these with Pedro’s tuners;
             // these values are just placeholders.
             .translationalPIDFCoefficients(new PIDFCoefficients(
-                    0.03, 0.0, 0.0, 0.0
+                    0.3, 0.0, 0.01, 0.0
             ))
             .headingPIDFCoefficients(new PIDFCoefficients(
-                    0.1, 0.0, 0.01, 0.0
+                    1, 0.1, 0.1, 0.1
             ))
             .drivePIDFCoefficients(new FilteredPIDFCoefficients(
-                    0.03, 0.0, 0.0, 0.0, 0.0
+                    0.1, 0.0, 0.01, 0.0, 0.0
             ))
             .forwardZeroPowerAcceleration(-38.5)
             .lateralZeroPowerAcceleration(-86.65)
@@ -96,7 +96,7 @@ public class Constants {
             0.99,   // tValue: how far along the curve (0–1) before it can end
             100.0,  // velocity constraint (in/s) for "done"
             1.0,    // translational error allowed (in)
-            1.0     // heading error allowed (rad)
+            Math.toRadians(2)     // heading error allowed (rad)
     );
 
     // ---------------- Factory: create the Follower ----------------
