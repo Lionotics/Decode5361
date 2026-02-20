@@ -33,7 +33,7 @@ public class TeleopParent extends NextFTCOpMode {
 
     public static double targetHoodPosition = 0.05;
 
-    public  static  double testTiltAngle = 90;
+    public  static  double testTiltAngle = 0;
 
     private Follower follower;
     public Command driverControlled;
