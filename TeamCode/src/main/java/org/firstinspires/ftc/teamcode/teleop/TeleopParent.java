@@ -134,22 +134,11 @@ public class TeleopParent extends NextFTCOpMode {
         telemetry.addData("Motor Outtake Right Current Velocity: ",  Outtake.INSTANCE.getMotorCurrentRightVelocity());
         telemetry.addData("Motor Outtake Target Velocity: ",  Outtake.motorVelocityTarget);
 
+        telemetry.addData("lastFaceBlueGoalAngle", DriveTrain.lastFaceBlueGoalAngle);
 
         Webcam.INSTANCE.addTelemetry(telemetry);
 
-        double targetDeg = DriveTrain.faceGoal_lastTargetHeadingDeg;
 
-
-
-        telemetry.addData("FaceGoal last target heading (deg)", targetDeg);
-
-        long ageMs = System.currentTimeMillis() - DriveTrain.faceGoal_lastComputedAtMs;
-        telemetry.addData("FaceGoal age (ms)", ageMs);
-        telemetry.addData("FaceGoal source", DriveTrain.faceGoal_source);
-        telemetry.addData("FaceGoal dirToTag (deg)", DriveTrain.faceGoal_dirToTagDeg);
-        telemetry.addData("FaceGoal liveBearing (deg)", DriveTrain.faceGoal_liveBearingDeg);
-
-        telemetry.addData("Is follower active: ", DriveTrain.INSTANCE.followerIsActive);
 
 
         telemetry.update();

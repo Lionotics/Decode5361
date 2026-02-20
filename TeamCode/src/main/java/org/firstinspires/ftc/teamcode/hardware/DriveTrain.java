@@ -61,16 +61,14 @@ public class DriveTrain extends Subsystem {
     public  boolean drivingFieldCentricNoTurnIsActivated = false;
 
 
-    // --- debug telemetry for faceBlueGoalPedro ---
-    public static double faceGoal_targetHeadingDeg = Double.NaN;
-    public static double faceGoal_dirToTagDeg = Double.NaN;
-    public static double faceGoal_liveBearingDeg = Double.NaN;
-    public static String faceGoal_source = "NONE";
 
-    public static double faceGoal_lastTargetHeadingDeg = Double.NaN;  // "tilt to face goal since last check"
-    public static long   faceGoal_lastComputedAtMs = 0;
+    public static double lastFaceBlueGoalAngle = Double.NaN;
 
     public  boolean followerIsActive = false;
+
+
+    // If your robot turns the wrong direction, set this to -1 in dashboard.
+    public static double faceGoalTurnSign = 1.0;
 
 
 
@@ -267,7 +265,13 @@ public class DriveTrain extends Subsystem {
                 .setSubsystems(this) // claims DriveTrain so normal driving won’t fight it
                 .setStart(() -> {
                     followerIsActive = true;
-                    double targetDeg = tiltAngle; //calcFaceBlueGoalTargetDeg(); // your method returns DEGREES
+                    double targetDeg = tiltAngle;  // your method returns DEGREES
+
+                    if (tiltAngle == 0) {
+                        targetDeg = calcFaceBlueGoalTargetDeg();
+                    }
+
+
                     syncFollowerPoseToOdometry(follower);
                     if (Double.isFinite(targetDeg)) {
                         follower.turn(Math.toRadians(targetDeg));  // absolute “turn to heading”
@@ -287,75 +291,58 @@ public class DriveTrain extends Subsystem {
     }
 
     public double calcFaceBlueGoalTargetDeg() {
+        double deltaDeg = Double.NaN;
 
-        faceGoal_source = "NONE";
-        faceGoal_lastTargetHeadingDeg = Double.NaN;
-        faceGoal_dirToTagDeg = Double.NaN;
-        faceGoal_liveBearingDeg = Double.NaN;
-
-        // Always grab a fresh detection (don’t rely on periodic timing)
-        AprilTagDetection det = Webcam.INSTANCE.getDetectionById(GOAL_TAG_ID);
-
-        // Update odometry pose
         if (odometry != null) odometry.update();
-        Pose2D pose = (odometry != null) ? odometry.getPosition() : null;
-        if (pose == null) {
-            faceGoal_source = "NO_POSE";
-            return Double.NaN;
+
+        // --- Case 1: Tag visible -> just rotate by bearing (relative) ---
+        // ftcPose.bearing is already a relative left/right angle to center the tag. :contentReference[oaicite:2]{index=2}
+        if (d != null && d.ftcPose != null) {
+            // Want bearing -> desiredTilt, so turn by (bearing - desiredTilt)
+            deltaDeg = wrapDeg((d.ftcPose.bearing - desiredTilt) * faceGoalTurnSign);
         }
-
-        // If Pinpoint heading ever glitches, use IMU as fallback
-        double hDeg = pose.getHeading(AngleUnit.DEGREES);
-        if (!Double.isFinite(hDeg) && imu != null) {
-            hDeg = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
-        }
-        if (!Double.isFinite(hDeg)) {
-            faceGoal_source = "BAD_HEADING";
-            return Double.NaN;
-        }
-
-        // LIVE TAG branch (only if bearing is valid)
-        if (det != null && det.ftcPose != null && Double.isFinite(det.ftcPose.bearing)) {
-            faceGoal_source = "LIVE_TAG";
-            faceGoal_liveBearingDeg = det.ftcPose.bearing;
-
-            // Direction from robot to tag in FIELD frame (deg)
-            // (heading + bearing) points from robot toward tag.
-            faceGoal_dirToTagDeg = wrapDeg(hDeg + det.ftcPose.bearing);
-
-            // Heading that makes bearing -> desiredTilt (usually 0)
-            double targetHeadingDeg = wrapDeg(hDeg + (det.ftcPose.bearing - desiredTilt));
-
-            faceGoal_lastTargetHeadingDeg = targetHeadingDeg;
-            faceGoal_lastComputedAtMs = System.currentTimeMillis();
-            return targetHeadingDeg;
-        }
-
-        // Keep estimate fresh if pose exists but bearing is invalid this frame
-        if (det != null && det.ftcPose != null) {
-            updateBlueTagEstimate(det);
-        }
-
-        // ODOMETRY ESTIMATE fallback
-        if (haveTagEstimate) {
-            faceGoal_source = "ODO_ESTIMATE";
+        // --- Case 2: Tag not visible but we have world estimate -> compute heading error ---
+        else if (haveTagEstimate && odometry != null && odometry.getPosition() != null && imu != null) {
+            Pose2D pose = odometry.getPosition();
 
             double rx = pose.getX(DistanceUnit.INCH);
             double ry = pose.getY(DistanceUnit.INCH);
 
-            double dx = blueTagX_in - rx;
-            double dy = blueTagY_in - ry;
+            double hDeg = pose.getHeading(AngleUnit.DEGREES);
 
-            faceGoal_dirToTagDeg = Math.toDegrees(Math.atan2(dy, dx));
-            faceGoal_lastTargetHeadingDeg = wrapDeg(faceGoal_dirToTagDeg - desiredTilt);
-            faceGoal_lastComputedAtMs = System.currentTimeMillis();
-            return faceGoal_lastTargetHeadingDeg;
+            if ( !Double.isFinite(hDeg) ) {
+                hDeg =  imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+            }
+
+            if (!Double.isFinite(hDeg)) {
+                deltaDeg = Double.NaN;
+
+            } else {
+                // Camera position (accounts for offsets)
+                double hRad = Math.toRadians(hDeg);
+                double camX = rx + camOffsetX_in * Math.cos(hRad) - camOffsetY_in * Math.sin(hRad);
+                double camY = ry + camOffsetX_in * Math.sin(hRad) + camOffsetY_in * Math.cos(hRad);
+
+                double dx = blueTagX_in - camX;
+                double dy = blueTagY_in - camY;
+
+                // Absolute direction to tag
+                double dirToTagDeg = Math.toDegrees(Math.atan2(dy, dx));
+
+                // Desired robot heading so camera points at tag (minus desired tilt)
+                double headingTargetDeg = wrapDeg(dirToTagDeg - desiredTilt);
+
+                // RELATIVE turn needed from current heading
+                deltaDeg = wrapDeg((headingTargetDeg - hDeg) * faceGoalTurnSign);
+            }
         }
 
-        faceGoal_source = "NO_TAG_NO_ESTIMATE";
-        faceGoal_lastTargetHeadingDeg = wrapDeg(hDeg);
-        faceGoal_lastComputedAtMs = System.currentTimeMillis();
-        return faceGoal_lastTargetHeadingDeg;
+        // Save + telemetry every call
+        lastFaceBlueGoalAngle = deltaDeg;
+
+
+
+        return deltaDeg;
     }
 
 
