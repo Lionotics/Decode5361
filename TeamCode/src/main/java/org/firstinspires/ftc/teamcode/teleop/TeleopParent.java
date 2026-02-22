@@ -119,11 +119,12 @@ public class TeleopParent extends NextFTCOpMode {
             telemetry.addData("Odo Heading (deg)", headingDeg);
         }
 
-        telemetry.addData("Hood Position", OuttakeRotator.INSTANCE.getHoodPosition());
-        telemetry.addData("Hood Position Target", targetHoodPosition);
+        telemetry.addData("IMU Heading (deg)", DriveTrain.INSTANCE.getIMUHeading());
 
-        // Update intake fullness detection once per loop
-        Intake.INSTANCE.updateFullDetection();
+
+
+        telemetry.addData("Hood Position", OuttakeRotator.INSTANCE.getHoodPosition());
+
 
         telemetry.addData("INTAKE FULL (3 balls)", Intake.INSTANCE.isFull() ? "YES" : "NO");
 
@@ -134,7 +135,13 @@ public class TeleopParent extends NextFTCOpMode {
         telemetry.addData("Motor Outtake Right Current Velocity: ",  Outtake.INSTANCE.getMotorCurrentRightVelocity());
         telemetry.addData("Motor Outtake Target Velocity: ",  Outtake.motorVelocityTarget);
 
+
         telemetry.addData("lastFaceBlueGoalAngle", DriveTrain.lastFaceBlueGoalAngle);
+        telemetry.addData("Blue Tag X Estimate (in)", DriveTrain.blueTagX_in);
+        telemetry.addData("Blue Tag Y Estimate (in)", DriveTrain.blueTagY_in);
+
+
+
 
         Webcam.INSTANCE.addTelemetry(telemetry);
 

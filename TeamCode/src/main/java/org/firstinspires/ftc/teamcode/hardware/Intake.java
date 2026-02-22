@@ -84,6 +84,9 @@ public class Intake extends Subsystem {
 
     @Override
     public void periodic() {
+        // Update intake fullness detection once per loop
+        updateFullDetection();
+
         if (full) {
             setLightColor(GREEN);
         } else {
