@@ -110,9 +110,9 @@ public class DriveTrain extends Subsystem {
 
         double elevRad = Math.toRadians(d.ftcPose.elevation);
 
-        double horizontalRange = d.ftcPose.range * Math.cos(elevRad);
+       // double horizontalRange = d.ftcPose.range * Math.cos(elevRad); // uncomment this code if not accounting for elevation causes problems
 
-       // horizontalRange = d.ftcPose.range; // uncomment this code if accounting for elevation causes problems
+        double horizontalRange = d.ftcPose.range;
 
 
 
