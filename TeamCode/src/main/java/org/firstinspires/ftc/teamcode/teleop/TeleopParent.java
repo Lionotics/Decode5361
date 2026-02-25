@@ -10,6 +10,7 @@ import com.rowanmcalpin.nextftc.core.command.groups.ParallelGroup;
 import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.ForcedParallelCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
+import com.rowanmcalpin.nextftc.core.command.utility.NullCommand;
 import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadEx;
 
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
@@ -48,6 +49,8 @@ public class TeleopParent extends NextFTCOpMode {
     public void onStartButtonPressed() {
        FtcDashboard.getInstance().startCameraStream(Webcam.INSTANCE.getVisionPortal(), 30);
 
+
+
         follower = Constants.createFollower(hardwareMap);
 
         // Optional but recommended: set a starting pose (pick something reasonable)
@@ -79,13 +82,14 @@ public class TeleopParent extends NextFTCOpMode {
 
 
 
-        gp1.getLeftBumper().setPressedCommand(() ->
-                new SequentialGroup(
-                        new InstantCommand(() -> driverControlled.stop(true)),
-                        DriveTrain.INSTANCE.faceBlueGoal(follower, testTiltAngle),
-                        new InstantCommand(() -> driverControlled.invoke())
-                )
-        );
+        gp1.getLeftBumper().setPressedCommand(() -> {
+            if (follower.isBusy()) return new NullCommand();   // <--- guard
+            return new SequentialGroup(
+                   // new InstantCommand(() -> driverControlled.stop(true)),
+                    DriveTrain.INSTANCE.faceBlueGoal(follower, testTiltAngle),
+                    new InstantCommand(() -> driverControlled.invoke())
+            );
+        });
 
 
 
@@ -106,7 +110,6 @@ public class TeleopParent extends NextFTCOpMode {
     public void onUpdate() {
 
         if (DriveTrain.INSTANCE.odometry != null) {
-            DriveTrain.INSTANCE.odometry.update(); // read sensors and update internal pose
 
             Pose2D pose = DriveTrain.INSTANCE.odometry.getPosition();
 
@@ -116,7 +119,9 @@ public class TeleopParent extends NextFTCOpMode {
 
             telemetry.addData("Odo X (in)", xInches);
             telemetry.addData("Odo Y (in)", yInches);
-            telemetry.addData("Odo Heading (deg)", headingDeg);
+
+            double h360 = (headingDeg % 360 + 360) % 360;
+            telemetry.addData("Odo Heading (deg)", h360);
         }
 
         telemetry.addData("IMU Heading (deg)", DriveTrain.INSTANCE.getIMUHeading());
@@ -136,7 +141,9 @@ public class TeleopParent extends NextFTCOpMode {
         telemetry.addData("Motor Outtake Target Velocity: ",  Outtake.motorVelocityTarget);
 
 
-        telemetry.addData("lastFaceBlueGoalAngle", DriveTrain.lastFaceBlueGoalAngle);
+        telemetry.addData("lastFaceGoalAngleRelative", DriveTrain.lastFaceGoalAngleRelative);
+        telemetry.addData("lastFaceGoalAngleAbsolute", DriveTrain.lastFaceGoalAngleAbsolute);
+
         telemetry.addData("Blue Tag X Estimate (in)", DriveTrain.blueTagX_in);
         telemetry.addData("Blue Tag Y Estimate (in)", DriveTrain.blueTagY_in);
 

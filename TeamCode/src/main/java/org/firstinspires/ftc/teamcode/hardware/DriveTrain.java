@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.Range;
 import com.rowanmcalpin.nextftc.core.Subsystem;
 import com.rowanmcalpin.nextftc.core.command.Command;
+import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.LambdaCommand;
 import com.rowanmcalpin.nextftc.ftc.OpModeData;
 import com.rowanmcalpin.nextftc.ftc.driving.MecanumDriverControlled;
@@ -55,8 +56,12 @@ public class DriveTrain extends Subsystem {
     // How aggressively we trust new measurements (0..1). Higher = updates faster.
     public static double tagEstimateAlpha = 0.25;
 
+    public  static  double jumpThreashold = 1.0;
 
-    public static double lastFaceBlueGoalAngle = Double.NaN;
+
+    public static double lastFaceGoalAngleRelative = Double.NaN;
+    public static double lastFaceGoalAngleAbsolute = Double.NaN;
+
 
     public  boolean followerIsActive = false;
 
@@ -64,9 +69,20 @@ public class DriveTrain extends Subsystem {
     // If your robot turns the wrong direction, set this to -1 in dashboard.
     public static double faceGoalTurnSign = 1.0;
 
-    public  static  boolean UsingOdemtryInsteadOfIMU = true; // if true, using odemtry, if false, using IMU
+    public  static  boolean UsingOdemtryInsteadOfIMU = false; // if true, using odemtry, if false, using IMU
 
 
+
+        // When TRUE: if the goal tag is NOT visible, do a simple IMU-based "turn left/right"
+    // to the computed target heading (from the stored tag world estimate).
+    // When FALSE: always run the current Pedro follower.turn() behavior.
+    public static boolean useIMUFallbackWhenNoTag = true;
+
+    // IMU fallback tuning
+    public static double imuFallbackTurnPower = 0.35;     // 0..1
+    public static double imuFallbackTimeoutSec = 10.75;    // safety timeout
+
+    public static double faceGoalBearingDoneDeg = 2.0;  // finish when |bearing| < this
 
 
     private static double wrapDeg(double deg) {
@@ -87,6 +103,7 @@ public class DriveTrain extends Subsystem {
 
         double rx = pose.getX(DistanceUnit.INCH);
         double ry = pose.getY(DistanceUnit.INCH);
+
 
         double hDeg = 0;
         if (UsingOdemtryInsteadOfIMU) {
@@ -119,6 +136,19 @@ public class DriveTrain extends Subsystem {
         double measTagX = camX + horizontalRange * Math.cos(dirRad);
         double measTagY = camY + horizontalRange * Math.sin(dirRad);
 
+
+
+        // before blending:
+        double dx = measTagX - blueTagX_in;
+        double dy = measTagY - blueTagY_in;
+        double jump = Math.hypot(dx, dy);
+
+        // reject impossible jumps (tune 6-12 inches)
+        if (haveTagEstimate && jump > jumpThreashold)  {
+            return;
+        }
+
+
         if (!haveTagEstimate) {
             blueTagX_in = measTagX;
             blueTagY_in = measTagY;
@@ -147,6 +177,11 @@ public class DriveTrain extends Subsystem {
 
         odometry = OpModeData.INSTANCE.getHardwareMap().get(GoBildaPinpointDriver.class, "Odometry");
 
+        odometry.setPosition(new Pose2D(DistanceUnit.INCH,0,0,AngleUnit.RADIANS,0));
+
+        blueTagX_in = 0;
+        blueTagY_in = 0;
+        haveTagEstimate  = false; // remember that I did this later. it might come back to bite me.
 
         frontLeft.reverse();
         backLeft.reverse();
@@ -168,8 +203,15 @@ public class DriveTrain extends Subsystem {
         imu.initialize(parameters);
         imu.resetYaw();
 
-        odometry.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.REVERSED, GoBildaPinpointDriver.EncoderDirection.FORWARD);
         odometry.resetPosAndIMU();
+
+
+        odometry.setPosition(new Pose2D(DistanceUnit.INCH, 0, 0, AngleUnit.RADIANS, 0));
+        odometry.setOffsets(-1.0,-7.5,DistanceUnit.INCH);
+
+        odometry.setEncoderDirections(GoBildaPinpointDriver.EncoderDirection.REVERSED, GoBildaPinpointDriver.EncoderDirection.FORWARD);
+
+
     }
 
     public Command Drive(GamepadEx gamepad, boolean robotOriented) {
@@ -237,6 +279,8 @@ public class DriveTrain extends Subsystem {
 
 
     public void periodic() {
+        if (odometry != null) odometry.update();
+
         d = Webcam.INSTANCE.getDetectionById(GOAL_TAG_ID);
 
         // Always keep odometry-based estimate fresh when tag is visible
@@ -252,114 +296,251 @@ public class DriveTrain extends Subsystem {
     private void syncFollowerPoseToOdometry(Follower follower) {
         if (follower == null || odometry == null) return;
 
-        odometry.update();
         Pose2D pose = odometry.getPosition();
         if (pose == null) return;
 
         double xIn = pose.getX(DistanceUnit.INCH);
         double yIn = pose.getY(DistanceUnit.INCH);
 
-        double headingDeg = 0;
+        double headingRad = 0;
 
         if (UsingOdemtryInsteadOfIMU) {
-          headingDeg =  pose.getHeading(AngleUnit.DEGREES);
+          headingRad =  pose.getHeading(AngleUnit.RADIANS);
         } else if ( imu != null) {
-            headingDeg = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+            headingRad = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
         }
-        if (!Double.isFinite(xIn) || !Double.isFinite(yIn) || !Double.isFinite(headingDeg)) return;
+
+        if (!Double.isFinite(xIn) || !Double.isFinite(yIn) || !Double.isFinite(headingRad)) return;
+
+        headingRad = AngleUnit.normalizeRadians(headingRad);
 
         // Pedro headings are radians; Pose expects x/y + heading.
-        follower.setStartingPose(new Pose(xIn, yIn, Math.toRadians(headingDeg)));
+        follower.setStartingPose(new Pose(xIn, yIn, headingRad));
 
         // Optional but nice: ensures the follower internal state is refreshed immediately
         follower.update();
     }
 
     public Command faceBlueGoal(Follower follower, double tiltAngle) {
-        return new LambdaCommand()
-                .setSubsystems(this) // claims DriveTrain so normal driving won’t fight it
-                .setStart(() -> {
-                    followerIsActive = true;
-                    double targetDeg = tiltAngle;  // your method returns DEGREES
 
+        Command inner =  new Command() {
+
+            // --- IMU fallback state ---
+            private boolean usingImuFallback = false;
+            private double targetAbsRad = Double.NaN;
+            private long startNanos = 0;
+
+            @Override
+            public @NotNull Set<Subsystem> getSubsystems() {
+                return Collections.singleton(DriveTrain.this);
+            }
+
+            @Override
+            public void start() {
+                syncFollowerPoseToOdometry(follower);
+                followerIsActive = true;
+
+                // Refresh detection right now (periodic() also does this, but be explicit)
+                d = Webcam.INSTANCE.getDetectionById(GOAL_TAG_ID);
+
+                // If tag is visible OR user disabled fallback, keep the current Pedro behavior
+                if ((d != null && d.ftcPose != null) || !useIMUFallbackWhenNoTag) {
+                    usingImuFallback = false;
+
+                    double targetRad = tiltAngle;
                     if (tiltAngle == 0) {
-                        targetDeg = calcFaceBlueGoalTargetDeg();
+                        targetRad = calcFaceBlueGoalTargetRad(follower);
                     }
 
+                    // Pedro turn uses a relative angle (radians)
+                    follower.turn(targetRad);
+                    startNanos = System.nanoTime();
+                    return;
+                }
 
-                    syncFollowerPoseToOdometry(follower);
-                    if (Double.isFinite(targetDeg)) {
-                        follower.turn(Math.toRadians(targetDeg));  // absolute “turn to heading”
-                    }
-                })
-                .setUpdate(() -> {
+                // --- Tag NOT visible, fallback requested ---
+                // We can only compute a heading if we have a world estimate.
+                if (!haveTagEstimate || odometry == null || odometry.getPosition() == null || imu == null) {
+                    usingImuFallback = false;
+
+                    // fall back to whatever calcFaceBlueGoalTargetRad returns (even if it is NaN)
+                    double targetRad = (tiltAngle == 0) ? calcFaceBlueGoalTargetRad(follower) : tiltAngle;
+                    follower.turn(targetRad);
+                    startNanos = System.nanoTime();
+                    return;
+                }
+
+                usingImuFallback = true;
+                startNanos = System.nanoTime();
+
+                // Compute the ABSOLUTE target heading based on the stored tag estimate and current robot pose
+                Pose2D pose = odometry.getPosition();
+                double rx = pose.getX(DistanceUnit.INCH);
+                double ry = pose.getY(DistanceUnit.INCH);
+
+                double imuYawRad = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+                imuYawRad = AngleUnit.normalizeRadians(imuYawRad);
+
+                // Camera position (accounts for offsets)
+                double camX = rx + camOffsetX_in * Math.cos(imuYawRad) - camOffsetY_in * Math.sin(imuYawRad);
+                double camY = ry + camOffsetX_in * Math.sin(imuYawRad) + camOffsetY_in * Math.cos(imuYawRad);
+
+                double dx = blueTagX_in - camX;
+                double dy = blueTagY_in - camY;
+
+                targetAbsRad = AngleUnit.normalizeRadians(
+                        Math.atan2(dy, dx) - Math.toRadians(desiredTilt)
+                );
+
+                // Telemetry helpers (same variables you already show)
+                lastFaceGoalAngleAbsolute = Math.toDegrees(targetAbsRad);
+            }
+
+            @Override
+            public void update() {
+                if (!usingImuFallback) {
                     follower.update(); // REQUIRED every loop for Pedro to actually run
-                })
-                .setIsDone(() -> !follower.isBusy())
-                .setStop(interrupted -> {
-                    // Optional: you can stop motors or just let TeleOp drive resume afterwards
-                   stopDrive();
-                   follower.breakFollowing();
-                    followerIsActive = false;
+                    return;
+                }
 
-                });
+                // --- IMU fallback: choose CW/CCW based on sign of shortest-path error ---
+                double imuYawRad = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+                imuYawRad = AngleUnit.normalizeRadians(imuYawRad);
+
+                double errRad = AngleUnit.normalizeRadians(targetAbsRad - imuYawRad);
+                lastFaceGoalAngleRelative = Math.toDegrees(errRad);
+
+                // Stop if aligned
+                if (d != null && d.ftcPose != null) {
+                    stopDrive();
+                    return;
+                }
+
+                // Turn in the direction of the error sign
+                double turn = Math.copySign(imuFallbackTurnPower, errRad);
+
+                // If your robot turns the wrong way, flip faceGoalTurnSign in dashboard (you already have this)
+                turn *= -faceGoalTurnSign;
+
+                setTurnPower(turn);
+            }
+
+            @Override
+            public boolean isDone() {
+                if (!usingImuFallback) {
+                    return !follower.isBusy();
+                }
+
+                // Timeout OR within tolerance
+                double elapsedSec = (System.nanoTime() - startNanos) / 1e9;
+
+                if (elapsedSec >= imuFallbackTimeoutSec) return true;
+
+                return (d != null && d.ftcPose != null);
+            }
+
+            @Override
+            public void stop(boolean interrupted) {
+                stopDrive();
+                if (follower != null) follower.breakFollowing();
+                followerIsActive = false;
+            }
+        };
+
+        final boolean[] bearingDone = new boolean[1];
+        bearingDone[0] = (d != null && d.ftcPose != null &&
+                Math.abs(d.ftcPose.bearing) <= faceGoalBearingDoneDeg);
+
+        return  new Command() {
+            @Override
+            public void start() {
+                inner.start();
+            }
+
+            @Override
+            public void update() {
+                bearingDone[0] = (d != null && d.ftcPose != null &&
+                        Math.abs(d.ftcPose.bearing) <= faceGoalBearingDoneDeg);
+                    if (inner.isDone()) {
+                        if (!(bearingDone[0]) ){
+                            inner.start();
+                        }
+                    } else {
+                        inner.update();
+                    }
+            }
+
+
+            @Override
+            public boolean isDone() {
+                return  bearingDone[0] ;
+            }
+
+            @Override
+            public void stop(boolean interrupted) {
+                inner.stop(interrupted);
+            }
+        };
     }
 
-    public double calcFaceBlueGoalTargetDeg() {
-        double deltaDeg = Double.NaN;
+    public double calcFaceBlueGoalTargetRad(Follower follower) {
+        double deltaRad = Double.NaN;
 
-        if (odometry != null) odometry.update();
 
         // --- Case 1: Tag visible -> just rotate by bearing (relative) ---
         // ftcPose.bearing is already a relative left/right angle to center the tag. :contentReference[oaicite:2]{index=2}
         if (d != null && d.ftcPose != null) {
             // Want bearing -> desiredTilt, so turn by (bearing - desiredTilt)
-            deltaDeg = wrapDeg((d.ftcPose.bearing - desiredTilt) * faceGoalTurnSign);
+            double errRad = Math.toRadians(d.ftcPose.bearing - desiredTilt);
+            errRad = AngleUnit.normalizeRadians(errRad);
+            deltaRad = errRad * faceGoalTurnSign;
+
         }
         // --- Case 2: Tag not visible but we have world estimate -> compute heading error ---
-        else if (haveTagEstimate && odometry != null && odometry.getPosition() != null && imu != null) {
+        else if (haveTagEstimate && odometry != null && odometry.getPosition() != null && (imu != null || UsingOdemtryInsteadOfIMU)) {
             Pose2D pose = odometry.getPosition();
 
             double rx = pose.getX(DistanceUnit.INCH);
             double ry = pose.getY(DistanceUnit.INCH);
 
-            double hDeg = 0;
+
+            double hRad = 0;
 
             if (UsingOdemtryInsteadOfIMU) {
-                hDeg =  pose.getHeading(AngleUnit.DEGREES);
+                hRad =  pose.getHeading(AngleUnit.RADIANS);
             } else  if ( imu != null ) {
-                hDeg =  imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+                hRad =  imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
             }
 
-            if (!Double.isFinite(hDeg)) {
-                deltaDeg = Double.NaN;
+            if (!Double.isFinite(hRad)) {
+                deltaRad = Double.NaN;
 
             } else {
                 // Camera position (accounts for offsets)
-                double hRad = Math.toRadians(hDeg);
+                hRad = AngleUnit.normalizeRadians(hRad);
                 double camX = rx + camOffsetX_in * Math.cos(hRad) - camOffsetY_in * Math.sin(hRad);
                 double camY = ry + camOffsetX_in * Math.sin(hRad) + camOffsetY_in * Math.cos(hRad);
 
                 double dx = blueTagX_in - camX;
                 double dy = blueTagY_in - camY;
 
-                // Absolute direction to tag
-                double dirToTagDeg = Math.toDegrees(Math.atan2(dy, dx));
 
-                // Desired robot heading so camera points at tag (minus desired tilt)
-                double headingTargetDeg = wrapDeg(dirToTagDeg - desiredTilt);
+                double targetRad = Math.atan2(dy, dx) - Math.toRadians(desiredTilt);
 
-                // RELATIVE turn needed from current heading
-                deltaDeg = wrapDeg((headingTargetDeg - hDeg) * faceGoalTurnSign);
+                lastFaceGoalAngleAbsolute = Math.toDegrees(targetRad);
+
+//              signed shortest-path error in [-pi, pi)
+                deltaRad = AngleUnit.normalizeRadians(targetRad- follower.getPose().getHeading()) * faceGoalTurnSign;
+
             }
         }
 
         // Save + telemetry every call
-        lastFaceBlueGoalAngle = deltaDeg;
+        lastFaceGoalAngleRelative = Math.toDegrees(deltaRad);
 
 
 
-        return deltaDeg;
+        return deltaRad;
     }
 
     public  double getIMUHeading() {
