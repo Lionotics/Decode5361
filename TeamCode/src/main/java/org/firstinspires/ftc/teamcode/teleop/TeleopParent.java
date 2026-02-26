@@ -11,6 +11,7 @@ import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.ForcedParallelCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.NullCommand;
+import com.rowanmcalpin.nextftc.core.command.utility.delays.WaitUntil;
 import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadEx;
 
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
@@ -18,6 +19,7 @@ import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
+import org.firstinspires.ftc.teamcode.commands.AutoScoreCommands;
 import org.firstinspires.ftc.teamcode.hardware.DriveTrain;
 import org.firstinspires.ftc.teamcode.hardware.OuttakeRotator;
 import org.firstinspires.ftc.teamcode.hardware.Transfer;
@@ -78,15 +80,22 @@ public class TeleopParent extends NextFTCOpMode {
 
 
 
-        gp1.getRightBumper().setPressedCommand( ()-> autoScore() );
+        gp1.getRightBumper().setPressedCommand(() ->
+                AutoScoreCommands.teleopAutoScore(
+                        follower,
+                        driverControlled,
+                        testTiltAngle,
+                        true   // keep teleop behavior = DO face goal
+                )
+        );
 
 
 
         gp1.getLeftBumper().setPressedCommand(() -> {
             if (follower.isBusy()) return new NullCommand();   // <--- guard
             return new SequentialGroup(
-                   // new InstantCommand(() -> driverControlled.stop(true)),
-                    DriveTrain.INSTANCE.faceBlueGoal(follower, testTiltAngle),
+                   new InstantCommand(() -> driverControlled.stop(true)),
+                    DriveTrain.INSTANCE.faceGoal(follower, testTiltAngle),
                     new InstantCommand(() -> driverControlled.invoke())
             );
         });
@@ -96,7 +105,9 @@ public class TeleopParent extends NextFTCOpMode {
 // Return to normal field-centric driving
         gp1.getDpadLeft().setPressedCommand(() ->
                 new InstantCommand(   ()-> {
+                    follower.breakFollowing();
                     driverControlled.invoke();
+
                 }
                 )
         );
@@ -168,8 +179,9 @@ public class TeleopParent extends NextFTCOpMode {
 
     public Command autoScore() {
         return new SequentialGroup(
-                DriveTrain.INSTANCE.faceBlueGoal(follower,testTiltAngle),
-
+                new InstantCommand(() -> driverControlled.stop(true)),
+                DriveTrain.INSTANCE.faceGoal(follower,testTiltAngle),
+                new WaitUntil(()->Webcam.INSTANCE.seesTag() ),
                 // This step runs ONLY after faceBlueGoal is finished
                 new Command() {
                     private Command afterFace;

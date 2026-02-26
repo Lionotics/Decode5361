@@ -96,7 +96,7 @@ public class Constants {
             0.99,   // tValue: how far along the curve (0–1) before it can end
             100.0,  // velocity constraint (in/s) for "done"
             1.0,    // translational error allowed (in)
-            Math.toRadians(2)     // heading error allowed (rad)
+            Math.toRadians(1)     // heading error allowed (rad)
     );
 
     // ---------------- Factory: create the Follower ----------------

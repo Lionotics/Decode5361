@@ -11,8 +11,6 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.Range;
 import com.rowanmcalpin.nextftc.core.Subsystem;
 import com.rowanmcalpin.nextftc.core.command.Command;
-import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
-import com.rowanmcalpin.nextftc.core.command.utility.LambdaCommand;
 import com.rowanmcalpin.nextftc.ftc.OpModeData;
 import com.rowanmcalpin.nextftc.ftc.driving.MecanumDriverControlled;
 import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadEx;
@@ -79,7 +77,7 @@ public class DriveTrain extends Subsystem {
     public static boolean useIMUFallbackWhenNoTag = true;
 
     // IMU fallback tuning
-    public static double imuFallbackTurnPower = 0.35;     // 0..1
+    public static double imuFallbackTurnPower = 0.2;
     public static double imuFallbackTimeoutSec = 10.75;    // safety timeout
 
     public static double faceGoalBearingDoneDeg = 2.0;  // finish when |bearing| < this
@@ -321,14 +319,18 @@ public class DriveTrain extends Subsystem {
         follower.update();
     }
 
-    public Command faceBlueGoal(Follower follower, double tiltAngle) {
+    public Command faceGoal(Follower follower, double tiltAngle) {
+         final boolean[] usingImuFallback  = new boolean[1];
+              usingImuFallback[0] =    false;
+
 
         Command inner =  new Command() {
 
             // --- IMU fallback state ---
-            private boolean usingImuFallback = false;
             private double targetAbsRad = Double.NaN;
             private long startNanos = 0;
+
+            private  double imuYawRad = 0;
 
             @Override
             public @NotNull Set<Subsystem> getSubsystems() {
@@ -343,9 +345,11 @@ public class DriveTrain extends Subsystem {
                 // Refresh detection right now (periodic() also does this, but be explicit)
                 d = Webcam.INSTANCE.getDetectionById(GOAL_TAG_ID);
 
+
+
                 // If tag is visible OR user disabled fallback, keep the current Pedro behavior
                 if ((d != null && d.ftcPose != null) || !useIMUFallbackWhenNoTag) {
-                    usingImuFallback = false;
+                    usingImuFallback[0] = false;
 
                     double targetRad = tiltAngle;
                     if (tiltAngle == 0) {
@@ -361,7 +365,7 @@ public class DriveTrain extends Subsystem {
                 // --- Tag NOT visible, fallback requested ---
                 // We can only compute a heading if we have a world estimate.
                 if (!haveTagEstimate || odometry == null || odometry.getPosition() == null || imu == null) {
-                    usingImuFallback = false;
+                    usingImuFallback[0] = false;
 
                     // fall back to whatever calcFaceBlueGoalTargetRad returns (even if it is NaN)
                     double targetRad = (tiltAngle == 0) ? calcFaceBlueGoalTargetRad(follower) : tiltAngle;
@@ -370,7 +374,7 @@ public class DriveTrain extends Subsystem {
                     return;
                 }
 
-                usingImuFallback = true;
+                usingImuFallback[0] = true;
                 startNanos = System.nanoTime();
 
                 // Compute the ABSOLUTE target heading based on the stored tag estimate and current robot pose
@@ -378,7 +382,7 @@ public class DriveTrain extends Subsystem {
                 double rx = pose.getX(DistanceUnit.INCH);
                 double ry = pose.getY(DistanceUnit.INCH);
 
-                double imuYawRad = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+                imuYawRad = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
                 imuYawRad = AngleUnit.normalizeRadians(imuYawRad);
 
                 // Camera position (accounts for offsets)
@@ -398,17 +402,11 @@ public class DriveTrain extends Subsystem {
 
             @Override
             public void update() {
-                if (!usingImuFallback) {
+                if (!usingImuFallback[0]) {
                     follower.update(); // REQUIRED every loop for Pedro to actually run
                     return;
                 }
 
-                // --- IMU fallback: choose CW/CCW based on sign of shortest-path error ---
-                double imuYawRad = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
-                imuYawRad = AngleUnit.normalizeRadians(imuYawRad);
-
-                double errRad = AngleUnit.normalizeRadians(targetAbsRad - imuYawRad);
-                lastFaceGoalAngleRelative = Math.toDegrees(errRad);
 
                 // Stop if aligned
                 if (d != null && d.ftcPose != null) {
@@ -416,18 +414,16 @@ public class DriveTrain extends Subsystem {
                     return;
                 }
 
-                // Turn in the direction of the error sign
-                double turn = Math.copySign(imuFallbackTurnPower, errRad);
 
                 // If your robot turns the wrong way, flip faceGoalTurnSign in dashboard (you already have this)
-                turn *= -faceGoalTurnSign;
+                double turn = imuFallbackTurnPower * faceGoalTurnSign;
 
                 setTurnPower(turn);
             }
 
             @Override
             public boolean isDone() {
-                if (!usingImuFallback) {
+                if (!usingImuFallback[0]) {
                     return !follower.isBusy();
                 }
 
@@ -448,19 +444,24 @@ public class DriveTrain extends Subsystem {
         };
 
         final boolean[] bearingDone = new boolean[1];
-        bearingDone[0] = (d != null && d.ftcPose != null &&
-                Math.abs(d.ftcPose.bearing) <= faceGoalBearingDoneDeg);
+        bearingDone[0] = ( inner.isDone() &&   (!usingImuFallback[0] || (d != null && d.ftcPose != null &&
+                Math.abs(d.ftcPose.bearing) <= faceGoalBearingDoneDeg) )) ;
 
-        return  new Command() {
+        Command outer =   new Command() {
             @Override
             public void start() {
                 inner.start();
             }
 
             @Override
+            public @NotNull Set<Subsystem> getSubsystems() {
+                return Collections.singleton(DriveTrain.this);
+            }
+
+            @Override
             public void update() {
-                bearingDone[0] = (d != null && d.ftcPose != null &&
-                        Math.abs(d.ftcPose.bearing) <= faceGoalBearingDoneDeg);
+                bearingDone[0] = ( inner.isDone() &&   (!usingImuFallback[0] || (d != null && d.ftcPose != null &&
+                        Math.abs(d.ftcPose.bearing) <= faceGoalBearingDoneDeg) )) ;
                     if (inner.isDone()) {
                         if (!(bearingDone[0]) ){
                             inner.start();
@@ -473,6 +474,8 @@ public class DriveTrain extends Subsystem {
 
             @Override
             public boolean isDone() {
+                bearingDone[0] = ( inner.isDone() &&   (!usingImuFallback[0] || (d != null && d.ftcPose != null &&
+                        Math.abs(d.ftcPose.bearing) <= faceGoalBearingDoneDeg) )) ;
                 return  bearingDone[0] ;
             }
 
@@ -481,6 +484,8 @@ public class DriveTrain extends Subsystem {
                 inner.stop(interrupted);
             }
         };
+
+        return  outer;
     }
 
     public double calcFaceBlueGoalTargetRad(Follower follower) {
