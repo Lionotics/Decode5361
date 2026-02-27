@@ -43,6 +43,7 @@ public class Webcam extends Subsystem {
 
     @Override
     public void initialize() {
+        soleTagID = 0;
         HardwareMap hw = OpModeData.hardwareMap;
 
         // 1) Start with the DECODE (current season) tag library

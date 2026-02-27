@@ -143,6 +143,13 @@ public abstract class AutoParent extends PedroOpMode {
         panelsTelemetry.addData("Outtake Target Velocity", Outtake.motorVelocityTarget);
         panelsTelemetry.addData("Is Intake Full", Intake.INSTANCE.isFull());
 
+        if (Webcam.INSTANCE.seesTag()) {
+            panelsTelemetry.addData("Goal Bearing: ", Webcam.INSTANCE.getBearing());
+
+        } else {
+                panelsTelemetry.addData("Goal Bearing: ", "Can't see goal." );
+
+        }
 
 
 

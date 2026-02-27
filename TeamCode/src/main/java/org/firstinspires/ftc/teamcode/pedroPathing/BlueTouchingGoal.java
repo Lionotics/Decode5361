@@ -8,15 +8,14 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.commands.AutoScoreCommands;
-import org.firstinspires.ftc.teamcode.hardware.DriveTrain;
 import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.Transfer;
 import org.firstinspires.ftc.teamcode.hardware.Webcam;
 
 
 @Config
-@Autonomous(name = "BlueTouchingWallAuto", group = "Autonomous")
-public class BlueTouchingWall extends AutoParent {
+@Autonomous(name = "BlueTouchingGoalAuto", group = "Autonomous")
+public class BlueTouchingGoal extends AutoParent {
 
     // This auto's custom paths
     private PathChain pathToShootingInitial;
@@ -30,16 +29,13 @@ public class BlueTouchingWall extends AutoParent {
     private PathChain pathToEnd;
 
 
-
-    public  static  double desiredBearing = -1;
-
-    public static double angleToFaceGoal = 20;
+    public static double angleToFaceGoal = 35;
 
     public static double angleToSuckInLineBalls = 0;
 
-    public  static  double gettingLineBallX = 8;
+    public  static  double gettingLineBallX = 15;
 
-    public  static  double gettingLineBallY = 33;
+    public  static  double gettingLineBallY = 85;
 
 
     public  static  double minIntakeMS = 700;
@@ -59,7 +55,7 @@ public class BlueTouchingWall extends AutoParent {
 
     @Override
     protected Pose getStartPose() {
-        return new Pose(56, 8, Math.toRadians(90));
+        return new Pose(25, 128, Math.toRadians(320));
     }
 
     @Override
@@ -67,25 +63,25 @@ public class BlueTouchingWall extends AutoParent {
         // Your existing Path1/Path2 logic moved here
         pathToShootingInitial = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(56, 8.000),
-                        new Pose(56, 15)
+                        new Pose(25, 128),
+                        new Pose(55, 90)
                 ))
-                .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(angleToFaceGoal))
+                .setLinearHeadingInterpolation(Math.toRadians(320), Math.toRadians(angleToFaceGoal))
                 .build();
 
         pathToWallBalls1 = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(56, 15),
-                        new Pose(56, gettingLineBallY)
+                        new Pose(55, 90),
+                        new Pose(55, gettingLineBallY)
                 ))
-                .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToSuckInLineBalls))
+                .setLinearHeadingInterpolation(Math.toRadians(angleToFaceGoal), Math.toRadians(angleToSuckInLineBalls))
                 .build();
 
 
 
         pathToWallBalls2 = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(56, gettingLineBallY),
+                        new Pose(55, gettingLineBallY),
                         new Pose(gettingLineBallX, gettingLineBallY)
                 ))
                 .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToSuckInLineBalls))
@@ -94,7 +90,7 @@ public class BlueTouchingWall extends AutoParent {
         pathToShootingfromBalls = follower.pathBuilder()
                 .addPath(new BezierLine(
                         new Pose(gettingLineBallX, gettingLineBallY),
-                        new Pose(56, 15)
+                        new Pose(55, 90)
                 ))
                 .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToFaceGoal))
                 .build();
@@ -102,8 +98,8 @@ public class BlueTouchingWall extends AutoParent {
 
         pathToEnd = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(56, 15),
-                        new Pose(56, 35)
+                        new Pose(55, 90),
+                        new Pose(55, 60)
                 ))
                 .setLinearHeadingInterpolation(Math.toRadians(angleToFaceGoal), Math.toRadians(180))
                 .build();
@@ -123,7 +119,7 @@ public class BlueTouchingWall extends AutoParent {
                 // Wait until we are done driving to the shooting pose
                 if (!follower.isBusy() && Webcam.INSTANCE.seesTag() ) {
                     double angle = Webcam.INSTANCE.getBearing();
-                    follower.turn(AngleUnit.normalizeRadians(Math.toRadians(angle-desiredBearing)));
+                    follower.turn(AngleUnit.normalizeRadians(Math.toRadians(angle)));
                     pathState = 2;
                 }
                 break;
@@ -142,10 +138,6 @@ public class BlueTouchingWall extends AutoParent {
                     }
                 }
                 break;
-
-
-
-
 
 
             case 3:
@@ -222,7 +214,7 @@ public class BlueTouchingWall extends AutoParent {
                 if (!follower.isBusy() && Webcam.INSTANCE.seesTag() ) {
                     follower.breakFollowing();
                     double angle = Webcam.INSTANCE.getBearing();
-                    follower.turn(AngleUnit.normalizeRadians(Math.toRadians(angle-desiredBearing)));
+                    follower.turn(AngleUnit.normalizeRadians(Math.toRadians(angle)));
                     pathState = 8;
                 }
                 break;

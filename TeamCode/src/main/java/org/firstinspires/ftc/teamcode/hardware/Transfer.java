@@ -27,7 +27,7 @@ public class Transfer extends Subsystem {
 
     public static  double loadDelaySecond = 0.4;
 
-    public static double shootDelaySeconds = 0.4;
+    public static double shootDelaySeconds = 0.3;
 
     public int scoreTimes = 0;
 

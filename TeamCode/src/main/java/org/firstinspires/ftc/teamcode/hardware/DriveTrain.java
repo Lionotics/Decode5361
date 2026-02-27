@@ -269,11 +269,22 @@ public class DriveTrain extends Subsystem {
 
     // Tune these:
 
-    public static double desiredTilt = 0;
+
+    public  static  double desiredBearingCloserBlue = 0;
+    public  static  double desiredBearingCloserRed = 0;
+
+    public  static  double desiredBearingFartherBlue = -2;
+
+    public  static  double desiredBearingFartherRed = 2;
+
+    public  static  double desiredBearingDistanceDivider = 90;
+
+
 
 
 
     private AprilTagDetection d;
+
 
 
     public void periodic() {
@@ -285,6 +296,24 @@ public class DriveTrain extends Subsystem {
         if (d != null && d.ftcPose != null) {
             updateBlueTagEstimate(d);
         }
+    }
+
+    public  double getDesiredBearing() {
+        if (Webcam.INSTANCE.getRange() > desiredBearingDistanceDivider) {
+            if (GOAL_TAG_ID == 24) {
+                return  desiredBearingFartherRed;
+            } else {
+                return  desiredBearingFartherBlue;
+            }
+
+        } else {
+            if (GOAL_TAG_ID == 24) {
+                return  desiredBearingCloserRed;
+            } else {
+                return  desiredBearingCloserBlue;
+            }
+        }
+
     }
 
     public void setGoalID(int id) {
@@ -392,8 +421,12 @@ public class DriveTrain extends Subsystem {
                 double dx = blueTagX_in - camX;
                 double dy = blueTagY_in - camY;
 
+
+                double desiredBearing = getDesiredBearing();
+
+
                 targetAbsRad = AngleUnit.normalizeRadians(
-                        Math.atan2(dy, dx) - Math.toRadians(desiredTilt)
+                        Math.atan2(dy, dx) - Math.toRadians(desiredBearing)
                 );
 
                 // Telemetry helpers (same variables you already show)
@@ -496,7 +529,9 @@ public class DriveTrain extends Subsystem {
         // ftcPose.bearing is already a relative left/right angle to center the tag. :contentReference[oaicite:2]{index=2}
         if (d != null && d.ftcPose != null) {
             // Want bearing -> desiredTilt, so turn by (bearing - desiredTilt)
-            double errRad = Math.toRadians(d.ftcPose.bearing - desiredTilt);
+            double desiredBearing = getDesiredBearing();
+
+            double errRad = Math.toRadians(d.ftcPose.bearing - desiredBearing);
             errRad = AngleUnit.normalizeRadians(errRad);
             deltaRad = errRad * faceGoalTurnSign;
 
@@ -530,7 +565,9 @@ public class DriveTrain extends Subsystem {
                 double dy = blueTagY_in - camY;
 
 
-                double targetRad = Math.atan2(dy, dx) - Math.toRadians(desiredTilt);
+                double desiredBearing = getDesiredBearing();
+
+                double targetRad = Math.atan2(dy, dx) - Math.toRadians(desiredBearing);
 
                 lastFaceGoalAngleAbsolute = Math.toDegrees(targetRad);
 

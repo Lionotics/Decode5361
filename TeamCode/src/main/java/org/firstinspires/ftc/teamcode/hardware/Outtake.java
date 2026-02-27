@@ -73,14 +73,13 @@ public class Outtake extends Subsystem {
 
 
     public double distanceToVelocity(double distance) {
-       // not outdated, just linearer return  6.01105 * distance + 878.10236;
+       // not outdated, just linear return  6.01105 * distance + 878.10236;
         return 0.0147602 * distance * distance + 3.54619 * distance + 966;
     }
 
     public double distanceToHoodPosition(double distance) {
-        return 0.00079863 * distance + 0.0436113;
-        //return  -0.0000089*distance*distance + 0.0023 * distance - 0.06;
-        //return distance*distance*distance * 0.00000028  -0.0000776*distance*distance + 0.0073 * distance - 0.15;
+           return 0.00079863 * distance + 0.0436113;
+        //return  -0.0000125184*distance*distance + 0.00288912 * distance - 0.0314711;
     }
 
 
