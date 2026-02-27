@@ -64,7 +64,7 @@ public class TeleopParent extends NextFTCOpMode {
         driverControlled = DriveTrain.INSTANCE.Drive(gp1, false);
         driverControlled.invoke();
 
-      //  gp1.getA().setPressedCommand(() -> Test());
+       gp1.getA().setPressedCommand(() -> Test());
 
         gp1.getB().setPressedCommand(() -> Intake.INSTANCE.eat());
 

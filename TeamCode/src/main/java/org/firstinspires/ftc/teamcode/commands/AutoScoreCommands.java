@@ -74,10 +74,12 @@ public final class AutoScoreCommands {
             private boolean startedInner = false;
             private Command inner = null;
 
+
             @Override
             public void start() {
                 startedInner = false;
                 inner = null;
+                Transfer.INSTANCE.scoreTimes = 0;
             }
 
             @Override
