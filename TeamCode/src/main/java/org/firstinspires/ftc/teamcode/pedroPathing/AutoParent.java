@@ -141,6 +141,8 @@ public abstract class AutoParent extends PedroOpMode {
         panelsTelemetry.addData("Y", follower.getPose().getY());
         panelsTelemetry.addData("Heading (deg)", Math.toDegrees(follower.getPose().getHeading()));
         panelsTelemetry.addData("Outtake Target Velocity", Outtake.motorVelocityTarget);
+        panelsTelemetry.addData("Outtake Current Velocity", Outtake.INSTANCE.getMotorCurrentLeftVelocity());
+
         panelsTelemetry.addData("Is Intake Full", Intake.INSTANCE.isFull());
 
         if (Webcam.INSTANCE.seesTag()) {

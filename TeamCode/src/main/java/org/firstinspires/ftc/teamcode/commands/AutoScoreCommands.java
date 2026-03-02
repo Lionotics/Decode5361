@@ -8,6 +8,7 @@ import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.delays.WaitUntil;
 
 import org.firstinspires.ftc.teamcode.hardware.DriveTrain;
+import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.Outtake;
 import org.firstinspires.ftc.teamcode.hardware.OuttakeRotator;
 import org.firstinspires.ftc.teamcode.hardware.Transfer;
@@ -161,6 +162,7 @@ public final class AutoScoreCommands {
                     shotYet = true;
                     currentShot = Transfer.INSTANCE.kickBall();
                     currentShot.invoke();
+                    Transfer.INSTANCE.autoSpeederUpper = false;
                 }
             }
 

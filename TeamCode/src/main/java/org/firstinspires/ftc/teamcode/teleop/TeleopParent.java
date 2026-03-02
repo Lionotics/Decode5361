@@ -6,6 +6,7 @@ import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
 import com.rowanmcalpin.nextftc.core.command.Command;
+import com.rowanmcalpin.nextftc.core.command.CommandManager;
 import com.rowanmcalpin.nextftc.core.command.groups.ParallelGroup;
 import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.ForcedParallelCommand;
@@ -40,6 +41,8 @@ public class TeleopParent extends NextFTCOpMode {
 
     private Follower follower;
     public Command driverControlled;
+
+    private Command teleopAutoScoreCmd = null;
 
     public TeleopParent() {
         super(DriveTrain.INSTANCE,Intake.INSTANCE, Transfer.INSTANCE,Outtake.INSTANCE, OuttakeRotator.INSTANCE, Webcam.INSTANCE);
@@ -80,19 +83,21 @@ public class TeleopParent extends NextFTCOpMode {
 
 
 
-        gp1.getRightBumper().setPressedCommand(() ->
-                AutoScoreCommands.teleopAutoScore(
-                        follower,
-                        driverControlled,
-                        testTiltAngle,
-                        true   // keep teleop behavior = DO face goal
-                )
-        );
+        gp1.getRightBumper().setPressedCommand(() -> {
+            teleopAutoScoreCmd = AutoScoreCommands.teleopAutoScore(
+                    follower,
+                    driverControlled,
+                    testTiltAngle,
+                    true
+            );
+
+            return teleopAutoScoreCmd;
+        });
 
 
 
         gp1.getLeftBumper().setPressedCommand(() -> {
-            if (follower.isBusy()) return new NullCommand();   // <--- guard
+            if (follower.isBusy()) return new NullCommand();
             return new SequentialGroup(
                    new InstantCommand(() -> driverControlled.stop(true)),
                     DriveTrain.INSTANCE.faceGoal(follower, testTiltAngle),
@@ -105,15 +110,18 @@ public class TeleopParent extends NextFTCOpMode {
 // Return to normal field-centric driving
         gp1.getDpadLeft().setPressedCommand(() ->
                 new InstantCommand(   ()-> {
+                    if (teleopAutoScoreCmd != null && !teleopAutoScoreCmd.isDone()) {
+                        CommandManager.INSTANCE.cancelCommand(teleopAutoScoreCmd);
+
+                        teleopAutoScoreCmd = null;
+                    }
+
                     follower.breakFollowing();
                     driverControlled.invoke();
 
                 }
                 )
         );
-
-
-
 
     }
 
@@ -175,115 +183,6 @@ public class TeleopParent extends NextFTCOpMode {
        FtcDashboard.getInstance().stopCameraStream();
     }
 
-
-
-    public Command autoScore() {
-        return new SequentialGroup(
-                new InstantCommand(() -> driverControlled.stop(true)),
-                DriveTrain.INSTANCE.faceGoal(follower,testTiltAngle),
-                new WaitUntil(()->Webcam.INSTANCE.seesTag() ),
-                // This step runs ONLY after faceBlueGoal is finished
-                new Command() {
-                    private Command afterFace;
-
-                    @Override
-                    public void start() {
-                        double webCamDistance;
-                        if (Webcam.INSTANCE.seesTag()) {
-                            webCamDistance = Webcam.INSTANCE.getRange();
-                        } else if (DriveTrain.haveTagEstimate && DriveTrain.INSTANCE.odometry != null) {
-                            // Make sure pose is fresh right now (not just onUpdate)
-                            DriveTrain.INSTANCE.odometry.update();
-
-                            Pose2D pose = DriveTrain.INSTANCE.odometry.getPosition();
-                            double rx = pose.getX(DistanceUnit.INCH);
-                            double ry = pose.getY(DistanceUnit.INCH);
-
-                            double dx = DriveTrain.blueTagX_in - rx;
-                            double dy = DriveTrain.blueTagY_in - ry;
-
-                            webCamDistance = Math.hypot(dx, dy); // inches
-                        } else {
-                            webCamDistance = 30.0; // last-resort fallback if you *never* saw the tag yet
-                        }
-
-                        double targetTempRaw = Outtake.INSTANCE.distanceToVelocity(webCamDistance);
-
-                        afterFace = new SequentialGroup(
-                                new ForcedParallelCommand(Outtake.INSTANCE.holdVelocity(targetTempRaw)),
-                                OuttakeRotator.INSTANCE.setHoodPosition(
-                                        Outtake.INSTANCE.distanceToHoodPosition(webCamDistance)
-                                ),
-                                score3Times(),
-                                Outtake.INSTANCE.stopMotor()
-                        );
-
-                        afterFace.invoke();
-                    }
-
-                    @Override
-                    public void update() { }
-
-                    @Override
-                    public boolean isDone() {
-                        return afterFace != null && afterFace.isDone();
-                    }
-
-                    @Override
-                    public void stop(boolean interrupted) {
-                        if (interrupted) {
-                            Outtake.INSTANCE.stopMotor().invoke();
-                        }
-                    }
-                },
-                new InstantCommand(() -> driverControlled.invoke())
-        );
-    }
-
-
-
-
-
-    public Command score3Times(){
-       /*  return new SequentialGroup(
-                Transfer.INSTANCE.kickBall(),
-                Transfer.INSTANCE.kickBall(),
-                Transfer.INSTANCE.kickBall()
-        );  */
-
-       return new Command() {
-            private Command currentShot;
-
-
-            boolean shotYet = false;
-
-            @Override
-            public void start() {
-                Transfer.INSTANCE.scoreTimes = 0;
-
-               // currentShot = Transfer.INSTANCE.kickBall();
-               // currentShot.invoke(); // schedule first shot ONCE
-            }
-
-            @Override
-            public void update() {
-                if (Transfer.INSTANCE.scoreTimes >= 3) return;
-
-                // only look at the SAME command you scheduled
-                if ( !shotYet ||  (currentShot != null && currentShot.isDone()) ) {
-
-                    shotYet = true;
-                    currentShot = Transfer.INSTANCE.kickBall();
-                    currentShot.invoke(); // schedule next shot ONCE
-                }
-            }
-
-            @Override
-            public boolean isDone() {
-                return Transfer.INSTANCE.scoreTimes >= 3;
-            }
-        };
-    }
     public Command Test(){
             return new Command() {
                     Command inrCmd;

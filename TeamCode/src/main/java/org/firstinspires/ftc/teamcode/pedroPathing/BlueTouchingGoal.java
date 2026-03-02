@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.commands.AutoScoreCommands;
 import org.firstinspires.ftc.teamcode.hardware.Intake;
+import org.firstinspires.ftc.teamcode.hardware.Outtake;
 import org.firstinspires.ftc.teamcode.hardware.Transfer;
 import org.firstinspires.ftc.teamcode.hardware.Webcam;
 
@@ -35,12 +36,14 @@ public class BlueTouchingGoal extends AutoParent {
 
     public  static  double gettingLineBallX = 15;
 
-    public  static  double gettingLineBallY = 85;
+    public  static  double gettingLineBallY = 87;
 
 
     public  static  double minIntakeMS = 700;
 
     public  static  double maxIntakeMS = 3000;
+
+    public  static  double holdVelocityBefore = 1000;
 
 
     private long intakeFullStartMs = -1; // when isFull first became true (continuous timer)
@@ -55,7 +58,7 @@ public class BlueTouchingGoal extends AutoParent {
 
     @Override
     protected Pose getStartPose() {
-        return new Pose(25, 128, Math.toRadians(320));
+        return new Pose(34, 135, Math.toRadians(270));
     }
 
     @Override
@@ -63,16 +66,16 @@ public class BlueTouchingGoal extends AutoParent {
         // Your existing Path1/Path2 logic moved here
         pathToShootingInitial = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(25, 128),
-                        new Pose(55, 90)
+                        new Pose(34, 135),
+                        new Pose(60, 90)
                 ))
-                .setLinearHeadingInterpolation(Math.toRadians(320), Math.toRadians(angleToFaceGoal))
+                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(angleToFaceGoal))
                 .build();
 
         pathToWallBalls1 = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(55, 90),
-                        new Pose(55, gettingLineBallY)
+                        new Pose(60, 90),
+                        new Pose(60, gettingLineBallY)
                 ))
                 .setLinearHeadingInterpolation(Math.toRadians(angleToFaceGoal), Math.toRadians(angleToSuckInLineBalls))
                 .build();
@@ -81,7 +84,7 @@ public class BlueTouchingGoal extends AutoParent {
 
         pathToWallBalls2 = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(55, gettingLineBallY),
+                        new Pose(60, gettingLineBallY),
                         new Pose(gettingLineBallX, gettingLineBallY)
                 ))
                 .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToSuckInLineBalls))
@@ -90,7 +93,7 @@ public class BlueTouchingGoal extends AutoParent {
         pathToShootingfromBalls = follower.pathBuilder()
                 .addPath(new BezierLine(
                         new Pose(gettingLineBallX, gettingLineBallY),
-                        new Pose(55, 90)
+                        new Pose(60, 90)
                 ))
                 .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToFaceGoal))
                 .build();
@@ -98,8 +101,8 @@ public class BlueTouchingGoal extends AutoParent {
 
         pathToEnd = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(55, 90),
-                        new Pose(55, 60)
+                        new Pose(60, 90),
+                        new Pose(60, 130)
                 ))
                 .setLinearHeadingInterpolation(Math.toRadians(angleToFaceGoal), Math.toRadians(180))
                 .build();
@@ -111,6 +114,7 @@ public class BlueTouchingGoal extends AutoParent {
 
         switch (pathState) {
             case 0:
+                Outtake.INSTANCE.holdVelocity(holdVelocityBefore).invoke();
                 follower.followPath(pathToShootingInitial);
                 pathState = 1;
                 break;
@@ -173,33 +177,26 @@ public class BlueTouchingGoal extends AutoParent {
 
                 boolean full = Intake.INSTANCE.isFull();
 
+                long fullFor = -1;
+
                 if (full) {
                     // start the "continuous true" timer the moment it first becomes full
                     if (intakeFullStartMs < 0) intakeFullStartMs = now;
 
-                    long fullFor = now - intakeFullStartMs;
+                    fullFor = now - intakeFullStartMs;
 
-                    if (fullFor >= minIntakeMS) {
-                        // isFull has been continuously true long enough
-                        Intake.INSTANCE.eat().invoke();
-                        follower.breakFollowing();
-                        follower.followPath(pathToShootingfromBalls);
-
-                        // reset for next cycle (optional but good hygiene)
-                        intakeFullStartMs = -1;
-
-                        pathState = 7;
-                    }
                 } else {
                     // lost "full" -> reset continuous timer
                     intakeFullStartMs = -1;
                 }
 
                 // hard timeout fallback
-                if (totalElapsed >= maxIntakeMS) {
+                if (!follower.isBusy() || fullFor >= minIntakeMS || totalElapsed >= maxIntakeMS) {
                     Intake.INSTANCE.eat().invoke();
                     follower.breakFollowing();
                     follower.followPath(pathToShootingfromBalls);
+                    Outtake.INSTANCE.holdVelocity(holdVelocityBefore).invoke();
+
 
                     intakeFullStartMs = -1;
 
@@ -241,6 +238,12 @@ public class BlueTouchingGoal extends AutoParent {
                     follower.breakFollowing();
                     follower.followPath(pathToEnd);
                     pathState = 10;
+                }
+                break;
+
+            case 10:
+                if (!follower.isBusy()) {
+                    follower.turnTo(Math.toRadians(180));
                 }
                 break;
 

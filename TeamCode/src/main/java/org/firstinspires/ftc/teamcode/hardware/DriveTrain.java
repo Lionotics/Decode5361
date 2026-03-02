@@ -267,8 +267,6 @@ public class DriveTrain extends Subsystem {
 
     int GOAL_TAG_ID = 0;
 
-    // Tune these:
-
 
     public  static  double desiredBearingCloserBlue = 0;
     public  static  double desiredBearingCloserRed = 0;
@@ -422,7 +420,7 @@ public class DriveTrain extends Subsystem {
                 double dy = blueTagY_in - camY;
 
 
-                double desiredBearing = getDesiredBearing();
+                double desiredBearing = 0;
 
 
                 targetAbsRad = AngleUnit.normalizeRadians(

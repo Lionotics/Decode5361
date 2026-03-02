@@ -31,6 +31,8 @@ public class Transfer extends Subsystem {
 
     public int scoreTimes = 0;
 
+    public  boolean autoSpeederUpper = false;
+
 
 
     private Transfer() {}
@@ -68,7 +70,10 @@ public class Transfer extends Subsystem {
                     new Delay(preReturnDelaySeconds),
                     keepBall(),
                     new Delay(postReturnDelaySeconds),
+                    new InstantCommand(()->autoSpeederUpper = true),
+
                     Intake.INSTANCE.loadBall(loadDelaySecond),
+                    new InstantCommand(()->autoSpeederUpper = false),
                     new InstantCommand(() -> scoreTimes += 1)
             );
         } else {
