@@ -43,6 +43,8 @@ public final class AutoScoreCommands {
                     }
                 }),
 
+                new InstantCommand( ()->follower.holdPoint(follower.getPose()) ),
+
                 // old teleop behavior waited until tag is seen
                 new WaitUntil(() -> Webcam.INSTANCE.seesTag()),
 
@@ -168,7 +170,7 @@ public final class AutoScoreCommands {
 
             @Override
             public boolean isDone() {
-                return Transfer.INSTANCE.scoreTimes >= 3;
+                return (Transfer.INSTANCE.scoreTimes >= 2 && Transfer.INSTANCE.autoSpeederUpper);
             }
         };
     }

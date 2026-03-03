@@ -357,7 +357,6 @@ public class DriveTrain extends Subsystem {
             private double targetAbsRad = Double.NaN;
             private long startNanos = 0;
 
-            private  double imuYawRad = 0;
 
             @Override
             public @NotNull Set<Subsystem> getSubsystems() {
@@ -404,31 +403,11 @@ public class DriveTrain extends Subsystem {
                 usingImuFallback[0] = true;
                 startNanos = System.nanoTime();
 
-                // Compute the ABSOLUTE target heading based on the stored tag estimate and current robot pose
-                Pose2D pose = odometry.getPosition();
-                double rx = pose.getX(DistanceUnit.INCH);
-                double ry = pose.getY(DistanceUnit.INCH);
-
-                imuYawRad = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
-                imuYawRad = AngleUnit.normalizeRadians(imuYawRad);
-
-                // Camera position (accounts for offsets)
-                double camX = rx + camOffsetX_in * Math.cos(imuYawRad) - camOffsetY_in * Math.sin(imuYawRad);
-                double camY = ry + camOffsetX_in * Math.sin(imuYawRad) + camOffsetY_in * Math.cos(imuYawRad);
-
-                double dx = blueTagX_in - camX;
-                double dy = blueTagY_in - camY;
 
 
-                double desiredBearing = 0;
 
 
-                targetAbsRad = AngleUnit.normalizeRadians(
-                        Math.atan2(dy, dx) - Math.toRadians(desiredBearing)
-                );
 
-                // Telemetry helpers (same variables you already show)
-                lastFaceGoalAngleAbsolute = Math.toDegrees(targetAbsRad);
             }
 
             @Override
