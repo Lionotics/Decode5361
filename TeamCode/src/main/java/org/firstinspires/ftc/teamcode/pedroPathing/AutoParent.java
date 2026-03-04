@@ -52,10 +52,11 @@ public abstract class AutoParent extends PedroOpMode {
 
     protected  double turnMillisecondsWait = 2000;
 
-    protected boolean reachedCaseTwo = false;
 
     // Common command slot if your autos use it
     protected Command scoreCmd = null;
+
+    protected  boolean webCamAtStartUpdatingEveryFrame = false;
 
     public AutoParent() {
         super(Intake.INSTANCE, Outtake.INSTANCE, Transfer.INSTANCE, Webcam.INSTANCE, OuttakeRotator.INSTANCE);
@@ -77,12 +78,13 @@ public abstract class AutoParent extends PedroOpMode {
 
     @Override
     public void onInit() {
-        FtcDashboard.getInstance().startCameraStream(Webcam.INSTANCE.getVisionPortal(), 30);
 
+        if (Webcam.ftcDashBoardTurnedOn) {
+            FtcDashboard.getInstance().startCameraStream(Webcam.INSTANCE.getVisionPortal(), 30);
+        }
 
         // Reset per-run state
         pathState = 0;
-        reachedCaseTwo = false;
         scoreCmd = null;
         turnStartMs = 0;
         target = 0;
@@ -105,11 +107,18 @@ public abstract class AutoParent extends PedroOpMode {
         rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+
+        webCamAtStartUpdatingEveryFrame = Webcam.updateCameraEveryFrame;
+        Webcam.updateCameraEveryFrame = true;
+
+
         // Start pose + paths
         follower.setStartingPose(getStartPose());
         buildPaths();
 
         follower.update();
+
+
 
         panelsTelemetry.addLine("Status: Initialized");
         panelsTelemetry.addData("Path State", pathState);
@@ -117,6 +126,8 @@ public abstract class AutoParent extends PedroOpMode {
         panelsTelemetry.addData("Y", follower.getPose().getY());
         panelsTelemetry.addData("Heading (deg)", Math.toDegrees(follower.getPose().getHeading()));
         panelsTelemetry.update();
+
+
 
 
     }
@@ -160,5 +171,15 @@ public abstract class AutoParent extends PedroOpMode {
 
         panelsTelemetry.update();
 
+    }
+
+    @Override
+    public void onStop() {
+        if (Webcam.ftcDashBoardTurnedOn) {
+            FtcDashboard.getInstance().stopCameraStream();
+        }
+        Webcam.updateCameraEveryFrame = webCamAtStartUpdatingEveryFrame;
+
+        super.onStop();
     }
 }

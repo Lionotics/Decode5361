@@ -7,6 +7,8 @@ import com.rowanmcalpin.nextftc.core.command.Command;
 import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.NullCommand;
+import com.rowanmcalpin.nextftc.core.command.utility.conditionals.BlockingConditionalCommand;
+import com.rowanmcalpin.nextftc.core.command.utility.conditionals.PassiveConditionalCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.delays.Delay;
 import com.rowanmcalpin.nextftc.core.command.utility.delays.WaitUntil;
 import com.rowanmcalpin.nextftc.ftc.OpModeData;
@@ -27,7 +29,7 @@ public class Transfer extends Subsystem {
 
     public static  double loadDelaySecond = 0.4;
 
-    public static double shootDelaySeconds = 0.3;
+    public static double shootDelaySeconds = 0.0;
 
     public int scoreTimes = 0;
 
@@ -62,7 +64,7 @@ public class Transfer extends Subsystem {
     public Command kickBall() {
         if (Outtake.INSTANCE.getMotorCurrentLeftVelocity() != 0 || Outtake.INSTANCE.getMotorCurrentRightVelocity() != 0) {
             return new SequentialGroup(
-                    new WaitUntil(() -> Outtake.INSTANCE.flywheelReady(Outtake.motorVelocityTarget)),
+                    new WaitUntil(() -> (Outtake.INSTANCE.flywheelReady(Outtake.motorVelocityTarget) || scoreTimes != 0) ),
                     new Delay(shootDelaySeconds),
                     new InstantCommand(() -> protector.setPosition(protectorPosition2)),
                     new Delay(kickDelaySeconds),
@@ -72,7 +74,17 @@ public class Transfer extends Subsystem {
                     new Delay(postReturnDelaySeconds),
                     new InstantCommand(()->autoSpeederUpper = true),
 
-                    Intake.INSTANCE.loadBall(loadDelaySecond),
+
+                    new PassiveConditionalCommand(
+                            () -> !(Transfer.INSTANCE.scoreTimes >= 2 && Transfer.INSTANCE.autoSpeederUpper),
+                            () ->        new SequentialGroup(
+                                    Intake.INSTANCE.setPowerToIntake(-1)
+                            ),
+                            () ->  Intake.INSTANCE.setPowerToIntake(0)
+
+                            ),
+
+
                     new InstantCommand(()->autoSpeederUpper = false),
                     new InstantCommand(() -> scoreTimes += 1)
             );

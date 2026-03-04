@@ -41,6 +41,34 @@ public class DriveTrain extends Subsystem {
     private IMU imu;
 
 
+
+
+
+
+    // If true: faceGoal aims at the BACK CORNER of the goal (using tag pose + geometry),
+// not "center tag bearing = desiredBearing".
+// If false: behavior is exactly as before.
+    public static boolean alignToGoalInsteadOfTag = false;
+
+    // Corner offset relative to the TAG CENTER, expressed in the TAG'S LOCAL 2D frame (inches).
+// You will tune these on FTC Dashboard.
+// Sign convention depends on how your tag yaw behaves; start small and tune.
+    public static double blueGoalCornerOffsetX_in = 15.0;
+    public static double blueGoalCornerOffsetY_in = 11.0;
+
+    public static double redGoalCornerOffsetX_in  = 15.0;
+    public static double redGoalCornerOffsetY_in  = 11.0;
+
+    // If yaw is noisy, you can disable using yaw in the corner math.
+    public static boolean useTagYawForCorner = true;
+
+    public  static  double multipleYawRad = 1;
+
+
+
+
+
+
     // --- Tag world estimate (odometry frame) ---
     public static boolean haveTagEstimate = false;
     public static double blueTagX_in = 0.0;
@@ -192,6 +220,8 @@ public class DriveTrain extends Subsystem {
         Webcam.INSTANCE.setSoleTagID(GOAL_TAG_ID);
 
         followerIsActive = false;
+
+
     }
 
     public void initIMU(HardwareMap hwMap) {
@@ -288,12 +318,16 @@ public class DriveTrain extends Subsystem {
     public void periodic() {
         if (odometry != null) odometry.update();
 
-        d = Webcam.INSTANCE.getDetectionById(GOAL_TAG_ID);
 
-        // Always keep odometry-based estimate fresh when tag is visible
-        if (d != null && d.ftcPose != null) {
-            updateBlueTagEstimate(d);
+        if (Webcam.shouldUpdateCameraNow()) {
+            d = Webcam.INSTANCE.getDetectionById(GOAL_TAG_ID);
+
         }
+            // Always keep odometry-based estimate fresh when tag is visible
+            if (d != null && d.ftcPose != null) {
+                updateBlueTagEstimate(d);
+            }
+
     }
 
     public  double getDesiredBearing() {
@@ -312,6 +346,40 @@ public class DriveTrain extends Subsystem {
             }
         }
 
+    }
+
+
+    private double computeGoalCornerBearingDeg(AprilTagDetection det) {
+        if (det == null || det.ftcPose == null) return Double.NaN;
+
+        // 1) Vector from CAMERA -> TAG in camera frame (planar)
+        double bearingRad = Math.toRadians(det.ftcPose.bearing); // +left
+        double range = det.ftcPose.range; // inches
+
+        double xTag = range * Math.cos(bearingRad); // forward
+        double yTag = range * Math.sin(bearingRad); // left
+
+        // 2) Choose which corner offset to use (blue vs red)
+        double offX = (GOAL_TAG_ID == 24) ? redGoalCornerOffsetX_in : blueGoalCornerOffsetX_in;
+        double offY = (GOAL_TAG_ID == 24) ? redGoalCornerOffsetY_in : blueGoalCornerOffsetY_in;
+
+        // 3) Rotate the offset by tag yaw into the camera frame (optional)
+        double yawRad = useTagYawForCorner ? Math.toRadians(det.ftcPose.yaw) : 0.0;
+
+        // NOTE: This rotation direction might need a sign flip depending on your yaw convention.
+        // If tuning feels mirrored, change (-yawRad) to (+yawRad).
+        double c = Math.cos(multipleYawRad * yawRad);
+        double s = Math.sin(multipleYawRad *yawRad);
+
+        double offX_cam = offX * c - offY * s;
+        double offY_cam = offX * s + offY * c;
+
+        // 4) Camera -> CORNER vector
+        double xCorner = xTag + offX_cam;
+        double yCorner = yTag + offY_cam;
+
+        // 5) Bearing to corner
+        return Math.toDegrees(Math.atan2(yCorner, xCorner)); // +left
     }
 
     public void setGoalID(int id) {
@@ -346,15 +414,18 @@ public class DriveTrain extends Subsystem {
         follower.update();
     }
 
-    public Command faceGoal(Follower follower, double tiltAngle) {
+    public Command
+    faceGoal(Follower follower, double tiltAngle) {
          final boolean[] usingImuFallback  = new boolean[1];
               usingImuFallback[0] =    false;
 
 
+
         Command inner =  new Command() {
 
+
+
             // --- IMU fallback state ---
-            private double targetAbsRad = Double.NaN;
             private long startNanos = 0;
 
 
@@ -365,10 +436,11 @@ public class DriveTrain extends Subsystem {
 
             @Override
             public void start() {
+                Webcam.beginCameraUse();
                 syncFollowerPoseToOdometry(follower);
                 followerIsActive = true;
 
-                // Refresh detection right now (periodic() also does this, but be explicit)
+
                 d = Webcam.INSTANCE.getDetectionById(GOAL_TAG_ID);
 
 
@@ -388,17 +460,6 @@ public class DriveTrain extends Subsystem {
                     return;
                 }
 
-                // --- Tag NOT visible, fallback requested ---
-                // We can only compute a heading if we have a world estimate.
-                if (!haveTagEstimate || odometry == null || odometry.getPosition() == null || imu == null) {
-                    usingImuFallback[0] = false;
-
-                    // fall back to whatever calcFaceBlueGoalTargetRad returns (even if it is NaN)
-                    double targetRad = (tiltAngle == 0) ? calcFaceBlueGoalTargetRad(follower) : tiltAngle;
-                    follower.turn(targetRad);
-                    startNanos = System.nanoTime();
-                    return;
-                }
 
                 usingImuFallback[0] = true;
                 startNanos = System.nanoTime();
@@ -450,6 +511,7 @@ public class DriveTrain extends Subsystem {
                 stopDrive();
                 if (follower != null) follower.breakFollowing();
                 followerIsActive = false;
+                Webcam.endCameraUse();
             }
         };
 
@@ -502,17 +564,28 @@ public class DriveTrain extends Subsystem {
         double deltaRad = Double.NaN;
 
 
-        // --- Case 1: Tag visible -> just rotate by bearing (relative) ---
-        // ftcPose.bearing is already a relative left/right angle to center the tag. :contentReference[oaicite:2]{index=2}
-        if (d != null && d.ftcPose != null) {
-            // Want bearing -> desiredTilt, so turn by (bearing - desiredTilt)
-            double desiredBearing = getDesiredBearing();
 
-            double errRad = Math.toRadians(d.ftcPose.bearing - desiredBearing);
+        // --- Case 1: Tag visible -> rotate by bearing (relative) ---
+        if (d != null && d.ftcPose != null) {
+
+            double measuredBearingDeg;
+
+            if (alignToGoalInsteadOfTag) {
+                // Use computed bearing to goal CORNER (tag pose only; no odometry x/y).
+                measuredBearingDeg = computeGoalCornerBearingDeg(d);
+            } else {
+                // Original behavior: use tag center bearing
+                measuredBearingDeg = d.ftcPose.bearing;
+            }
+
+            double desiredBearing = getDesiredBearing(); // your existing distance-based bias
+
+            double errRad = Math.toRadians(measuredBearingDeg - desiredBearing);
             errRad = AngleUnit.normalizeRadians(errRad);
             deltaRad = errRad * faceGoalTurnSign;
-
         }
+
+
         // --- Case 2: Tag not visible but we have world estimate -> compute heading error ---
         else if (haveTagEstimate && odometry != null && odometry.getPosition() != null && (imu != null || UsingOdemtryInsteadOfIMU)) {
             Pose2D pose = odometry.getPosition();

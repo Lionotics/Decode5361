@@ -44,7 +44,6 @@ public class TeleopParent extends NextFTCOpMode {
 
     private Command teleopAutoScoreCmd = null;
 
-    public  static boolean ftcDashBoardOn = true;
 
     public TeleopParent() {
         super(DriveTrain.INSTANCE,Intake.INSTANCE, Transfer.INSTANCE,Outtake.INSTANCE, OuttakeRotator.INSTANCE, Webcam.INSTANCE);
@@ -53,7 +52,7 @@ public class TeleopParent extends NextFTCOpMode {
 
     @Override
     public void onStartButtonPressed() {
-        if (ftcDashBoardOn) {
+        if (Webcam.ftcDashBoardTurnedOn) {
             FtcDashboard.getInstance().startCameraStream(Webcam.INSTANCE.getVisionPortal(), 30);
         }
 
@@ -182,7 +181,7 @@ public class TeleopParent extends NextFTCOpMode {
     @Override
     public  void onStop() {
         Webcam.INSTANCE.close();
-        if (ftcDashBoardOn) {
+        if (Webcam.ftcDashBoardTurnedOn) {
             FtcDashboard.getInstance().stopCameraStream();
         }
     }

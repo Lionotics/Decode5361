@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.commands;
 
 import com.pedropathing.follower.Follower;
+import com.pedropathing.geometry.Pose;
+import com.rowanmcalpin.nextftc.core.Subsystem;
 import com.rowanmcalpin.nextftc.core.command.Command;
 import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.ForcedParallelCommand;
@@ -13,6 +15,10 @@ import org.firstinspires.ftc.teamcode.hardware.Outtake;
 import org.firstinspires.ftc.teamcode.hardware.OuttakeRotator;
 import org.firstinspires.ftc.teamcode.hardware.Transfer;
 import org.firstinspires.ftc.teamcode.hardware.Webcam;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Collections;
+import java.util.Set;
 
 /**
  * AutoScoreCommands
@@ -22,6 +28,51 @@ import org.firstinspires.ftc.teamcode.hardware.Webcam;
 public final class AutoScoreCommands {
 
     private AutoScoreCommands() {}
+
+
+    public static class HoldPoseWhileActive extends Command {
+        private final Follower follower;
+        private Pose holdPose;
+
+        public HoldPoseWhileActive(Follower follower) {
+            this.follower = follower;
+        }
+
+        @Override
+        public void start() {
+            // Hold the current pose at the moment shooting starts
+            holdPose = follower.getPose();
+            follower.holdPoint(holdPose);
+        }
+
+        @Override
+        public void update() {
+            // This is the critical part: keep Pedro “alive” so it actually resists pushes
+            follower.update();
+
+            // Optional: if you want it to “re-lock” to the original pose even harder:
+            // follower.holdPoint(holdPose);
+        }
+
+        @Override
+        public boolean isDone() {
+            return false; // runs until canceled by the group finishing
+        }
+
+        @Override
+        public void stop(boolean interrupted) {
+            // Release Pedro control cleanly
+            follower.breakFollowing();
+            DriveTrain.INSTANCE.stopDrive();
+        }
+
+        @Override
+        @NotNull
+        public Set<Subsystem> getSubsystems() {
+            return Collections.singleton(DriveTrain.INSTANCE);
+        }
+    }
+
 
     /**
      * TeleOp AutoScore: stops driver control, faces goal (optional), waits for tag, shoots 3.
@@ -34,22 +85,28 @@ public final class AutoScoreCommands {
             boolean doFaceGoal
     ) {
         return new SequentialGroup(
+
                 new InstantCommand(() -> driverControlled.stop(true)),
 
+                new InstantCommand(Webcam::beginCameraUse),
+
                 // optional face step (your old behavior did faceBlueGoal here)
-                new InstantCommand(() -> {
-                    if (doFaceGoal) {
-                        DriveTrain.INSTANCE.faceGoal(follower, tiltAngle).invoke();
-                    }
-                }),
+                DriveTrain.INSTANCE.faceGoal(follower, tiltAngle),
+
 
                 new InstantCommand( ()->follower.holdPoint(follower.getPose()) ),
 
                 // old teleop behavior waited until tag is seen
                 new WaitUntil(() -> Webcam.INSTANCE.seesTag()),
 
-                // compute distance + shoot sequence
+                new ForcedParallelCommand(
+                       new HoldPoseWhileActive(follower)
+                ),
+
                 buildShootFromDistanceCommand(),
+
+                new InstantCommand(Webcam::endCameraUse),
+
 
                 new InstantCommand(driverControlled::invoke)
         );
@@ -80,7 +137,9 @@ public final class AutoScoreCommands {
 
             @Override
             public void start() {
-                startedInner = false;
+                Webcam.beginCameraUse();
+
+                        startedInner = false;
                 inner = null;
                 Transfer.INSTANCE.scoreTimes = 0;
             }
@@ -124,6 +183,8 @@ public final class AutoScoreCommands {
 
             @Override
             public void stop(boolean interrupted) {
+                Webcam.endCameraUse();
+
                 if (interrupted) {
                     Outtake.INSTANCE.stopMotor().invoke();
                 }
@@ -170,7 +231,7 @@ public final class AutoScoreCommands {
 
             @Override
             public boolean isDone() {
-                return (Transfer.INSTANCE.scoreTimes >= 2 && Transfer.INSTANCE.autoSpeederUpper);
+                return (Transfer.INSTANCE.scoreTimes >= 3);
             }
         };
     }

@@ -39,6 +39,30 @@ public class Webcam extends Subsystem {
     private AprilTagDetection bestObeliskDetection;
     private List<AprilTagDetection> lastDetections = new ArrayList<>();
 
+    public  static boolean ftcDashBoardTurnedOn = true;
+
+
+
+    // --- Camera update gating ---
+// If true: behave exactly like now (update detections every loop).
+// If false: only update while faceGoal or AutoScoreCommands are running.
+    public static boolean updateCameraEveryFrame = true;
+
+    // Ref-count so multiple commands can request camera updates safely.
+    private static int cameraUsers = 0;
+
+    public static synchronized void beginCameraUse() {
+        cameraUsers++;
+    }
+
+    public static synchronized void endCameraUse() {
+        cameraUsers = Math.max(0, cameraUsers - 1);
+    }
+
+    public static synchronized boolean shouldUpdateCameraNow() {
+        return updateCameraEveryFrame || cameraUsers > 0;
+    }
+
     private Webcam() { }
 
     @Override
@@ -89,6 +113,10 @@ public class Webcam extends Subsystem {
 
     @Override
     public void periodic() {
+        if (!shouldUpdateCameraNow()) {
+            return;
+        }
+
         if (aprilTag == null) return;
 
         lastDetections = aprilTag.getDetections();
