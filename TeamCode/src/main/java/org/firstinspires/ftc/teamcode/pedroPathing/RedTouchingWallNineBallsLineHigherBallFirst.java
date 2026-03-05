@@ -55,7 +55,7 @@ public class RedTouchingWallNineBallsLineHigherBallFirst extends AutoParent {
 
     public  static  double gettingHigherWallBallX = 134;
 
-    public  static  double gettingHigherWallBallY = 60;
+    public  static  double gettingHigherWallBallY = 56;
 
 
 
@@ -205,7 +205,7 @@ public class RedTouchingWallNineBallsLineHigherBallFirst extends AutoParent {
                         // Autonomous autoscore: NO faceBlueGoal
                         scoreCmd = AutoScoreCommands.autoAutoScoreNoFaceGoal();
                         scoreCmd.invoke();
-                    } else if (Transfer.INSTANCE.scoreTimes >= 2 && Transfer.INSTANCE.autoSpeederUpper) {
+                    } else if (Transfer.INSTANCE.scoreTimes >= 3 ) {
                         scoreCmd = null;
                         pathState = 9;  // continue your existing FSM
                     }
@@ -297,7 +297,7 @@ public class RedTouchingWallNineBallsLineHigherBallFirst extends AutoParent {
                         // Autonomous autoscore: NO faceBlueGoal
                         scoreCmd = AutoScoreCommands.autoAutoScoreNoFaceGoal();
                         scoreCmd.invoke();
-                    } else if (Transfer.INSTANCE.scoreTimes >= 2 && Transfer.INSTANCE.autoSpeederUpper) {
+                    } else if (Transfer.INSTANCE.scoreTimes >= 3 ) {
                         scoreCmd = null;
                         pathState = 15;  // continue your existing FSM
                     }
@@ -394,7 +394,7 @@ public class RedTouchingWallNineBallsLineHigherBallFirst extends AutoParent {
                         // Autonomous autoscore: NO faceBlueGoal
                         scoreCmd = AutoScoreCommands.autoAutoScoreNoFaceGoal();
                         scoreCmd.invoke();
-                    } else if (Transfer.INSTANCE.scoreTimes >= 2 && Transfer.INSTANCE.autoSpeederUpper) {
+                    } else if (Transfer.INSTANCE.scoreTimes >= 3 ) {
                         scoreCmd = null;
                         pathState = 3;  // continue your existing FSM
                     }

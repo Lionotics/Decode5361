@@ -191,7 +191,8 @@ public class TeleopParent extends NextFTCOpMode {
                     Command inrCmd;
                     @Override
                     public void start () {
-                         inrCmd =
+                        Outtake.motorVelocityTarget = 1650;
+                        inrCmd =
                         new ParallelGroup(
                                 Outtake.INSTANCE.holdVelocity(Outtake.motorVelocityTarget)//,
                                // OuttakeRotator.INSTANCE.setHoodPosition(targetHoodPosition)

@@ -23,8 +23,8 @@ public class Transfer extends Subsystem {
     public  static double kickerPosition2 = 0.25;
     public  static double protectorPosition2 = 0.4;
 
-    public static double kickDelaySeconds = 0.13;
-    public static double preReturnDelaySeconds = 0.1;
+    public static double kickDelaySeconds = 0.2;
+    public static double preReturnDelaySeconds = 0.05;
     public static double postReturnDelaySeconds = 0.0;
 
     public static  double loadDelaySecond = 0.4;
@@ -33,7 +33,9 @@ public class Transfer extends Subsystem {
 
     public int scoreTimes = 0;
 
-    public  boolean autoSpeederUpper = false;
+    public  boolean speederUpper = false;
+
+
 
 
 
@@ -71,12 +73,17 @@ public class Transfer extends Subsystem {
                     new InstantCommand(() -> kicker.setPosition(kickerPosition2)),
                     new Delay(preReturnDelaySeconds),
                     keepBall(),
+
+                    new InstantCommand(()->speederUpper = true),
+
                     new Delay(postReturnDelaySeconds),
-                    new InstantCommand(()->autoSpeederUpper = true),
+
+                    new InstantCommand(()->speederUpper = false),
+
 
 
                     new PassiveConditionalCommand(
-                            () -> !(Transfer.INSTANCE.scoreTimes >= 2 && Transfer.INSTANCE.autoSpeederUpper),
+                            () -> !(Transfer.INSTANCE.scoreTimes >= 2),
                             () ->        new SequentialGroup(
                                     Intake.INSTANCE.setPowerToIntake(-1)
                             ),
@@ -85,7 +92,6 @@ public class Transfer extends Subsystem {
                             ),
 
 
-                    new InstantCommand(()->autoSpeederUpper = false),
                     new InstantCommand(() -> scoreTimes += 1)
             );
         } else {

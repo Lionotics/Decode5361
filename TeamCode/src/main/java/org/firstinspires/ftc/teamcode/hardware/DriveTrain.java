@@ -53,16 +53,15 @@ public class DriveTrain extends Subsystem {
     // Corner offset relative to the TAG CENTER, expressed in the TAG'S LOCAL 2D frame (inches).
 // You will tune these on FTC Dashboard.
 // Sign convention depends on how your tag yaw behaves; start small and tune.
-    public static double blueGoalCornerOffsetX_in = 15.0;
+    public static double blueGoalCornerOffsetX_in = 0;
     public static double blueGoalCornerOffsetY_in = 11.0;
 
-    public static double redGoalCornerOffsetX_in  = 15.0;
+    public static double redGoalCornerOffsetX_in  = 0;
     public static double redGoalCornerOffsetY_in  = 11.0;
 
     // If yaw is noisy, you can disable using yaw in the corner math.
     public static boolean useTagYawForCorner = true;
 
-    public  static  double multipleYawRad = 1;
 
 
 
@@ -319,10 +318,14 @@ public class DriveTrain extends Subsystem {
         if (odometry != null) odometry.update();
 
 
+
         if (Webcam.shouldUpdateCameraNow()) {
             d = Webcam.INSTANCE.getDetectionById(GOAL_TAG_ID);
-
+        } else {
+            d = null;
         }
+
+
             // Always keep odometry-based estimate fresh when tag is visible
             if (d != null && d.ftcPose != null) {
                 updateBlueTagEstimate(d);
@@ -352,34 +355,60 @@ public class DriveTrain extends Subsystem {
     private double computeGoalCornerBearingDeg(AprilTagDetection det) {
         if (det == null || det.ftcPose == null) return Double.NaN;
 
-        // 1) Vector from CAMERA -> TAG in camera frame (planar)
-        double bearingRad = Math.toRadians(det.ftcPose.bearing); // +left
-        double range = det.ftcPose.range; // inches
+        // --- 1) Tag center position in camera 2D (floor-projected) ---
+        // FTC docs: "range" is point-to-point; projecting onto the floor with cos(elevation)
+        // is often more consistent if the camera is above the tag. :contentReference[oaicite:2]{index=2}
+        double bearingRad = Math.toRadians(det.ftcPose.bearing);
+        double elevRad    = Math.toRadians(det.ftcPose.elevation);
 
-        double xTag = range * Math.cos(bearingRad); // forward
-        double yTag = range * Math.sin(bearingRad); // left
+        elevRad = 0;
 
-        // 2) Choose which corner offset to use (blue vs red)
-        double offX = (GOAL_TAG_ID == 24) ? redGoalCornerOffsetX_in : blueGoalCornerOffsetX_in;
-        double offY = (GOAL_TAG_ID == 24) ? redGoalCornerOffsetY_in : blueGoalCornerOffsetY_in;
+        double horizontalRange = det.ftcPose.range * Math.cos(elevRad);
 
-        // 3) Rotate the offset by tag yaw into the camera frame (optional)
-        double yawRad = useTagYawForCorner ? Math.toRadians(det.ftcPose.yaw) : 0.0;
+        double forward = horizontalRange * Math.cos(bearingRad);
+        double left    = horizontalRange * Math.sin(bearingRad);
 
-        // NOTE: This rotation direction might need a sign flip depending on your yaw convention.
-        // If tuning feels mirrored, change (-yawRad) to (+yawRad).
-        double c = Math.cos(multipleYawRad * yawRad);
-        double s = Math.sin(multipleYawRad *yawRad);
+        // --- 2) Pick the correct offsets for red vs blue ---
+        double offsetX = redGoalCornerOffsetX_in;
+        double offsetY = redGoalCornerOffsetY_in;
 
-        double offX_cam = offX * c - offY * s;
-        double offY_cam = offX * s + offY * c;
+        if (det.id == 20) {
+            offsetX = blueGoalCornerOffsetX_in;
+            offsetY = blueGoalCornerOffsetY_in;
+        } else if (det.id == 24) {
+            offsetX = redGoalCornerOffsetX_in;
+            offsetY = redGoalCornerOffsetY_in;
+        } else {
+            // Unknown tag id: fall back to "red" constants (or change as you prefer)
+            offsetX = redGoalCornerOffsetX_in;
+            offsetY = redGoalCornerOffsetY_in;
+        }
 
-        // 4) Camera -> CORNER vector
-        double xCorner = xTag + offX_cam;
-        double yCorner = yTag + offY_cam;
+        // Tag-local offsets expressed as (forward_from_tag, left_from_tag)
+        // "farther/back" => +forward
+        // "right"        => -left
+        double offForward_tag = offsetY;
+        double offLeft_tag    = -offsetX;
 
-        // 5) Bearing to corner
-        return Math.toDegrees(Math.atan2(yCorner, xCorner)); // +left
+        // --- 3) Rotate offsets by tag yaw (optional) and add to tag center ---
+        // FTC yaw is rotation about Z, right-hand rule.
+        if (useTagYawForCorner) {
+            double yawRad = Math.toRadians(det.ftcPose.yaw);
+
+            double offForward_cam = offForward_tag * Math.cos(yawRad) - offLeft_tag * Math.sin(yawRad);
+            double offLeft_cam    = offForward_tag * Math.sin(yawRad) + offLeft_tag * Math.cos(yawRad);
+
+            forward += offForward_cam;
+            left    += offLeft_cam;
+        } else {
+            // If yaw is noisy, assume tag is "facing" the camera (no rotation).
+            forward += offForward_tag;
+            left    += offLeft_tag;
+        }
+
+        // --- 4) Bearing to the corner point ---
+        // atan2(left, forward) gives the left/right turn angle needed to point at that point.
+        return Math.toDegrees(Math.atan2(left, forward));
     }
 
     public void setGoalID(int id) {

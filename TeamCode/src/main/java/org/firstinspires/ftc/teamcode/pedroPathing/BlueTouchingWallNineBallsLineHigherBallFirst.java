@@ -56,7 +56,7 @@ public class BlueTouchingWallNineBallsLineHigherBallFirst extends AutoParent {
 
     public  static  double gettingHigherWallBallX = 6;
 
-    public  static  double gettingHigherWallBallY = 60;
+    public  static  double gettingHigherWallBallY = 56;
 
 
     public  static  double minIntakeMS = 800;
@@ -204,7 +204,7 @@ public class BlueTouchingWallNineBallsLineHigherBallFirst extends AutoParent {
                         // Autonomous autoscore: NO faceBlueGoal
                         scoreCmd = AutoScoreCommands.autoAutoScoreNoFaceGoal();
                         scoreCmd.invoke();
-                    } else if (Transfer.INSTANCE.scoreTimes >= 2 && Transfer.INSTANCE.autoSpeederUpper) {
+                    } else if (Transfer.INSTANCE.scoreTimes >= 3 ) {
                         scoreCmd = null;
                         pathState = 9;  // continue your existing FSM
                     }
@@ -297,7 +297,7 @@ public class BlueTouchingWallNineBallsLineHigherBallFirst extends AutoParent {
                         // Autonomous autoscore: NO faceBlueGoal
                         scoreCmd = AutoScoreCommands.autoAutoScoreNoFaceGoal();
                         scoreCmd.invoke();
-                    } else if (Transfer.INSTANCE.scoreTimes >= 2 && Transfer.INSTANCE.autoSpeederUpper) {
+                    } else if (Transfer.INSTANCE.scoreTimes >= 3) {
                         scoreCmd = null;
                         pathState = 15;  // continue your existing FSM
                     }
@@ -393,7 +393,7 @@ public class BlueTouchingWallNineBallsLineHigherBallFirst extends AutoParent {
                         // Autonomous autoscore: NO faceBlueGoal
                         scoreCmd = AutoScoreCommands.autoAutoScoreNoFaceGoal();
                         scoreCmd.invoke();
-                    } else if (Transfer.INSTANCE.scoreTimes >= 2 && Transfer.INSTANCE.autoSpeederUpper) {
+                    } else if (Transfer.INSTANCE.scoreTimes >= 3 ) {
                         scoreCmd = null;
                         pathState = 3;  // continue your existing FSM
                     }

@@ -94,22 +94,26 @@ public final class AutoScoreCommands {
                 DriveTrain.INSTANCE.faceGoal(follower, tiltAngle),
 
 
-                new InstantCommand( ()->follower.holdPoint(follower.getPose()) ),
+                  new ForcedParallelCommand(
+                       new HoldPoseWhileActive(follower)
+                ),
+
 
                 // old teleop behavior waited until tag is seen
                 new WaitUntil(() -> Webcam.INSTANCE.seesTag()),
 
-                new ForcedParallelCommand(
-                       new HoldPoseWhileActive(follower)
-                ),
+
 
                 buildShootFromDistanceCommand(),
 
-                new InstantCommand(Webcam::endCameraUse),
+        new InstantCommand(Webcam::endCameraUse),
+
+                new InstantCommand(() -> driverControlled.invoke()),
+
+                Outtake.INSTANCE.stopMotor()
 
 
-                new InstantCommand(driverControlled::invoke)
-        );
+                );
     }
 
     /**
@@ -121,7 +125,9 @@ public final class AutoScoreCommands {
      * do it in the auto state machine before invoking this command (or wrap it with WaitUntil).
      */
     public static Command autoAutoScoreNoFaceGoal() {
-        return buildShootFromDistanceCommand();
+        return  new SequentialGroup( buildShootFromDistanceCommand(),
+                Outtake.INSTANCE.stopMotor()
+        );
     }
 
     /**
@@ -163,8 +169,7 @@ public final class AutoScoreCommands {
                             OuttakeRotator.INSTANCE.setHoodPosition(
                                     Outtake.INSTANCE.distanceToHoodPosition(distIn)
                             ),
-                            score3Times(),
-                            Outtake.INSTANCE.stopMotor()
+                            score3Times()
                     );
 
                     inner.invoke();
@@ -215,6 +220,7 @@ public final class AutoScoreCommands {
             @Override
             public void start() {
                 Transfer.INSTANCE.scoreTimes = 0;
+                Transfer.INSTANCE.speederUpper = false;
             }
 
             @Override
@@ -225,13 +231,12 @@ public final class AutoScoreCommands {
                     shotYet = true;
                     currentShot = Transfer.INSTANCE.kickBall();
                     currentShot.invoke();
-                    Transfer.INSTANCE.autoSpeederUpper = false;
                 }
             }
 
             @Override
             public boolean isDone() {
-                return (Transfer.INSTANCE.scoreTimes >= 3);
+                return (Transfer.INSTANCE.scoreTimes >= 2 && Transfer.INSTANCE.speederUpper);
             }
         };
     }

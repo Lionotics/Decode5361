@@ -31,6 +31,8 @@ public class Outtake extends Subsystem {
     public  static  double motorVelocityThreashholdHigher = 50;
 
 
+    public  static  double distanceToVelocityC = 900;
+
     private boolean motorRunning = false;
 
     public  static  boolean motorIsOnHigher = true;
@@ -54,7 +56,6 @@ public class Outtake extends Subsystem {
 
     public double targetVelocityToActualVelocity(double targetVelocity) {
         return  -targetVelocity-20;
-        //return  0.0418 * targetVelocity + 5;
     }
 
 
@@ -74,7 +75,7 @@ public class Outtake extends Subsystem {
 
     public double distanceToVelocity(double distance) {
        // not outdated, just linear return  6.01105 * distance + 878.10236;
-        return 0.0147602 * distance * distance + 3.54619 * distance + 966;
+        return 0.0147602 * distance * distance + 3.54619 * distance + distanceToVelocityC;
     }
 
     public double distanceToHoodPosition(double distance) {
