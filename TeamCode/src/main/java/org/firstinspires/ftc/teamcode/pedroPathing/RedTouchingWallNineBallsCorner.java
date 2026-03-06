@@ -179,7 +179,7 @@ public class RedTouchingWallNineBallsCorner extends AutoParent {
                         // Autonomous autoscore: NO faceBlueGoal
                         scoreCmd = AutoScoreCommands.autoAutoScoreNoFaceGoal();
                         scoreCmd.invoke();
-                    } else if (Transfer.INSTANCE.scoreTimes >= 3 ) {
+                    } else if (scoreCmd.isDone() ) {
                         scoreCmd = null;
                         pathState = 3;  // continue your existing FSM
                     }
@@ -271,7 +271,7 @@ public class RedTouchingWallNineBallsCorner extends AutoParent {
                         // Autonomous autoscore: NO faceBlueGoal
                         scoreCmd = AutoScoreCommands.autoAutoScoreNoFaceGoal();
                         scoreCmd.invoke();
-                    } else if (Transfer.INSTANCE.scoreTimes >= 3 ) {
+                    } else if (scoreCmd.isDone() ) {
                         scoreCmd = null;
                         pathState = 9;  // continue your existing FSM
                     }
@@ -360,7 +360,7 @@ public class RedTouchingWallNineBallsCorner extends AutoParent {
                         // Autonomous autoscore: NO faceBlueGoal
                         scoreCmd = AutoScoreCommands.autoAutoScoreNoFaceGoal();
                         scoreCmd.invoke();
-                    } else if (Transfer.INSTANCE.scoreTimes >= 3 ) {
+                    } else if (scoreCmd.isDone()  ) {
                         scoreCmd = null;
                         pathState = 15;  // continue your existing FSM
                     }

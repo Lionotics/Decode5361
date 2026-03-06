@@ -4,9 +4,11 @@ import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
 import com.rowanmcalpin.nextftc.core.Subsystem;
 import com.rowanmcalpin.nextftc.core.command.Command;
+import com.rowanmcalpin.nextftc.core.command.groups.ParallelRaceGroup;
 import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.ForcedParallelCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
+import com.rowanmcalpin.nextftc.core.command.utility.PerpetualCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.delays.WaitUntil;
 
 import org.firstinspires.ftc.teamcode.hardware.DriveTrain;
@@ -32,10 +34,14 @@ public final class AutoScoreCommands {
 
     public static class HoldPoseWhileActive extends Command {
         private final Follower follower;
+
+        private  Command driverControlledArg;
+
         private Pose holdPose;
 
-        public HoldPoseWhileActive(Follower follower) {
+        public HoldPoseWhileActive(Follower follower, Command b) {
             this.follower = follower;
+            this.driverControlledArg = b;
         }
 
         @Override
@@ -56,14 +62,14 @@ public final class AutoScoreCommands {
 
         @Override
         public boolean isDone() {
-            return false; // runs until canceled by the group finishing
+            return Transfer.INSTANCE.scoreTimes >= 2 && Transfer.INSTANCE.speederUpper; // runs until canceled by the group finishing
         }
 
         @Override
         public void stop(boolean interrupted) {
             // Release Pedro control cleanly
             follower.breakFollowing();
-            DriveTrain.INSTANCE.stopDrive();
+            driverControlledArg.invoke();
         }
 
         @Override
@@ -95,7 +101,7 @@ public final class AutoScoreCommands {
 
 
                   new ForcedParallelCommand(
-                       new HoldPoseWhileActive(follower)
+                       new HoldPoseWhileActive(follower,driverControlled)
                 ),
 
 
@@ -104,11 +110,10 @@ public final class AutoScoreCommands {
 
 
 
-                buildShootFromDistanceCommand(),
+                buildShootFromDistanceCommand(Transfer.kickDelaySecondsTeleop, Transfer.preReturnDelaySecondsTeleop),
 
         new InstantCommand(Webcam::endCameraUse),
 
-                new InstantCommand(() -> driverControlled.invoke()),
 
                 Outtake.INSTANCE.stopMotor()
 
@@ -125,16 +130,18 @@ public final class AutoScoreCommands {
      * do it in the auto state machine before invoking this command (or wrap it with WaitUntil).
      */
     public static Command autoAutoScoreNoFaceGoal() {
-        return  new SequentialGroup( buildShootFromDistanceCommand(),
-                Outtake.INSTANCE.stopMotor()
-        );
+        return  new SequentialGroup(
+                buildShootFromDistanceCommand(Transfer.kickDelaySecondsAuto, Transfer.preReturnDelaySecondsAuto),
+                new WaitUntil( ()-> Transfer.INSTANCE.scoreTimes == 3),
+                new InstantCommand( ()-> Outtake.INSTANCE.stopMotor().invoke() )
+         );
     }
 
     /**
      * Shared “compute distance and run outtake/hood/3 shots/stop” logic.
      * This is the core of what your old TeleopParent.autoScore() did after faceBlueGoal.
      */
-    private static Command buildShootFromDistanceCommand() {
+    private static Command buildShootFromDistanceCommand(double kickDelayArg, double preReturnArg) {
         return new Command() {
 
             private boolean startedInner = false;
@@ -161,16 +168,21 @@ public final class AutoScoreCommands {
                     // Tag is visible NOW -> we can compute distance and begin shooting.
                     startedInner = true;
 
+                    Transfer.INSTANCE.scoreTimes = 0;
+
                     double distIn = computeDistanceFromGoalInches(); // guaranteed tag-based
                     double targetVel = Outtake.INSTANCE.distanceToVelocity(distIn);
+
+                    Transfer.INSTANCE.speederUpper = false;
 
                     inner = new SequentialGroup(
                             new ForcedParallelCommand(Outtake.INSTANCE.holdVelocity(targetVel)),
                             OuttakeRotator.INSTANCE.setHoodPosition(
                                     Outtake.INSTANCE.distanceToHoodPosition(distIn)
                             ),
-                            score3Times()
+                            score3Times(kickDelayArg, preReturnArg)
                     );
+
 
                     inner.invoke();
                     return;
@@ -212,7 +224,7 @@ public final class AutoScoreCommands {
     /**
      * Moved from TeleopParent.score3Times().
      */
-    public static Command score3Times() {
+    public static Command score3Times(double kickDelayArg, double preReturnSecondArg) {
         return new Command() {
             private Command currentShot;
             private boolean shotYet = false;
@@ -229,14 +241,14 @@ public final class AutoScoreCommands {
 
                 if (!shotYet || (currentShot != null && currentShot.isDone())) {
                     shotYet = true;
-                    currentShot = Transfer.INSTANCE.kickBall();
+                    currentShot = Transfer.INSTANCE.kickBall(kickDelayArg,preReturnSecondArg);
                     currentShot.invoke();
                 }
             }
 
             @Override
             public boolean isDone() {
-                return (Transfer.INSTANCE.scoreTimes >= 2 && Transfer.INSTANCE.speederUpper);
+                return (shotYet && Transfer.INSTANCE.scoreTimes >= 3 && currentShot.isDone());
             }
         };
     }

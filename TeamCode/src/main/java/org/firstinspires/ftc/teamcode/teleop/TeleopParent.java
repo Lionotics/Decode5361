@@ -80,7 +80,7 @@ public class TeleopParent extends NextFTCOpMode {
 
 
 
-        gp1.getDpadUp().setHeldCommand( ()-> Transfer.INSTANCE.kickBall());
+        gp1.getDpadUp().setHeldCommand( ()-> Transfer.INSTANCE.kickBall(Transfer.kickDelaySecondsTeleop,Transfer.preReturnDelaySecondsTeleop));
 
 
 

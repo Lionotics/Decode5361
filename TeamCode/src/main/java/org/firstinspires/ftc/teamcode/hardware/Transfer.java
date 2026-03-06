@@ -7,7 +7,6 @@ import com.rowanmcalpin.nextftc.core.command.Command;
 import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.NullCommand;
-import com.rowanmcalpin.nextftc.core.command.utility.conditionals.BlockingConditionalCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.conditionals.PassiveConditionalCommand;
 import com.rowanmcalpin.nextftc.core.command.utility.delays.Delay;
 import com.rowanmcalpin.nextftc.core.command.utility.delays.WaitUntil;
@@ -23,11 +22,16 @@ public class Transfer extends Subsystem {
     public  static double kickerPosition2 = 0.25;
     public  static double protectorPosition2 = 0.4;
 
-    public static double kickDelaySeconds = 0.2;
-    public static double preReturnDelaySeconds = 0.05;
-    public static double postReturnDelaySeconds = 0.0;
+    public static double kickDelaySecondsAuto = 0.2;
 
-    public static  double loadDelaySecond = 0.4;
+    public static double kickDelaySecondsTeleop = 0.0;
+
+    public static double preReturnDelaySecondsAuto = 0.07;
+
+
+
+    public static double preReturnDelaySecondsTeleop = 0.00;
+    public static double postReturnDelaySeconds = 0.0;
 
     public static double shootDelaySeconds = 0.0;
 
@@ -63,15 +67,17 @@ public class Transfer extends Subsystem {
         });
     }
 
-    public Command kickBall() {
+    public Command kickBall(double kickDelayArg, double preReturnDelaySecondsArg) {
+
+
         if (Outtake.INSTANCE.getMotorCurrentLeftVelocity() != 0 || Outtake.INSTANCE.getMotorCurrentRightVelocity() != 0) {
             return new SequentialGroup(
                     new WaitUntil(() -> (Outtake.INSTANCE.flywheelReady(Outtake.motorVelocityTarget) || scoreTimes != 0) ),
                     new Delay(shootDelaySeconds),
                     new InstantCommand(() -> protector.setPosition(protectorPosition2)),
-                    new Delay(kickDelaySeconds),
+                    new Delay(kickDelayArg),
                     new InstantCommand(() -> kicker.setPosition(kickerPosition2)),
-                    new Delay(preReturnDelaySeconds),
+                    new Delay(preReturnDelaySecondsArg),
                     keepBall(),
 
                     new InstantCommand(()->speederUpper = true),
