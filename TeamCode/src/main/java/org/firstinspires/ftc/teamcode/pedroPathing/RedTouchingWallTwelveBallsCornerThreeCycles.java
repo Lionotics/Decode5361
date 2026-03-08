@@ -43,7 +43,7 @@ public class RedTouchingWallTwelveBallsCornerThreeCycles extends AutoParent {
     private PathChain pathToEnd;
 
 
-    public static double angleToFaceGoal = 337;
+    public static double angleToFaceGoal = 340;
 
     public static double angleToSuckInLineBalls = 180;
 

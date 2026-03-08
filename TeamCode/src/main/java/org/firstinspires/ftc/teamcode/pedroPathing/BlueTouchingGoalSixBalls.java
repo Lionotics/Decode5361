@@ -15,8 +15,8 @@ import org.firstinspires.ftc.teamcode.hardware.Webcam;
 
 
 @Config
-@Autonomous(name = "BlueTouchingGoalAuto", group = "Autonomous")
-public class BlueTouchingGoal extends AutoParent {
+@Autonomous(name = "BlueTouchingGoalSixBallAuto", group = "Autonomous")
+public class BlueTouchingGoalSixBalls extends AutoParent {
 
     // This auto's custom paths
     private PathChain pathToShootingInitial;
@@ -69,7 +69,7 @@ public class BlueTouchingGoal extends AutoParent {
                         new Pose(34, 135),
                         new Pose(60, 90)
                 ))
-                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(angleToFaceGoal))
+                .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(angleToFaceGoal))
                 .build();
 
         pathToWallBalls1 = follower.pathBuilder()

@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.hardware.Webcam;
 
 
 @Config
-@Autonomous(name = "RedTouchingGoalAuto", group = "Autonomous")
+@Autonomous(name = "RedTouchingGoalSixBallsAuto", group = "Autonomous")
 public class RedTouchingGoalSixBalls extends AutoParent {
 
     // This auto's custom paths
@@ -41,7 +41,7 @@ public class RedTouchingGoalSixBalls extends AutoParent {
 
     public  static  double minIntakeMS = 700;
 
-    public  static  double maxIntakeMS = 3000;
+    public  static  double maxIntakeMS = 1600;
 
     public  static  double holdVelocityBefore = 1000;
 

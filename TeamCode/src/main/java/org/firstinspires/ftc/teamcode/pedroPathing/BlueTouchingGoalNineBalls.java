@@ -10,76 +10,71 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.commands.AutoScoreCommands;
 import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.Outtake;
+import org.firstinspires.ftc.teamcode.hardware.Transfer;
 import org.firstinspires.ftc.teamcode.hardware.Webcam;
 
 
 @Config
-@Autonomous(name = "BlueTouchingWallTwelveBallsCornerTwoCyclesAndOneVerticalLoadingAuto", group = "Autonomous")
-public class BlueTouchingWallTwelveBallsCornerTwoCyclesAndOneVerticalLoading extends AutoParent {
+@Autonomous(name = "BlueTouchingGoalNineBallsAuto", group = "Autonomous")
+public class BlueTouchingGoalNineBalls extends AutoParent {
 
     // This auto's custom paths
     private PathChain pathToShootingInitial;
 
-    private PathChain pathToFirstWallBalls1;
+    private PathChain pathToFirstBalls1;
 
-    private PathChain pathToFirstWallBalls2;
-
-    private PathChain pathToSecondWallBalls1;
-
-    private PathChain pathToSecondWallBalls2;
+    private PathChain pathToFirstBalls2;
 
 
-    private PathChain pathToThirdWallBalls1;
-    private PathChain pathToThirdWallBalls2;
+    private PathChain pathToSecondBalls1;
+
+    private PathChain pathToSecondBalls2;
+
+    private PathChain pathToShootingFromFirstBalls;
+
+    private PathChain pathToShootingFromSecondBalls1;
+
+    private PathChain pathToShootingFromSecondBalls2;
 
 
 
+    private PathChain pathToGate1;
 
-    private PathChain pathToShootingfromFirstBalls;
-
-    private PathChain pathToShootingfromSecondBalls;
-
-    private PathChain pathToShootingfromThirdBalls;
-
+    private PathChain pathToGate2;
 
     private PathChain pathToEnd;
 
 
-    public static double angleToFaceGoal1 = 20;
-
-    public static double angleToFaceGoal2 = 20;
-
-    public static double angleToFaceGoal3 = 17;
-
-
+    public static double angleToFaceGoal = 35;
 
     public static double angleToSuckInLineBalls = 0;
 
-    public  static  double gettingFirstWallBallX = 4;
+    public  static  double gettingFirstBallX = 15;
 
-    public  static  double gettingFirstWallBallY = 33;
-
-    public  static  double gettingSecondWallBallX = 4;
-
-    public  static  double gettingSecondWallBallY = 55;
-
-    public  static  double gettingThirdWallBallX = 4;
-
-    public  static  double gettingThirdWallBallY = 10;
+    public  static  double gettingFirstBallY = 89;
 
 
+    public  static  double gettingSecondBallX = 13;
+
+    public  static  double gettingSecondBallY = 61;
 
 
+    public  static  double GateY =  82;
+
+    public  static  double preGateX = 35;
+
+    public  static  double GateX = 15;
 
 
-
-    public  static  double minIntakeMS = 800;
+    public  static  double minIntakeMS = 1000;
 
     public  static  double maxIntakeMS = 1800;
 
-    public  static  double holdVelocityBefore = 1500;
+    public  static  double holdGoldForMS = 3000;
 
-    public  static  double desiredBearing = -4;
+    public  static  double holdVelocityBefore = 1000;
+
+    public  static  double desiredBearing = 0;
 
 
     private long intakeFullStartMs = -1; // when isFull first became true (continuous timer)
@@ -88,13 +83,13 @@ public class BlueTouchingWallTwelveBallsCornerTwoCyclesAndOneVerticalLoading ext
     @Override
     public  void onInit() {
         super.onInit();
-         Webcam.INSTANCE.setSoleTagID(BLUE_TAG_ID); ;
+        Webcam.INSTANCE.setSoleTagID(BLUE_TAG_ID); ;
     }
 
 
     @Override
     protected Pose getStartPose() {
-        return new Pose(56, 8, Math.toRadians(90));
+        return new Pose(34, 135, Math.toRadians(270));
     }
 
     @Override
@@ -102,103 +97,100 @@ public class BlueTouchingWallTwelveBallsCornerTwoCyclesAndOneVerticalLoading ext
         // Your existing Path1/Path2 logic moved here
         pathToShootingInitial = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(56, 8.000),
-                        new Pose(56, 15)
+                        new Pose(34, 135),
+                        new Pose(60, 90)
                 ))
-                .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(angleToFaceGoal1))
+                .setLinearHeadingInterpolation(Math.toRadians(270), Math.toRadians(angleToFaceGoal))
                 .build();
 
-        pathToFirstWallBalls1 = follower.pathBuilder()
+        pathToFirstBalls1 = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(56, 15),
-                        new Pose(56, gettingFirstWallBallY)
+                        new Pose(60, 90),
+                        new Pose(60, gettingFirstBallY)
+                ))
+                .setLinearHeadingInterpolation(Math.toRadians(angleToFaceGoal), Math.toRadians(angleToSuckInLineBalls))
+                .build();
+
+
+
+        pathToFirstBalls2 = follower.pathBuilder()
+                .addPath(new BezierLine(
+                        new Pose(60, gettingFirstBallY),
+                        new Pose(gettingFirstBallX, gettingFirstBallY)
+                ))
+                .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToSuckInLineBalls))
+                .build();
+
+
+        pathToSecondBalls1 = follower.pathBuilder()
+                .addPath(new BezierLine(
+                        new Pose(60, 90),
+                        new Pose(60, gettingSecondBallY)
+                ))
+                .setLinearHeadingInterpolation(Math.toRadians(angleToFaceGoal), Math.toRadians(angleToSuckInLineBalls))
+                .build();
+
+
+        pathToSecondBalls2 = follower.pathBuilder()
+                .addPath(new BezierLine(
+                        new Pose(60, gettingSecondBallY),
+                        new Pose(gettingSecondBallX, gettingSecondBallY)
                 ))
                 .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToSuckInLineBalls))
                 .build();
 
 
 
-        pathToFirstWallBalls2 = follower.pathBuilder()
+        pathToShootingFromFirstBalls = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(56, gettingFirstWallBallY),
-                        new Pose(gettingFirstWallBallX, gettingFirstWallBallY)
+                        new Pose(GateX, GateY),
+                        new Pose(60, 90)
                 ))
-                .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToSuckInLineBalls))
-                .build();
-
-        pathToSecondWallBalls1 = follower.pathBuilder()
-                .addPath(new BezierLine(
-                        new Pose(56, 15),
-                        new Pose(56, gettingSecondWallBallY)
-                ))
-                .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToSuckInLineBalls))
+                .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToFaceGoal))
                 .build();
 
 
-        pathToSecondWallBalls2 = follower.pathBuilder()
+        pathToShootingFromSecondBalls1 = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(56, gettingSecondWallBallY),
-                        new Pose(gettingSecondWallBallX, gettingSecondWallBallY)
+                        new Pose(gettingSecondBallX, gettingSecondBallY),
+                        new Pose(60, gettingSecondBallY)
                 ))
-                .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToSuckInLineBalls))
+                .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToFaceGoal))
                 .build();
 
-
-        pathToThirdWallBalls1 = follower.pathBuilder()
+        pathToShootingFromSecondBalls2 = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(56, 15),
-                        new Pose(56, gettingThirdWallBallY)
+                        new Pose(60, gettingSecondBallY),
+                        new Pose(60, 90)
                 ))
-                .setLinearHeadingInterpolation(Math.toRadians(angleToFaceGoal1), Math.toRadians(angleToSuckInLineBalls))
-                .build();
-
-
-        pathToThirdWallBalls2 = follower.pathBuilder()
-                .addPath(new BezierLine(
-                        new Pose(56, gettingThirdWallBallY),
-                        new Pose(gettingThirdWallBallX, gettingThirdWallBallY)
-                ))
-                .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToSuckInLineBalls))
+                .setLinearHeadingInterpolation(Math.toRadians(angleToFaceGoal), Math.toRadians(angleToFaceGoal))
                 .build();
 
 
 
-
-
-
-        pathToShootingfromFirstBalls = follower.pathBuilder()
+        pathToGate1 = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(gettingFirstWallBallX, gettingFirstWallBallY),
-                        new Pose(56, 15)
+                        new Pose(gettingFirstBallX, gettingFirstBallY),
+                        new Pose(preGateX, GateY)
                 ))
-                .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToFaceGoal1))
+                .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(180))
                 .build();
 
 
-        pathToShootingfromSecondBalls = follower.pathBuilder()
+        pathToGate2 = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(gettingSecondWallBallX, gettingSecondWallBallY),
-                        new Pose(56, 15)
+                        new Pose(preGateX, GateY),
+                        new Pose(GateX, GateY)
                 ))
-                .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToFaceGoal2))
+                .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(180))
                 .build();
-
-        pathToShootingfromThirdBalls = follower.pathBuilder()
-                .addPath(new BezierLine(
-                        new Pose(gettingThirdWallBallX, gettingThirdWallBallY),
-                        new Pose(56, 15)
-                ))
-                .setLinearHeadingInterpolation(Math.toRadians(angleToSuckInLineBalls), Math.toRadians(angleToFaceGoal3))
-                .build();
-
-
 
         pathToEnd = follower.pathBuilder()
                 .addPath(new BezierLine(
-                        new Pose(56, 15),
-                        new Pose(56, 35)
+                        new Pose(60, 90),
+                        new Pose(60, 130)
                 ))
-                .setLinearHeadingInterpolation(Math.toRadians(angleToFaceGoal1), Math.toRadians(180))
+                .setLinearHeadingInterpolation(Math.toRadians(angleToFaceGoal), Math.toRadians(180))
                 .build();
     }
 
@@ -209,6 +201,7 @@ public class BlueTouchingWallTwelveBallsCornerTwoCyclesAndOneVerticalLoading ext
         switch (pathState) {
             case 0:
                 Outtake.INSTANCE.holdVelocity(holdVelocityBefore).invoke();
+
                 follower.followPath(pathToShootingInitial);
                 pathState = 1;
                 break;
@@ -230,7 +223,7 @@ public class BlueTouchingWallTwelveBallsCornerTwoCyclesAndOneVerticalLoading ext
                         // Autonomous autoscore: NO faceBlueGoal
                         scoreCmd = AutoScoreCommands.autoAutoScoreNoFaceGoal();
                         scoreCmd.invoke();
-                    } else if (scoreCmd.isDone() ) {
+                    } else if (scoreCmd.isDone() && Transfer.INSTANCE.scoreTimes >= 3) {
                         scoreCmd = null;
                         pathState = 3;  // continue your existing FSM
                     }
@@ -238,14 +231,10 @@ public class BlueTouchingWallTwelveBallsCornerTwoCyclesAndOneVerticalLoading ext
                 break;
 
 
-
-
-
-
             case 3:
                 if ( !follower.isBusy() ) {
                     follower.breakFollowing();
-                    follower.followPath(pathToFirstWallBalls1);
+                    follower.followPath(pathToFirstBalls1);
                     pathState = 4;
                 }
                 break;
@@ -253,17 +242,17 @@ public class BlueTouchingWallTwelveBallsCornerTwoCyclesAndOneVerticalLoading ext
 
             case 4:
                 if (!follower.isBusy()) {
-                    follower.followPath(pathToFirstWallBalls2);
+                    follower.followPath(pathToFirstBalls2);
                     pathState = 5;
                 }
                 break;
 
-                case 5:
-                    Intake.INSTANCE.intake.setPower(0);
-                    Intake.INSTANCE.eat().invoke();
-                    turnStartMs = System.currentTimeMillis();
-                    intakeFullStartMs = -1;
-                    pathState = 6;
+            case 5:
+                Intake.INSTANCE.intake.setPower(0);
+                Intake.INSTANCE.eat().invoke();
+                turnStartMs = System.currentTimeMillis();
+                intakeFullStartMs = -1;
+                pathState = 6;
 
                 break;
 
@@ -292,12 +281,35 @@ public class BlueTouchingWallTwelveBallsCornerTwoCyclesAndOneVerticalLoading ext
                 if (!follower.isBusy() || fullFor >= minIntakeMS || totalElapsed >= maxIntakeMS) {
                     Intake.INSTANCE.eat().invoke();
                     follower.breakFollowing();
-                    follower.followPath(pathToShootingfromFirstBalls);
+                    follower.followPath(pathToGate1);
                     Outtake.INSTANCE.holdVelocity(holdVelocityBefore).invoke();
 
 
                     intakeFullStartMs = -1;
 
+                    pathState = 6005;
+                }
+                break;
+
+
+            case 6005:
+                if ( !follower.isBusy() ) {
+                    follower.breakFollowing();
+                    follower.followPath(pathToGate2);
+                    turnStartMs = System.currentTimeMillis();
+                    pathState = 6010;
+                }
+                break;
+
+
+            case 6010:
+                now = System.currentTimeMillis();
+                totalElapsed = now - turnStartMs;
+
+
+                if ( totalElapsed  >= holdGoldForMS  ) {
+                    follower.breakFollowing();
+                    follower.followPath(pathToShootingFromFirstBalls);
                     pathState = 7;
                 }
                 break;
@@ -322,7 +334,7 @@ public class BlueTouchingWallTwelveBallsCornerTwoCyclesAndOneVerticalLoading ext
                         // Autonomous autoscore: NO faceBlueGoal
                         scoreCmd = AutoScoreCommands.autoAutoScoreNoFaceGoal();
                         scoreCmd.invoke();
-                    } else if (scoreCmd.isDone() ) {
+                    } else if (scoreCmd.isDone() && Transfer.INSTANCE.scoreTimes >= 3) {
                         scoreCmd = null;
                         pathState = 9;  // continue your existing FSM
                     }
@@ -334,7 +346,7 @@ public class BlueTouchingWallTwelveBallsCornerTwoCyclesAndOneVerticalLoading ext
             case 9:
                 if ( !follower.isBusy() ) {
                     follower.breakFollowing();
-                    follower.followPath(pathToSecondWallBalls1);
+                    follower.followPath(pathToSecondBalls1);
                     pathState = 10;
                 }
                 break;
@@ -342,17 +354,19 @@ public class BlueTouchingWallTwelveBallsCornerTwoCyclesAndOneVerticalLoading ext
 
             case 10:
                 if (!follower.isBusy()) {
-                    follower.followPath(pathToSecondWallBalls2);
+                    follower.followPath(pathToSecondBalls2);
+                    turnStartMs = System.currentTimeMillis();
                     pathState = 11;
                 }
                 break;
 
             case 11:
-                Intake.INSTANCE.intake.setPower(0);
-                Intake.INSTANCE.eat().invoke();
-                turnStartMs = System.currentTimeMillis();
-                intakeFullStartMs = -1;
-                pathState = 12;
+                    Intake.INSTANCE.intake.setPower(0);
+                    Intake.INSTANCE.eat().invoke();
+                    turnStartMs = System.currentTimeMillis();
+                    intakeFullStartMs = -1;
+                    pathState = 12;
+
 
                 break;
 
@@ -381,17 +395,24 @@ public class BlueTouchingWallTwelveBallsCornerTwoCyclesAndOneVerticalLoading ext
                 if (!follower.isBusy() || fullFor >= minIntakeMS || totalElapsed >= maxIntakeMS) {
                     Intake.INSTANCE.eat().invoke();
                     follower.breakFollowing();
-                    follower.followPath(pathToShootingfromSecondBalls);
+                    follower.followPath(pathToShootingFromSecondBalls1);
                     Outtake.INSTANCE.holdVelocity(holdVelocityBefore).invoke();
 
 
                     intakeFullStartMs = -1;
 
-                    pathState = 13;
+                    pathState = 12005;
                 }
                 break;
 
 
+            case 12005:
+                if ( !follower.isBusy() ) {
+                    follower.breakFollowing();
+                    follower.followPath(pathToShootingFromSecondBalls2);
+                    pathState = 13;
+                }
+                break;
 
             case 13:
                 // Wait until we are done driving to the shooting pose
@@ -411,7 +432,7 @@ public class BlueTouchingWallTwelveBallsCornerTwoCyclesAndOneVerticalLoading ext
                         // Autonomous autoscore: NO faceBlueGoal
                         scoreCmd = AutoScoreCommands.autoAutoScoreNoFaceGoal();
                         scoreCmd.invoke();
-                    } else if (scoreCmd.isDone()  ) {
+                    } else if (scoreCmd.isDone() && Transfer.INSTANCE.scoreTimes >= 3) {
                         scoreCmd = null;
                         pathState = 15;  // continue your existing FSM
                     }
@@ -424,108 +445,18 @@ public class BlueTouchingWallTwelveBallsCornerTwoCyclesAndOneVerticalLoading ext
             case 15:
                 if ( !follower.isBusy() ) {
                     follower.breakFollowing();
-                    follower.followPath(pathToThirdWallBalls1);
+                    follower.followPath(pathToEnd);
                     pathState = 16;
                 }
                 break;
 
 
+
             case 16:
                 if ( !follower.isBusy() ) {
                     follower.breakFollowing();
-                    follower.followPath(pathToThirdWallBalls2);
-                    pathState = 17;
-                }
-                break;
-
-
-            case 17:
-                Intake.INSTANCE.intake.setPower(0);
-                Intake.INSTANCE.eat().invoke();
-                turnStartMs = System.currentTimeMillis();
-                intakeFullStartMs = -1;
-                pathState = 19;
-
-                break;
-
-            case 19:
-                now = System.currentTimeMillis();
-
-                // safety timeout since we entered intake state (set in case 5)
-                totalElapsed = now - turnStartMs;
-
-                full = Intake.INSTANCE.isFull();
-
-                fullFor = -1;
-
-                if (full) {
-                    // start the "continuous true" timer the moment it first becomes full
-                    if (intakeFullStartMs < 0) intakeFullStartMs = now;
-
-                    fullFor = now - intakeFullStartMs;
-
-                } else {
-                    // lost "full" -> reset continuous timer
-                    intakeFullStartMs = -1;
-                }
-
-                // hard timeout fallback
-                if (!follower.isBusy() || fullFor >= minIntakeMS || totalElapsed >= maxIntakeMS) {
-                    Intake.INSTANCE.eat().invoke();
-                    follower.breakFollowing();
-                    follower.followPath(pathToShootingfromThirdBalls);
-                    Outtake.INSTANCE.holdVelocity(holdVelocityBefore).invoke();
-
-
-                    intakeFullStartMs = -1;
-
-                    pathState = 20;
-                }
-                break;
-
-
-
-            case 20:
-                // Wait until we are done driving to the shooting pose
-                if (!follower.isBusy() && Webcam.INSTANCE.seesTag() ) {
-                    follower.breakFollowing();
-                    double angle = Webcam.INSTANCE.getBearing();
-                    follower.turn(AngleUnit.normalizeRadians(Math.toRadians(angle-desiredBearing)));
-                    pathState = 21;
-                }
-                break;
-
-
-            case 21:
-                if (!follower.isBusy() && Webcam.INSTANCE.seesTag()) {
-                    follower.breakFollowing();
-                    if (scoreCmd == null) {
-                        // Autonomous autoscore: NO faceBlueGoal
-                        scoreCmd = AutoScoreCommands.autoAutoScoreNoFaceGoal();
-                        scoreCmd.invoke();
-                    } else if (scoreCmd.isDone()  ) {
-                        scoreCmd = null;
-                        pathState = 22;  // continue your existing FSM
-                    }
-                }
-                break;
-
-
-
-
-            case 22:
-                if ( !follower.isBusy() ) {
-                    follower.breakFollowing();
-                    follower.followPath(pathToEnd);
-                    pathState = 23;
-                }
-                break;
-
-
-            case 23:
-                if ( !follower.isBusy() ) {
-                    follower.breakFollowing();
                     follower.turnTo(Math.toRadians(180));
+                    pathState = 17;
                 }
                 break;
 

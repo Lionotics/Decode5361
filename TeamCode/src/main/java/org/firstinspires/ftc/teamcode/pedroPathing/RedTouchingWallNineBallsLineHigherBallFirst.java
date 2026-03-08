@@ -51,11 +51,11 @@ public class RedTouchingWallNineBallsLineHigherBallFirst extends AutoParent {
 
     public  static  double gettingLowerWallBallX = 134;
 
-    public  static  double gettingLowerWallBallY = 33;
+    public  static  double gettingLowerWallBallY = 56;
 
     public  static  double gettingHigherWallBallX = 134;
 
-    public  static  double gettingHigherWallBallY = 56;
+    public  static  double gettingHigherWallBallY = 34;
 
 
 
@@ -207,7 +207,7 @@ public class RedTouchingWallNineBallsLineHigherBallFirst extends AutoParent {
                         scoreCmd.invoke();
                     } else if (Transfer.INSTANCE.scoreTimes >= 3 ) {
                         scoreCmd = null;
-                        pathState = 9;  // continue your existing FSM
+                        pathState = 3;  // continue your existing FSM
                     }
                 }
                 break;
@@ -267,12 +267,19 @@ public class RedTouchingWallNineBallsLineHigherBallFirst extends AutoParent {
                 if (!follower.isBusy() || fullFor >= minIntakeMS || totalElapsed >= maxIntakeMS) {
                     Intake.INSTANCE.eat().invoke();
                     follower.breakFollowing();
-                    follower.followPath(pathToShootingfromLowerBalls);
+                    follower.followPath(pathToShootingfromHigherBallsAvoidingOtherBalls1);
                     Outtake.INSTANCE.holdVelocity(holdVelocityBefore).invoke();
-
-
                     intakeFullStartMs = -1;
 
+                    pathState = 6050;
+                }
+                break;
+
+
+
+            case 6050:
+                if (!follower.isBusy()) {
+                    follower.followPath(pathToShootingfromHigherBallsAvoidingOtherBalls2);
                     pathState = 7;
                 }
                 break;
@@ -299,7 +306,7 @@ public class RedTouchingWallNineBallsLineHigherBallFirst extends AutoParent {
                         scoreCmd.invoke();
                     } else if (Transfer.INSTANCE.scoreTimes >= 3 ) {
                         scoreCmd = null;
-                        pathState = 15;  // continue your existing FSM
+                        pathState = 9;  // continue your existing FSM
                     }
                 }
                 break;
@@ -356,23 +363,18 @@ public class RedTouchingWallNineBallsLineHigherBallFirst extends AutoParent {
                 if (!follower.isBusy() || fullFor >= minIntakeMS || totalElapsed >= maxIntakeMS) {
                     Intake.INSTANCE.eat().invoke();
                     follower.breakFollowing();
-                    follower.followPath(pathToShootingfromHigherBallsAvoidingOtherBalls1);
+                    follower.followPath(pathToShootingfromLowerBalls);
                     Outtake.INSTANCE.holdVelocity(holdVelocityBefore).invoke();
 
 
                     intakeFullStartMs = -1;
 
-                    pathState = 1205;
-                }
-                break;
-
-
-            case 1205:
-                if (!follower.isBusy()) {
-                    follower.followPath(pathToShootingfromHigherBallsAvoidingOtherBalls2);
                     pathState = 13;
                 }
                 break;
+
+
+
 
 
 
@@ -396,7 +398,7 @@ public class RedTouchingWallNineBallsLineHigherBallFirst extends AutoParent {
                         scoreCmd.invoke();
                     } else if (Transfer.INSTANCE.scoreTimes >= 3 ) {
                         scoreCmd = null;
-                        pathState = 3;  // continue your existing FSM
+                        pathState = 15;  // continue your existing FSM
                     }
                 }
                 break;

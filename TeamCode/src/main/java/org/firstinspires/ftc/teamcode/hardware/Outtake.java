@@ -27,8 +27,8 @@ public class Outtake extends Subsystem {
 
     public  static double motorVelocityTarget = motorVelocityTargetHigher;
 
-    public  static  double motorVelocityThreashholdLower = 30;
-    public  static  double motorVelocityThreashholdHigher = 50;
+    public  static  double motorVelocityThreashholdLower = 20;
+    public  static  double motorVelocityThreashholdHigher = 40;
 
 
     public  static  double distanceToVelocityC = 900;

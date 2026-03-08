@@ -17,16 +17,16 @@ public class Transfer extends Subsystem {
     public Servo kicker;
     public Servo protector;
 
-    public  static double kickerPosition1 = 0.08;
+    public  static double kickerPosition1 = 0.05;
     public  static double protectorPosition1 = 0.7;
     public  static double kickerPosition2 = 0.25;
     public  static double protectorPosition2 = 0.4;
 
     public static double kickDelaySecondsAuto = 0.2;
 
-    public static double kickDelaySecondsTeleop = 0.0;
+    public static double kickDelaySecondsTeleop = 0.05;
 
-    public static double preReturnDelaySecondsAuto = 0.07;
+    public static double preReturnDelaySecondsAuto = 0.05;
 
 
 
@@ -62,7 +62,7 @@ public class Transfer extends Subsystem {
 
     public InstantCommand keepBall() {
         return new InstantCommand(()-> {
-            protector.setPosition(protectorPosition1);
+           // protector.setPosition(protectorPosition1);
             kicker.setPosition(kickerPosition1);
         });
     }
@@ -72,9 +72,9 @@ public class Transfer extends Subsystem {
 
         if (Outtake.INSTANCE.getMotorCurrentLeftVelocity() != 0 || Outtake.INSTANCE.getMotorCurrentRightVelocity() != 0) {
             return new SequentialGroup(
+                    new InstantCommand(() -> protector.setPosition(protectorPosition2)),
                     new WaitUntil(() -> (Outtake.INSTANCE.flywheelReady(Outtake.motorVelocityTarget) || scoreTimes != 0) ),
                     new Delay(shootDelaySeconds),
-                    new InstantCommand(() -> protector.setPosition(protectorPosition2)),
                     new Delay(kickDelayArg),
                     new InstantCommand(() -> kicker.setPosition(kickerPosition2)),
                     new Delay(preReturnDelaySecondsArg),
@@ -93,10 +93,11 @@ public class Transfer extends Subsystem {
                             () ->        new SequentialGroup(
                                     Intake.INSTANCE.setPowerToIntake(-1)
                             ),
-                            () ->  Intake.INSTANCE.setPowerToIntake(0)
-
+                            () ->  new SequentialGroup(
+                                    Intake.INSTANCE.setPowerToIntake(0),
+                                    new InstantCommand(()->protector.setPosition(protectorPosition1))
+                            )
                             ),
-
 
                     new InstantCommand(() -> scoreTimes += 1)
             );
