@@ -22,9 +22,9 @@ public class Transfer extends Subsystem {
     public  static double kickerPosition2 = 0.25;
     public  static double protectorPosition2 = 0.4;
 
-    public static double kickDelaySecondsAuto = 0.2;
+    public static double kickDelaySecondsAuto = 0.15;
 
-    public static double kickDelaySecondsTeleop = 0.05;
+    public static double kickDelaySecondsTeleop = 0.2;
 
     public static double preReturnDelaySecondsAuto = 0.05;
 
@@ -67,13 +67,27 @@ public class Transfer extends Subsystem {
         });
     }
 
+    public Command spitOuttake() {
+        return new SequentialGroup(
+                new InstantCommand(() -> protector.setPosition(protectorPosition2)),
+                new InstantCommand(() -> Outtake.motorVelocityTarget = -100),
+                Outtake.INSTANCE.holdVelocity(-100),
+                new Delay(1.0),
+                new InstantCommand(() -> protector.setPosition(protectorPosition1)),
+                new InstantCommand(() -> Outtake.motorVelocityTarget = 0),
+                Outtake.INSTANCE.holdVelocity(0)
+        );
+    }
+
+
+
     public Command kickBall(double kickDelayArg, double preReturnDelaySecondsArg) {
 
 
         if (Outtake.INSTANCE.getMotorCurrentLeftVelocity() != 0 || Outtake.INSTANCE.getMotorCurrentRightVelocity() != 0) {
             return new SequentialGroup(
                     new InstantCommand(() -> protector.setPosition(protectorPosition2)),
-                    new WaitUntil(() -> (Outtake.INSTANCE.flywheelReady(Outtake.motorVelocityTarget) || scoreTimes != 0) ),
+                    new WaitUntil(() -> (Outtake.INSTANCE.flywheelReady(Outtake.motorVelocityTarget) ) ),
                     new Delay(shootDelaySeconds),
                     new Delay(kickDelayArg),
                     new InstantCommand(() -> kicker.setPosition(kickerPosition2)),

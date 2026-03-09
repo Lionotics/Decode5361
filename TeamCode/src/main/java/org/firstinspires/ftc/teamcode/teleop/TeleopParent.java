@@ -97,14 +97,9 @@ public class TeleopParent extends NextFTCOpMode {
 
 
 
-        gp1.getLeftBumper().setPressedCommand(() -> {
-            if (follower.isBusy()) return new NullCommand();
-            return new SequentialGroup(
-                   new InstantCommand(() -> driverControlled.stop(true)),
-                    DriveTrain.INSTANCE.faceGoal(follower, testTiltAngle),
-                    new InstantCommand(() -> driverControlled.invoke())
-            );
-        });
+        gp1.getLeftBumper().setPressedCommand(() ->
+            Transfer.INSTANCE.spitOuttake()
+                    );
 
 
 

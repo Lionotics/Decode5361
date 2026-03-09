@@ -27,8 +27,8 @@ public class Outtake extends Subsystem {
 
     public  static double motorVelocityTarget = motorVelocityTargetHigher;
 
-    public  static  double motorVelocityThreashholdLower = 20;
-    public  static  double motorVelocityThreashholdHigher = 40;
+    public  static  double motorVelocityThreashholdLower = 10;
+    public  static  double motorVelocityThreashholdHigher = 10;
 
 
     public  static  double distanceToVelocityC = 900;
@@ -55,6 +55,9 @@ public class Outtake extends Subsystem {
     private  MotorGroup flywheelGroup;
 
     public double targetVelocityToActualVelocity(double targetVelocity) {
+        if (targetVelocity >= 1300) {
+            return  -targetVelocity - 40;
+        }
         return  -targetVelocity-20;
     }
 

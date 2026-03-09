@@ -39,7 +39,7 @@ public class Webcam extends Subsystem {
     private AprilTagDetection bestObeliskDetection;
     private List<AprilTagDetection> lastDetections = new ArrayList<>();
 
-    public  static boolean ftcDashBoardTurnedOn = true;
+    public  static boolean ftcDashBoardTurnedOn = false;
 
 
 
